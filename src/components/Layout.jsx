@@ -1,0 +1,269 @@
+import { useEffect, useRef, useState } from 'react';
+import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { CATEGORIES, CONTACT, countIn, products } from '../data/products.js';
+import { MailIcon, WhatsAppIcon } from './icons.jsx';
+
+function Wordmark() {
+  return (
+    <Link className="wordmark" to="/">
+      HB<span> Coser</span>
+    </Link>
+  );
+}
+
+export default function Layout() {
+  const [shopOpen, setShopOpen] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+  const shopRef = useRef(null);
+  const waRef = useRef(null);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setShopOpen(false);
+    setDrawer(false);
+  }, [pathname]);
+
+  // The CTA is fixed to the bottom corner. On a narrow screen the product title sits low,
+  // because the hero image comes first, so the CTA can land on top of it and the page reads
+  // as broken. Shrink it away only while it actually overlaps the heading — on the pages
+  // where there is no collision this changes nothing.
+  useEffect(() => {
+    const wa = waRef.current;
+    if (!wa) return undefined;
+    let frame = 0;
+
+    const update = () => {
+      frame = 0;
+      const heading = document.querySelector('main h1');
+      if (!heading) {
+        wa.classList.remove('wa--hidden');
+        return;
+      }
+      const a = wa.getBoundingClientRect();
+      const b = heading.getBoundingClientRect();
+      const overlaps =
+        b.bottom > a.top && b.top < a.bottom && b.right > a.left && b.left < a.right;
+      wa.classList.toggle('wa--hidden', overlaps);
+    };
+
+    const schedule = () => {
+      if (!frame) frame = window.requestAnimationFrame(update);
+    };
+
+    update();
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    return () => {
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [pathname]);
+
+  useEffect(() => {
+    function onDown(e) {
+      if (shopRef.current && !shopRef.current.contains(e.target)) setShopOpen(false);
+    }
+    function onKey(e) {
+      if (e.key === 'Escape') {
+        setShopOpen(false);
+        setDrawer(false);
+      }
+    }
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = drawer ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [drawer]);
+
+  return (
+    <>
+      <a className="skip" href="#main">
+        Skip to content
+      </a>
+
+      <header className="header">
+        <div className="shell header__inner">
+          <Wordmark />
+
+          <nav className="nav" aria-label="Primary">
+            <div ref={shopRef} style={{ position: 'relative' }}>
+              <button
+                type="button"
+                className="nav__link"
+                aria-expanded={shopOpen}
+                aria-haspopup="true"
+                onClick={() => setShopOpen((v) => !v)}
+              >
+                Shop {shopOpen ? '▴' : '▾'}
+              </button>
+            </div>
+            <NavLink className="nav__link" to="/custom">
+              Custom / OEM
+            </NavLink>
+            <NavLink className="nav__link" to="/about">
+              About
+            </NavLink>
+            <NavLink className="nav__link" to="/blog">
+              Notes
+            </NavLink>
+            <NavLink className="nav__link" to="/inquiry">
+              Inquiry
+            </NavLink>
+          </nav>
+
+          <Link className="btn btn--primary header__cta" to="/inquiry">
+            Get a quote
+          </Link>
+
+          <button
+            type="button"
+            className="burger"
+            aria-label="Open menu"
+            aria-expanded={drawer}
+            onClick={() => setDrawer(true)}
+          >
+            <span />
+          </button>
+        </div>
+
+        {shopOpen && (
+          <div className="mega">
+            <div className="shell mega__grid">
+              {CATEGORIES.map((c) => (
+                <Link key={c.slug} className="mega__item" to={`/shop/${c.slug}`}>
+                  <strong>{c.name}</strong>
+                  <em>{countIn(c.slug)} products</em>
+                </Link>
+              ))}
+              <Link className="mega__item" to="/shop">
+                <strong>All products</strong>
+                <em>{products.length} references</em>
+              </Link>
+            </div>
+          </div>
+        )}
+      </header>
+
+      {drawer && (
+        <div className="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+          <div className="drawer__head">
+            <Wordmark />
+            <button type="button" className="drawer__close" aria-label="Close menu" onClick={() => setDrawer(false)}>
+              ×
+            </button>
+          </div>
+          <ul className="drawer__list">
+            {CATEGORIES.map((c) => (
+              <li key={c.slug}>
+                <Link to={`/shop/${c.slug}`}>{c.name}</Link>
+              </li>
+            ))}
+            <li>
+              <Link to="/shop">All products</Link>
+            </li>
+            <li>
+              <Link to="/custom">Custom / OEM</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/blog">Programme notes</Link>
+            </li>
+            <li>
+              <Link to="/inquiry">Inquiry</Link>
+            </li>
+          </ul>
+          <div className="drawer__meta">
+            <p>
+              <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+            </p>
+            <p>
+              <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
+            </p>
+          </div>
+        </div>
+      )}
+
+      <main id="main">
+        <Outlet />
+      </main>
+
+      <footer className="footer">
+        <div className="shell footer__grid">
+          <div>
+            <Wordmark />
+            <p className="mt-1" style={{ maxWidth: '32ch', fontSize: '0.92rem' }}>
+              Kids, pet and party cosplay, manufactured to order for wholesale and OEM buyers.
+            </p>
+          </div>
+          <div>
+            <p className="footer__label">Shop</p>
+            <ul>
+              {CATEGORIES.map((c) => (
+                <li key={c.slug}>
+                  <Link to={`/shop/${c.slug}`}>{c.name}</Link>
+                </li>
+              ))}
+              <li>
+                <Link to="/shop">All products</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="footer__label">Company</p>
+            <ul>
+              <li>
+                <Link to="/custom">Custom / OEM</Link>
+              </li>
+              <li>
+                <Link to="/about">About us</Link>
+              </li>
+              <li>
+                <Link to="/blog">Programme notes</Link>
+              </li>
+              <li>
+                <Link to="/inquiry">Request a quote</Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <p className="footer__label">Contact</p>
+            <ul>
+              <li>
+                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+              </li>
+              <li>
+                <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="shell footer__base">
+          <span>© {new Date().getFullYear()} HB Coser. All rights reserved.</span>
+          <span>Wholesale &amp; OEM · Worldwide shipping</span>
+        </div>
+      </footer>
+
+      <a
+        ref={waRef}
+        className="wa"
+        href={CONTACT.whatsappUrl}
+        aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}
+      >
+        <WhatsAppIcon />
+        <span>WhatsApp</span>
+      </a>
+    </>
+  );
+}

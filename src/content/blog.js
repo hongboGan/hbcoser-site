@@ -1,0 +1,261 @@
+// Programme notes.
+//
+// `sources` records the topic cues an article was written from — the discussions and
+// questions that prompted it. Every word of every article is original, and nothing here
+// is presented as a fact about our own factory that is not true.
+export const POSTS = [
+  {
+    slug: 'kids-dress-up-programme-what-breaks-first',
+    title: "What breaks first in a children's dress-up programme",
+    excerpt:
+      'Children\'s costumes fail in three predictable places. Knowing which one you are buying for decides the specification — and the reorder rate.',
+    date: '2026-09-26',
+    tags: ['Kids', 'Quality', 'Sourcing'],
+    cover: '/products/kids-firefighter-set.jpg',
+    sources: [
+      'Parent complaints about dress-up costumes losing shape after a few wears (topic cue only)',
+      'Buyer threads on returns rates in childrenswear and dress-up ranges (topic cue only)',
+      'Discussion of age grading and mandatory labelling for childrenswear (topic cue only)',
+    ],
+    body: `A children's dress-up programme is not judged on the first wear. It is judged on the tenth,
+after the costume has been through a wash, a birthday party and a dressing-up box.
+
+Three things fail first, and they fail in a predictable order.
+
+## 1. The closure, not the fabric
+
+Zip pulls snap, hook-and-loop loses its grab, and elastic goes slack. These are the cheapest parts
+of the garment and the first to end a costume's life, because a child cannot dress themselves once
+the closure stops working — and a parent who has to help every time stops buying.
+
+If you are specifying a dress-up line, **spend the money on the closure before the print.** A
+heavier-gauge zip or a wider hook-and-loop tape costs cents per unit and decides whether the
+product survives to be recommended.
+
+## 2. The shoulder and the seat
+
+In childrenswear the highest-stress seams are the shoulder (pulled when the costume is yanked on
+over the head) and the seat (sat on, dragged, and knelt on). A costume can look identical to a
+better-built one on a hanger and split at the shoulder on the third wear.
+
+This is where a size chart built from real measurements beats a generic block. If the garment is
+graded from an adult pattern scaled down, the shoulder width will be wrong across the whole run,
+and no amount of inspection catches it — because the garment is not defective, it is mis-graded.
+
+> A size chart is not paperwork. It is the part of the specification that decides your returns rate.
+
+## 3. Anything that sheds, snaps or is swallowed
+
+Trims, beads, feathers and anything that can be pulled off by a determined four-year-old are a
+compliance question before they are an aesthetic one. Age grading and mandatory warnings for
+childrenswear differ by market, and the run has to carry the right ones for where it is going.
+
+Ask early, not after the carton lands. Changing a label or adding a warning after the goods are
+packed is a rework cost; deciding it before cutting is free.
+
+## What this means when you order
+
+- **Decide the market first.** It sets the labelling, the age grading and often the trim list.
+- **Ask what the closure is.** If the answer is vague, that is the answer.
+- **Get the size chart in writing** and check the shoulder and seat measurements, not the chest.
+- **Sample the wash.** One wash cycle tells you more about a dress-up costume than an inspection
+  report does.
+
+None of this is exotic. It is the difference between a line that gets reordered every season and
+one that gets marked down in January.`,
+  },
+  {
+    slug: 'sizing-pet-costumes-for-retail',
+    title: 'Sizing pet costumes for a retail wall',
+    excerpt:
+      'Pet sizing is not small, medium and large. It is girth, length and neck — and getting it wrong is the most common reason a pet range comes back off the shelf.',
+    date: '2026-09-22',
+    tags: ['Pets', 'Sizing', 'Retail'],
+    cover: '/products/pets-tiger-fleece.jpg',
+    sources: [
+      'Pet-owner complaints about costume fit and returns (topic cue only)',
+      'Retail discussion of pet apparel sizing inconsistency between suppliers (topic cue only)',
+      'Breed and girth measurement conventions used in pet apparel (topic cue only)',
+    ],
+    body: `A pet costume is bought by a human who cannot try it on. That single fact decides how the
+range has to be specified.
+
+## The three measurements that matter
+
+Weight is a marketing number. The three that actually decide fit are:
+
+- **Girth** — around the chest, just behind the front legs. This is the primary measurement, and
+  the one most ranges get wrong.
+- **Length** — from the base of the neck to the base of the tail, along the back.
+- **Neck** — around the neck where a collar sits.
+
+A 6 kg poodle and a 6 kg bulldog are not the same customer. One is long and narrow, the other is
+deep and broad, and a costume sized on weight alone will fit neither properly.
+
+## Breed proxies are useful, up to a point
+
+Most buyers group the wall by rough size bands. Breed examples are the fastest way to communicate
+those bands to a shopper — "fits most terriers and similar" tells a parent more than "size M" does.
+
+The trap is treating breed as a specification. It is a merchandising label. The specification is
+still girth, length and neck, and it should be published on the product page, not left to the
+shopper's guess.
+
+## What to fix in the specification
+
+- **Grade by girth first,** then adjust length and neck within the band.
+- **Publish girth ranges** on the hangtag. Shoppers measure girth with a tape measure at home;
+  they do not measure anything else as reliably.
+- **Elasticity is a fit decision, not a cost decision.** A costume with enough give in the girth
+  covers two adjacent bands and cuts returns sharply.
+- **Separate the patterns for cats.** A cat is not a small dog. The leg openings and the belly
+  panel have to be cut differently, and a dog pattern scaled down will fail on a cat.
+
+> The cheapest return to avoid is the one caused by a size chart the shopper could not read.
+
+## On the wall
+
+For a retail wall, the practical rule is to keep the number of bands small enough that a shopper
+can pick confidently and wide enough that most pets fall inside one of them. Three or four bands
+covering the realistic size distribution will outsell a longer ladder of narrower sizes, because
+the shopper who is unsure buys nothing.
+
+Whatever the ladder is, it has to stay stable across reorders. A supplier who shifts the boundary
+of "medium" between two runs turns a reorder into a return.`,
+  },
+  {
+    slug: 'photo-booth-kit-that-survives-a-season',
+    title: 'Building a photo-booth kit that survives a season',
+    excerpt:
+      'Photo-booth props are a consumable that buyers expect to reuse. The specification that decides whether they do is unglamorous: board weight, stick fixing and finish.',
+    date: '2026-09-17',
+    tags: ['Party', 'Events', 'Specification'],
+    cover: '/products/party-circus-photobooth.jpg',
+    sources: [
+      'Event-producer complaints about props delaminating and snapping (topic cue only)',
+      'Discussion of rental-versus-disposable expectations for event props (topic cue only)',
+      'Buyer threads on packaging kits so they survive transport and reuse (topic cue only)',
+    ],
+    body: `A photo-booth kit is sold as reusable and used as a consumable. The gap between those two
+expectations is where the complaints come from.
+
+## Board weight decides the season
+
+The single biggest variable is the stock the props are cut from. Thinner board prints beautifully
+and photographs identically on day one. It also delaminates the first time a guest grips it with
+warm hands, and it curls the moment it sees humidity.
+
+For anything intended to be used more than once, the print is worth less than the board under it.
+Two things to pin down before quoting:
+
+- **Board weight**, in gsm, and whether it is laminated on both faces. A single-face laminate curls.
+- **Corner treatment.** Square corners fold and tear; radiused corners survive being stacked back
+  into a box by someone in a hurry.
+
+## The stick is where kits fail
+
+Guests hold props by the stick, and the stick is a joint. Glue that is adequate in a mild room
+fails after an hour in a warm venue.
+
+If the kit is going to be reused, ask how the stick is fixed and whether the fixing has been tested
+warm. A taped adhesive strip is a different product from a mechanically fixed or sandwiched stick,
+and the price difference is small relative to the difference in how the second event goes.
+
+> A prop that snaps is remembered. It is remembered at the venue, by the person who hired the kit.
+
+## Packing for the second use
+
+How a kit is packed decides whether it survives transport back from the event:
+
+- **Flat, in a divided box**, beats a bag. Bags bend the corners that radiused cutting just saved.
+- **A printed contents card** costs very little and is the difference between a kit being repacked
+  tidily and a kit coming back as a pile.
+- **A reusable outer** — a printed box rather than a polybag — turns the delivery packaging into
+  part of the product the buyer hired.
+
+## What to specify, in one line
+
+Board weight with double-face lamination, radiused corners, a warm-tested stick fixing, and a
+divided box. None of it is expensive. All of it is invisible in a product photo, which is exactly
+why it has to be written into the specification instead.`,
+  },
+  {
+    slug: 'when-to-place-a-halloween-order',
+    title: 'When to place a Halloween order',
+    excerpt:
+      'Halloween is the most compressed season in the calendar, and the buyers who lose money are the ones who treat it like a normal lead time.',
+    date: '2026-09-10',
+    tags: ['Planning', 'Seasonality', 'Sourcing'],
+    cover: '/products/party-balloon-arch-halloween.jpg',
+    sources: [
+      'Retail discussion of Halloween sell-through windows and markdown timing (topic cue only)',
+      'Supplier-discussion of factory congestion in the run-up to Q4 (topic cue only)',
+      'Discussion of container and freight congestion around peak season (topic cue only)',
+    ],
+    body: `Halloween has the narrowest sell-through window of any season on the calendar, and the
+longest supply chain. Those two facts together decide when an order has to be placed.
+
+## The window is shorter than the season
+
+The commercial season is not the month of October. Most sell-through happens in a compressed
+window before it, and after that the goods are marked down — which means a late arrival is not a
+late sale, it is a discount.
+
+Work backwards from the shelf date rather than forwards from today. The chain is:
+
+- sea transit, plus any inland leg
+- customs clearance at origin and destination
+- final inspection and packing
+- bulk production
+- sample production, shipping and sign-off
+
+Every one of those steps can absorb a week without anyone making a mistake.
+
+## Q4 congestion is structural, not bad luck
+
+From roughly late summer onwards, factories that serve multiple seasonal categories are competing
+for the same lines, and freight capacity tightens with them. A lead time that held comfortably in
+spring is not the same lead time in September, even from the same supplier.
+
+The practical consequence is that **sampling is the step buyers most often delay and can least
+afford to.** A sample that slips two weeks in spring is recoverable. A sample that slips two weeks
+in the middle of the pre-season crush takes the whole run with it.
+
+> Order the sample as though it were the production slot, because in a compressed season it is.
+
+## What to do differently for a seasonal line
+
+- **Approve the sample a season ahead** for anything recurring, so the next year's run starts from
+  an approved reference rather than a new sample cycle.
+- **Book capacity, not just price.** A confirmed slot is worth more than a marginally better unit
+  price that has no slot behind it.
+- **Split the shipment** if part of the range is more time-critical. Getting the lead SKUs onto the
+  floor early beats waiting for a complete order.
+- **Decide the markdown plan before the order is placed.** Knowing your exit price changes what you
+  are prepared to pay for speed.
+
+## The uncomfortable arithmetic
+
+A seasonal line that arrives on time at a slightly higher unit cost makes money. The same line
+arriving three weeks late at a better unit cost usually does not, because the discount it needs to
+clear is larger than the saving.
+
+That is the whole case for treating a seasonal calendar as a specification, exactly like colour or
+sizing.`,
+  },
+];
+
+export const sortedPosts = [...POSTS].sort((a, b) => (a.date < b.date ? 1 : -1));
+
+export function getPost(slug) {
+  return POSTS.find((p) => p.slug === slug) || null;
+}
+
+export function formatDate(iso) {
+  const [y, m, d] = iso.split('-').map(Number);
+  const months = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December',
+  ];
+  return `${d} ${months[m - 1]} ${y}`;
+}
