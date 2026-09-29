@@ -92,6 +92,48 @@ committed to the repository and served by Vercel.
 - **If adopted:** keep the source images in the repository regardless. R2 is a delivery
   layer, not a backup. The repository must stay the thing you can rebuild from.
 
+## Deployment record — 2026-09-29
+
+Recorded so a future rebuild starts from facts rather than memory.
+
+| | |
+|---|---|
+| GitHub repo | `hongboGan/hbcoser-site` — public, default branch `main` |
+| First commit | `2874f1ba93657b26d9085c491135b2f5ff11de95` |
+| Vercel project | `hbcoser-site` — id `prj_WtjpZieGkRZXQuApHAi6CjEapVO9` |
+| Vercel team | `team_v70WLrBY7nB0rAGbsm98rE0Y` (slug `hongbocostumes`) |
+| Vercel account | `miazhang031@gmail.com` (`miazhang031-6375`) |
+| Production URL | `https://hbcoser-site.vercel.app` |
+| Deployment id | `dpl_69u29K8SWnGRSZxhzXnKDM9G6EDD` — state READY |
+| Domain config in Vercel | `www.hbcoser.com` primary; apex `hbcoser.com` 308-redirects to www |
+
+DNS records Vercel issued for this project — **these are unique to this project; never copy
+another project's CNAME target**:
+
+| Domain | Type | Name | Value |
+|---|---|---|---|
+| `hbcoser.com` | A | `@` | `216.198.79.1` |
+| `www.hbcoser.com` | CNAME | `www` | `5b9dfe9ae74fd237.vercel-dns-017.com.` |
+
+### One environment trap worth writing down
+
+On this machine pushing to GitHub fails with `Recv failure: Connection was reset` and
+`Invoke-WebRequest` fails with a `system.net/defaultProxy` error, while plain TCP to
+`github.com:443` succeeds. The cause is a **system proxy enabled and pointed at a local
+proxy that cannot carry the git smart-HTTP path**. It is not a network outage, and it is not
+GitHub.
+
+Do not clear the registry proxy setting and do not touch the global git config. Bypass it per
+command instead:
+
+```bash
+git -c safe.directory='*' -c http.proxy= -c https.proxy= push -u origin main
+```
+
+`safe.directory` is needed as well because the project directory is owned by
+`BUILTIN\Administrators`, which git treats as a dubious-ownership case. Both overrides are
+per-invocation; nothing is written to any config file.
+
 ## Layer the list misses — the inquiry channel
 
 The layers above carry the site. They do **not** carry the thing the site exists for:
@@ -117,10 +159,10 @@ Three rules follow, and they belong in the architecture:
 | # | Layer | Purpose | State |
 |---|---|---|---|
 | 1 | Domain | Address `hbcoser.com` | ✅ held |
-| 2 | Cloudflare | DNS | ✅ in place — records not yet added for this site |
-| 3 | GitHub | Source of truth | ⏳ repository not created yet |
-| 4 | Vercel | Hosting + CDN + TLS | ⏳ project not created yet |
-| 5 | Repository assets | Product images, fonts | ✅ in source, served by Vercel once deployed |
+| 2 | Cloudflare | DNS | ⏳ zone present — the two Vercel records are **not yet added** |
+| 3 | GitHub | Source of truth | ✅ `hongboGan/hbcoser-site`, commit `2874f1b` pushed |
+| 4 | Vercel | Hosting + CDN + TLS | ✅ project READY at `hbcoser-site.vercel.app`; custom domain attached, awaiting DNS |
+| 5 | Repository assets | Product images, fonts | ✅ served from the repository through Vercel |
 | + | FormSubmit | Inquiry delivery | ⏳ not activated on this domain |
 
 Update this table when a layer goes live. A status table that drifts is worse than none.
