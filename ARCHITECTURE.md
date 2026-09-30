@@ -194,3 +194,40 @@ Update this table when a layer goes live. A status table that drifts is worse th
    of safe, and GitHub is intermittently unreachable from mainland China.
 6. **Test the inquiry channel** with one real submission per month, and always after any
    infrastructure change.
+
+## Addendum — 2026-09-30
+
+Facts that changed after the tables above were written, plus two operational lessons that cost
+real time to learn.
+
+**Search Console is live.** `sc-domain:hbcoser.com` was added as a Domain property and verified
+by the DNS TXT method with `google-site-verification=QYZGKkUmDrOfGOFps9ZqpTLbua2oF6Rk012ANVLjQQs`.
+`https://www.hbcoser.com/sitemap.xml` was submitted and accepted, reporting 41 discovered pages.
+Indexing was requested for `/`, `/shop` and `/custom`. The Pages report shows "Processing data,
+please check again in a day or so" — a new property has no counts for a day or two, and that is
+not the same thing as zero indexed pages.
+
+The apex therefore carries **two** TXT records: the mail-forwarding SPF record and the Google
+verification record. Both must survive future edits. Deleting either silently breaks email
+deliverability or search ownership.
+
+**Pushing to GitHub from this machine is unreliable in both directions.** The box runs a system
+proxy at `http://127.0.0.1:29290` (HKCU Internet Settings, `ProxyEnable=1`). At first that proxy
+broke git pushes — the smart-HTTP exchange was reset — and bypassing it with
+`-c http.proxy= -c https.proxy=` plus `NO_PROXY=*` made the push succeed. Later the opposite was
+true: bypassing failed with "Couldn't connect to server" while pushing **through** the same proxy
+succeeded. So the rule is not "always bypass" or "always use" — it is: when one path fails, try
+the other before concluding the network is down.
+
+Two related constraints on the same machine: `git` refuses to operate in this directory without
+`-c safe.directory=*`, because the working tree is owned by `BUILTIN\Administrators` rather than
+the current user; and `curl` and .NET cannot complete a TLS handshake with Vercel hosts at all
+(TCP connects, then the handshake is killed), so a live-site HTTPS check from the shell is not
+trustworthy here — use a browser.
+
+**The inquiry channel is not yet redundant.** FormSubmit still returns HTTP 500. The form now
+tries FormSubmit, then Web3Forms when `CONTACT.web3formsKey` is set, then falls back to a
+prefilled mail draft carrying the buyer's own input. That key is deliberately left empty: the
+sub-agent hit a signup wall on Web3Forms and correctly refused to create an account on the
+owner's behalf. Until the key is set, the effective path is "FormSubmit fails → prefilled draft",
+which no longer loses a lead but is not yet the two-channel delivery it claims to be.
