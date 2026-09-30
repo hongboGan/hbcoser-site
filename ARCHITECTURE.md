@@ -3,7 +3,15 @@
 The target architecture, layer by layer: where each thing lives, why it lives there, and
 which layers are actually in place today.
 
-> 一句话：**注册商买门牌号 + Cloudflare 管解析 + GitHub 存图纸 + Vercel 开店。**
+> 一句话：**注册商买门牌号 + Namecheap BasicDNS 管解析 + GitHub 存图纸 + Vercel 开店。**
+
+> ⚠️ **Correction, recorded 2026-09-30.** Earlier revisions of this document claimed DNS for
+> `hbcoser.com` is hosted on Cloudflare. That was wrong, and it was wrong in an instructive
+> way: the claim was carried over from the planning conversation instead of being verified,
+> and it aimed a whole DNS change at a Cloudflare account that owns no zones at all. The
+> truth, confirmed by an authoritative query (`Resolve-DnsName -Type NS`): hbcoser.com is
+> registered **and** resolved at **Namecheap**, on `dns1.registrar-servers.com` and
+> `dns2.registrar-servers.com`. Verify a layer before you act on it.
 
 Companion document: [RECOVERY.md](RECOVERY.md) — how to rebuild all of this after a loss.
 
@@ -17,12 +25,13 @@ be rebuilt from scratch, but a lost domain is gone.
 | | |
 |---|---|
 | Domain | `hbcoser.com` |
-| DNS hosting | Cloudflare (nameservers point at Cloudflare, not at the registrar) |
+| DNS hosting | Namecheap BasicDNS — `dns1/dns2.registrar-servers.com`, the same account that holds the registration |
 | Renewal | annual; **set auto-renew on and keep the card current** |
 
-Because DNS lives at Cloudflare rather than at the registrar, the registrar can change
-without touching a single record — and equally, losing access to the Cloudflare account
-loses every record. Keep a second owner on that account.
+DNS lives in the same Namecheap account as the registration, so there is one login to lose
+rather than two — and one login to protect. Losing that account loses the domain *and* every
+record at once, which is strictly worse than the split arrangement. Keep a second owner on it
+and keep the recovery email current.
 
 The domain is the one asset where an expired card costs you the business identity.
 Calendar the renewal date.
@@ -37,8 +46,9 @@ be restored at any time.
 | Repository | `hbcoser-site` (public, branch `main`) |
 | Contents | 9 routes, design system, 28-product catalogue, all product images, fonts, build scripts |
 
-Everything needed to rebuild the site is here. The only things outside it are the Cloudflare,
-GitHub and Vercel accounts, the domain, and the FormSubmit activation.
+Everything needed to rebuild the site is here. The only things outside it are the Namecheap
+account — which holds both the domain and its DNS — the GitHub and Vercel accounts, and the
+FormSubmit activation.
 
 ## Layer 3 — Vercel · the shopfront
 
@@ -62,7 +72,7 @@ without it every extensionless route falls through to the SPA shell and the prer
 is unreachable. Do not add a catch-all rewrite either: unmatched paths are answered by the
 prerendered `404.html`, which returns a real 404 and deliberately carries no canonical.
 
-## Layer 4 — Cloudflare · DNS in front
+## Layer 4 — Namecheap BasicDNS · DNS in front
 
 **Role:** owns DNS for the domain, and is where the "no character licences, no lookalike
 goods" sourcing position gets an extra safety net — bot and abuse filtering before traffic
@@ -70,9 +80,11 @@ reaches Vercel.
 
 Two rules when touching it:
 
-- **Start the site records on "DNS only".** Proxying adds a second cache layer, and a
-  misconfigured cache rule will happily serve stale HTML for a page that was just rebuilt.
-  Turn the orange cloud on one record at a time, after verifying the origin directly.
+- **BasicDNS has no proxy layer, so there is no orange cloud to manage here.** The spirit of
+  the old rule survives — change one record at a time and re-query after each — but the trap
+  on this provider is different: a **"URL Redirect Record" on `@` silently locks the apex
+  `TXT`** (the SPF record). That is exactly the state this zone was found in, which is why the
+  first plan to "just edit the apex A record" could not have worked.
 - **Never edit a mail record while adding a site record.** `stellagaoxin@gmail.com` is the
   inquiry destination and lives on a different provider; a careless zone edit at the apex is
   how an inquiry channel dies quietly.
@@ -169,8 +181,9 @@ Update this table when a layer goes live. A status table that drifts is worse th
 
 ## Recommended order of work
 
-1. **Push to GitHub, import to Vercel, attach the domain in Cloudflare.** Keep the site
-   records on "DNS only" until the origin is verified, then proxy.
+1. **Push to GitHub, import to Vercel, attach the domain at Namecheap.** BasicDNS has no proxy
+   layer; replace the parking `A`/`CNAME` rows rather than adding to them, and leave the mail
+   records alone.
 2. **Activate FormSubmit** by submitting the inquiry form once and clicking the link that
    arrives at `stellagaoxin@gmail.com`.
 3. **Submit the sitemap in Google Search Console** for the `www` property, and verify the
