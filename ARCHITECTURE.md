@@ -171,11 +171,11 @@ Three rules follow, and they belong in the architecture:
 | # | Layer | Purpose | State |
 |---|---|---|---|
 | 1 | Domain | Address `hbcoser.com` | ✅ held |
-| 2 | Cloudflare | DNS | ⏳ zone present — the two Vercel records are **not yet added** |
-| 3 | GitHub | Source of truth | ✅ `hongboGan/hbcoser-site`, commit `2874f1b` pushed |
-| 4 | Vercel | Hosting + CDN + TLS | ✅ project READY at `hbcoser-site.vercel.app`; custom domain attached, awaiting DNS |
+| 2 | Namecheap BasicDNS | DNS | ✅ live — `A @ → 216.198.79.1`, `CNAME www → 5b9dfe9ae74fd237.vercel-dns-017.com`, TTL Automatic; mail records untouched |
+| 3 | GitHub | Source of truth | ✅ `hongboGan/hbcoser-site`, branch `main` |
+| 4 | Vercel | Hosting + CDN + TLS | ✅ project READY · `www.hbcoser.com` and apex both `Valid Configuration`, TLS issued, apex 308 → www |
 | 5 | Repository assets | Product images, fonts | ✅ served from the repository through Vercel |
-| + | FormSubmit | Inquiry delivery | ⏳ not activated on this domain |
+| + | FormSubmit | Inquiry delivery | ⚠️ **unconfirmed** — the `/ajax/` endpoint returned HTTP 500 on 2026-09-30; re-test before relying on it |
 
 Update this table when a layer goes live. A status table that drifts is worse than none.
 
