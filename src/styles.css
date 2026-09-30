@@ -750,6 +750,17 @@ p { margin: 0 0 1em; }
   text-underline-offset: 2px;
   font-weight: 600;
 }
+
+/* `.notice a` (0,1,1) outranks `.btn--primary` (0,1,0), so its `color: inherit` was painting
+   near-black text on the near-black button — roughly 1.05:1, invisible — at the exact moment
+   a buyer needs to tap it. Scoped to the primary button only: the ghost button beside it sits
+   transparent on a light notice and must keep its dark label. */
+.notice .btn--primary,
+.notice .btn--primary:hover,
+.notice .btn--primary:focus {
+  color: #fff;
+  text-decoration: none;
+}
 .notice__detail { display: block; margin-top: 9px; font-size: 0.79rem; opacity: 0.72; }
 
 .contact-ways { display: grid; gap: 12px; margin-top: 22px; }
