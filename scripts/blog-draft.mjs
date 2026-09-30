@@ -21,7 +21,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { execFileSync } from 'node:child_process';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -501,7 +501,7 @@ function cmdReject(slug, reason) {
   console.log(`reject: moved ${hit.name} to blog-queue/rejected/`);
 }
 
-function cmdPublish(slug, { dryRun = false } = {}) {
+async function cmdPublish(slug, { dryRun = false } = {}) {
   const hit = readQueue().find((d) => d.post?.slug === slug);
   if (!hit) {
     console.error(`publish: no queued draft with slug "${slug}"`);
@@ -529,6 +529,27 @@ function cmdPublish(slug, { dryRun = false } = {}) {
   try {
     fs.writeFileSync(BLOG_JS, insertIntoBlogJs(originalBlog, hit.post));
     console.log(`  wrote ${hit.post.slug} into blog.js`);
+
+    // Structural self-check before the expensive build. Serialising a Markdown body into a
+    // template literal is the one step that can silently truncate an article, so catching it
+    // here names the real cause instead of surfacing later as a puzzling prerender failure.
+    // The cache-busting query is required: Node caches by specifier, so a plain re-import of the
+    // same path would hand back the pre-insert module.
+    const fresh = await import(`${pathToFileURL(BLOG_JS).href}?t=${Date.now()}`);
+    const written = fresh.POSTS.find((p) => p.slug === hit.post.slug);
+    if (!written) throw new Error('blog.js does not expose the new post after insertion');
+    if (fresh.POSTS.length !== POSTS.length + 1) {
+      throw new Error(`blog.js exposes ${fresh.POSTS.length} posts, expected ${POSTS.length + 1}`);
+    }
+    if (written.body.trim() !== hit.post.body.trim()) {
+      throw new Error(
+        `body changed during serialisation (${hit.post.body.length} chars in, ${written.body.length} out)`,
+      );
+    }
+    if (fresh.POSTS.filter((p) => p.slug === hit.post.slug).length !== 1) {
+      throw new Error('the new slug appears more than once in blog.js');
+    }
+    console.log(`  verified blog.js: ${fresh.POSTS.length} posts, body intact at ${written.body.length} chars`);
 
     run('node', ['scripts/gen-sitemap.mjs']);
     console.log('  regenerated public/sitemap.xml');
@@ -637,7 +658,7 @@ switch (command) {
     cmdReject(rest[0], rest.includes('--reason') ? rest[rest.indexOf('--reason') + 1] : '');
     break;
   case 'publish':
-    cmdPublish(rest[0], { dryRun: rest.includes('--dry-run') });
+    await cmdPublish(rest[0], { dryRun: rest.includes('--dry-run') });
     break;
   default:
     console.log(`blog-draft.mjs - draft queue for the daily programme-notes pipeline
