@@ -5,6 +5,73 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'who-signs-the-childrens-product-certificate',
+    title: "Who actually signs the children's product certificate",
+    excerpt: "The certificate that clears a children's product at the border is issued by the importer, not the factory. What that changes about your next dress-up order, and the filing rule that took effect this year.",
+    date: '2026-09-30',
+    tags: ['Kids', 'Compliance', 'Sourcing'],
+    cover: '/products/kids-officer-uniform.jpg',
+    sources: [
+      "Importers repeatedly asking who signs the children's product certificate (topic cue only)",
+      "Buyer questions about selling a children's product before certification is complete (topic cue only)",
+      'Regulator guidance describing the testing and certification duties of the importer (topic cue only)',
+    ],
+    body: `A children's product that is subject to a safety rule cannot legally enter the United States
+without a certificate of compliance. Buyers routinely assume the factory writes one and drops it
+into the shipping documents. It does not work that way, and the misunderstanding usually surfaces
+at the worst moment: at the border, with a container already on the water.
+
+## The certificate has to come from you
+
+The duty to draft and issue the certificate sits with the domestic manufacturer or the importer.
+A third-party laboratory supplies the test results; it does not issue the certificate. Those are
+two separate documents from two separate parties.
+
+This matters because a certificate issued by a factory overseas does not by itself discharge the
+importer's obligation. The rules do let an importer build a certificate on another party's
+testing, but only while exercising due care: you have to be satisfied the results are valid, and
+you have to be able to obtain the underlying test reports and the test plan behind them. A scanned
+certificate with no reports attached is not that.
+
+## What has to be on it
+
+Seven elements, and a missing one is a defect:
+
+- A description precise enough to match the certificate to that product and no other
+- A citation to each children's product safety rule the item is certified against
+- The name, full mailing address and telephone number of the firm certifying
+- Contact details for the person who holds the test records
+- The month and year of manufacture, plus the city and country of final assembly
+- The dates and places of testing
+- The name, address and telephone number of the accepted laboratory
+
+Where a rule carries an exemption, the item may not need testing, but it still needs a certificate
+that says so and names the exemption it relies on.
+
+## What changed this year
+
+Since July 2026, importers of most regulated consumer products have to file certificates of
+compliance electronically with US Customs and Border Protection ahead of entry, through a
+government-agency message set. A certificate that exists only as a PDF in somebody's inbox no
+longer clears the entry on its own.
+
+## What to ask before you commit
+
+- **Which safety rules apply** to this exact item and age grade, in writing, before the order is
+  confirmed.
+- **Who holds the test reports**, and whether you can have them alongside the certificate rather
+  than after it.
+- **Whether lot identifiers will be recorded**, so one certificate can cover repeated production
+  instead of being rewritten every shipment.
+- **Who the importer of record is.** That party is the certifier, whatever the invoice implies.
+
+These questions cost nothing to settle before the goods are cut and a great deal afterwards. The
+useful part a supplier can play is narrower and more practical: holding the test reports, keeping
+the lot identifiers straight, and answering them without a week of delay. The
+[kids range](/shop/kids) shows the styles we build for wholesale and OEM programmes.`,
+  },
+
+  {
     slug: 'kids-dress-up-programme-what-breaks-first',
     title: "What breaks first in a children's dress-up programme",
     excerpt:
