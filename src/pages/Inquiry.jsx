@@ -42,6 +42,54 @@ export default function Inquiry() {
     return e;
   }
 
+  // FormSubmit answers HTTP 200 even when it rejects a submission, so the body's success
+  // flag — not the status code — decides what actually happened. Trusting res.ok here would
+  // show "thank you" for an inquiry that never sent. The same discipline applies to the
+  // backup channel and to concluding that both have failed.
+  async function sendPrimary(payload) {
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !data || String(data.success) !== 'true') {
+      throw new Error((data && data.message) || `FormSubmit failed (${res.status})`);
+    }
+  }
+
+  async function sendBackup(payload) {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: CONTACT.web3formsKey, ...payload }),
+    });
+    const data = await res.json().catch(() => null);
+    if (!res.ok || !data || String(data.success) !== 'true') {
+      throw new Error((data && data.message) || `Backup channel failed (${res.status})`);
+    }
+  }
+
+  // A failed send must not cost us the lead. This composes the buyer's own words into a mail
+  // draft, so the fallback is one click instead of a retype.
+  function mailDraft() {
+    const body = [
+      `Name: ${values.Name}`,
+      `Company: ${values.Company}`,
+      `Email: ${values.Email}`,
+      values.Country && `Country: ${values.Country}`,
+      `Product: ${values.Product}`,
+      values.Quantity && `Quantity: ${values.Quantity}`,
+      values['Target date'] && `Target date: ${values['Target date']}`,
+      '',
+      values.Message,
+    ]
+      .filter(Boolean)
+      .join('\n');
+    const subject = `Website inquiry — ${values.Company || values.Name}`;
+    return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }
+
   async function onSubmit(ev) {
     ev.preventDefault();
     const e = validate();
@@ -55,29 +103,43 @@ export default function Inquiry() {
 
     setStatus('sending');
     setNotice('');
+    const payload = {
+      ...values,
+      _subject: `Website inquiry — ${values.Company || values.Name}`,
+      _template: 'table',
+      _captcha: 'false',
+    };
+
+    // Two independent providers. A single free form host is a single point of failure, and
+    // FormSubmit has already served a sustained HTTP 500 across two days. The second channel
+    // is armed only when a key is configured, so an unset key degrades to the mail draft
+    // rather than failing a submission that could have sent.
+    const failures = [];
     try {
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          ...values,
-          _subject: `Website inquiry — ${values.Company || values.Name}`,
-          _template: 'table',
-          _captcha: 'false',
-        }),
-      });
-      const data = await res.json().catch(() => null);
-      // FormSubmit answers HTTP 200 even when it rejects the submission, so the
-      // body's success flag — not the status code — decides what actually happened.
-      // Trusting res.ok here would show "thank you" for an inquiry that never sent.
-      if (!res.ok || !data || String(data.success) !== 'true') {
-        throw new Error((data && data.message) || `Submission failed (${res.status})`);
-      }
+      await sendPrimary(payload);
       setStatus('done');
+      return;
     } catch (err) {
-      setStatus('error');
-      setNotice(String(err.message || err).slice(0, 140));
+      failures.push(String(err.message || err));
     }
+
+    if (CONTACT.web3formsKey) {
+      try {
+        await sendBackup({
+          subject: `Website inquiry — ${values.Company || values.Name}`,
+          from_name: values.Name,
+          replyto: values.Email,
+          ...values,
+        });
+        setStatus('done');
+        return;
+      } catch (err) {
+        failures.push(String(err.message || err));
+      }
+    }
+
+    setStatus('error');
+    setNotice(failures.join(' · ').slice(0, 160));
   }
 
   if (status === 'done') {
@@ -118,9 +180,18 @@ export default function Inquiry() {
           <div className="panel">
             {status === 'error' && (
               <div className="notice notice--err">
-                Your inquiry was not sent automatically. Please email{' '}
-                <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a> or message us on WhatsApp{' '}
-                <a href={CONTACT.whatsappUrl}>{CONTACT.whatsappDisplay}</a> — we will pick it up straight away.
+                Your inquiry was not sent automatically. Nothing you typed is lost — the button
+                below opens your mail app with all of it already filled in.
+                <div className="hero__actions mt-2">
+                  <a className="btn btn--primary" href={mailDraft()}>
+                    <MailIcon />
+                    Send it by email instead
+                  </a>
+                  <a className="btn btn--ghost" href={CONTACT.whatsappUrl}>
+                    <WhatsAppIcon />
+                    WhatsApp {CONTACT.whatsappDisplay}
+                  </a>
+                </div>
                 {notice && <span className="notice__detail">Technical detail: {notice}</span>}
               </div>
             )}
