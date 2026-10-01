@@ -5,6 +5,73 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'balloon-kit-perishable-specification',
+    title: 'A balloon kit is perishable - specify it that way',
+    excerpt: 'A balloon garland reads as a durable prop and behaves like a perishable good. Latex loses lift in a day, oxidises in light and carries a shelf life, so the specification is a sell-by decision.',
+    date: '2026-10-01',
+    tags: ['Party', 'Specification', 'Packaging'],
+    cover: '/products/party-balloon-arch-73pc.jpg',
+    sources: [
+      'Party businesses comparing how long latex and foil balloons actually hold their lift (topic cue only)',
+      'Decorators describing latex balloons going dull and cloudy after inflating them early (topic cue only)',
+      'Distributor guidance on storing latex balloons away from light and heat, and the shelf life that follows (topic cue only)',
+    ],
+    body: `A balloon garland is bought like a prop and it behaves like a perishable good. It carries a lift
+expectation, a shelf life, and a finish that changes once air touches it. Buyers who treat the kit
+as a durable decoration tend to discover all three at once, in front of a customer.
+
+## The promise you are actually selling is lift
+
+Latex balloons lose their lift quickly. Helium molecules are small enough to diffuse straight
+through the wall of the balloon, so latex filled for an event is a same-day product rather than a
+same-week one. Foil balloons are made from a non-porous material and hold their lift far longer.
+
+That difference decides what a kit can honestly be sold as. A garland that hangs indoors for an
+afternoon is a straightforward proposition. The same garland sold as a week-long display is not,
+and the complaint arrives after the customer has already hung it.
+
+## Latex has a date on it
+
+Latex is harvested from rubber trees, which is why the material ages. Uninflated stock has a shelf
+life, and storage decides how much of it survives to the day it is used: away from direct sunlight
+and fluorescent light, away from heat, and at a steady room temperature of roughly 20 to 22
+degrees C.
+
+Inflation starts a second clock. Once a balloon is filled it begins to oxidise, and the visible
+result is a finish that goes from glossy to cloudy. Ultraviolet light accelerates that and also
+makes the film more brittle. A garland that looked right in a photograph can still read as tired by
+its second day.
+
+## What is actually inside the kit
+
+A garland kit is a size mix plus hardware, and the mix is where two kits at the same piece count
+diverge:
+
+- Balloon sizes, usually a small and a large working together, such as 5 inch with 11 or 12 inch
+- The colour and finish count, because matte, pearl and confetti finishes do not read the same
+- The garland strip, a plastic tape with holes that the balloon necks are pushed through
+- Adhesive dots, ribbon, and any foil or confetti accents
+
+The strip is the quiet failure point. A short strip, or one whose holes tear when a balloon is
+pulled through, ends the kit's life before the balloons do.
+
+## What to settle before you commit
+
+- **The lift expectation, in writing.** Same-day indoor use and multi-day display are different
+  products with different balloons in them.
+- **The size and finish mix by count**, not by total pieces, so a reorder matches the first run.
+- **The strip by length and hole count**, and whether it survives a whole garland being assembled.
+- **Light-blocking packaging**, with storage guidance printed on it, because the shelf life
+  belongs with whoever stores the stock.
+- **One inflation test.** Fill a sample and leave it standing for two days. That answers more than a
+  photograph does.
+
+None of this is exotic. It is the difference between a kit that sells as a decoration and one that
+comes back as a complaint. The [party range](/shop/party) shows how the components are specified
+across a full programme.`,
+  },
+
+  {
     slug: 'who-signs-the-childrens-product-certificate',
     title: "Who actually signs the children's product certificate",
     excerpt: "The certificate that clears a children's product at the border is issued by the importer, not the factory. What that changes about your next dress-up order, and the filing rule that took effect this year.",

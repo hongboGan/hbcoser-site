@@ -411,8 +411,32 @@ function draftFileName(post) {
 
 // ---------------------------------------------------------------- commands
 
-function run(cmd, args) {
-  return execFileSync(cmd, args, { cwd: ROOT, stdio: 'pipe', shell: process.platform === 'win32', encoding: 'utf8' });
+// This machine intermittently refuses a spawn with EPERM under load, which has nothing to do
+// with the content being published, so every child process gets a retry rather than only the
+// build. A real compile or script error is not transient and is not retried, so a genuine
+// failure still surfaces immediately and is not buried under repeats.
+function run(cmd, args, { attempts = 3 } = {}) {
+  let lastError;
+  let tries = 0;
+  while (tries < attempts) {
+    tries += 1;
+    try {
+      return execFileSync(cmd, args, {
+        cwd: ROOT,
+        stdio: 'pipe',
+        shell: process.platform === 'win32',
+        encoding: 'utf8',
+      });
+    } catch (err) {
+      lastError = err;
+      const detail = `${err.stdout || ''}\n${err.stderr || ''}`;
+      const transient = /EPERM|spawnSync|EBUSY|EAGAIN/.test(`${err.message}\n${detail}`);
+      if (!transient || tries === attempts) break;
+      console.log(`  ${cmd} was refused on attempt ${tries} (transient spawn refusal), retrying`);
+    }
+  }
+  const detail = `${lastError?.stdout || ''}${lastError?.stderr || ''}`.trim().split('\n').slice(-6).join('\n');
+  throw new Error(`${cmd} ${args.join(' ')} failed after ${tries} attempt(s)\n${detail}`);
 }
 
 function cmdList() {
@@ -501,7 +525,59 @@ function cmdReject(slug, reason) {
   console.log(`reject: moved ${hit.name} to blog-queue/rejected/`);
 }
 
-async function cmdPublish(slug, { dryRun = false } = {}) {
+// Verifies the built HTML rather than trusting a build exit code. Deliberately free of child
+// processes: this machine refuses a spawn from inside node, so the build is run by the caller
+// and only the result is checked here.
+function verifyPrerendered(post) {
+  const page = path.join(ROOT, 'dist', 'blog', `${post.slug}.html`);
+  if (!fs.existsSync(page)) throw new Error(`no prerendered page at ${path.relative(ROOT, page)}`);
+  const html = fs.readFileSync(page, 'utf8');
+
+  // Bounded by the document's last </div>, not by the next <script>: the module script and the
+  // JSON-LD block both sit in <head>, ahead of the root div, so there is no <script after the
+  // app markup to anchor on.
+  const rootStart = html.indexOf('<div id="root">');
+  const rootEnd = html.lastIndexOf('</div>');
+  // React escapes apostrophes and quotes on the way out, so entities have to come back before
+  // any comparison against the source text.
+  const decodeEntities = (s) =>
+    s
+      .replace(/&#x27;|&#39;/g, "'")
+      .replace(/&quot;/g, '"')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, '&');
+  const rootText =
+    rootStart >= 0 && rootEnd > rootStart
+      ? decodeEntities(html.slice(rootStart + '<div id="root">'.length, rootEnd).replace(/<[^>]+>/g, ' '))
+          .replace(/\s+/g, ' ')
+          .trim()
+      : '';
+  const rootChars = rootText.length;
+  if (rootChars < 1500) throw new Error(`prerendered #root holds only ${rootChars} characters of text`);
+
+  if (!rootText.includes(post.title.replace(/\s+/g, ' '))) {
+    throw new Error('prerendered page does not carry the article title');
+  }
+
+  // Fingerprint the body by its longest words rather than by a byte-exact substring: the
+  // renderer collapses soft wraps and splits inline markup into separate elements, so an exact
+  // match would fail for reasons unrelated to the article being present.
+  const tokens = [...new Set((post.body.match(/[A-Za-z]{8,}/g) || []).map((w) => w.toLowerCase()))];
+  const sample = tokens.slice(0, 14);
+  const haystack = rootText.toLowerCase();
+  const found = sample.filter((w) => haystack.includes(w));
+  if (sample.length < 5 || found.length < sample.length - 1) {
+    throw new Error(`prerendered page does not carry the article body (${found.length}/${sample.length} distinctive words present)`);
+  }
+
+  if (!html.includes(`https://www.hbcoser.com/blog/${post.slug}`)) {
+    throw new Error('prerendered page has no self-referencing canonical');
+  }
+  return rootChars;
+}
+
+async function cmdPublish(slug, { dryRun = false, build = true } = {}) {
   const hit = readQueue().find((d) => d.post?.slug === slug);
   if (!hit) {
     console.error(`publish: no queued draft with slug "${slug}"`);
@@ -551,67 +627,25 @@ async function cmdPublish(slug, { dryRun = false } = {}) {
     }
     console.log(`  verified blog.js: ${fresh.POSTS.length} posts, body intact at ${written.body.length} chars`);
 
+    if (!build) {
+      // Insertion is the only step that changes the site, and it needs no child process. The
+      // build does, and this machine refuses a spawn from inside node, so the build and the
+      // prerender check are left to the caller. The draft stays queued until `verify` passes,
+      // which means an abandoned staged publish loses nothing.
+      console.log('\nstaged: blog.js updated, draft kept in the queue, nothing verified yet.');
+      console.log('Run these from the shell, in order:');
+      console.log('  node scripts/gen-sitemap.mjs');
+      console.log('  npm run build');
+      console.log(`  node scripts/blog-draft.mjs verify ${hit.post.slug}`);
+      return;
+    }
+
     run('node', ['scripts/gen-sitemap.mjs']);
     console.log('  regenerated public/sitemap.xml');
 
-    // One retry: this machine intermittently fails a spawn under load, and the failure is
-    // not related to the content being built.
-    let built = false;
-    for (let attempt = 1; attempt <= 2 && !built; attempt += 1) {
-      try {
-        run('npm', ['run', 'build']);
-        built = true;
-      } catch (err) {
-        const detail = `${err.stdout || ''}${err.stderr || ''}`.trim().split('\n').slice(-6).join('\n');
-        if (attempt === 2) throw new Error(`build failed twice\n${detail}`);
-        console.log('  build attempt 1 failed, retrying once');
-      }
-    }
+    run('npm', ['run', 'build']);
 
-    // Verify the prerendered page rather than trusting the build exit code.
-    const page = path.join(ROOT, 'dist', 'blog', `${hit.post.slug}.html`);
-    if (!fs.existsSync(page)) throw new Error(`no prerendered page at ${path.relative(ROOT, page)}`);
-    const html = fs.readFileSync(page, 'utf8');
-
-    // Bounded by the document's last </div>, not by the next <script>: the module script and
-    // the JSON-LD block both sit in <head>, ahead of the root div, so there is no <script after
-    // the app markup to anchor on.
-    const rootStart = html.indexOf('<div id="root">');
-    const rootEnd = html.lastIndexOf('</div>');
-    // React escapes apostrophes and quotes on the way out, so entities have to come back before
-    // any comparison against the source text.
-    const decodeEntities = (s) =>
-      s
-        .replace(/&#x27;|&#39;/g, "'")
-        .replace(/&quot;/g, '"')
-        .replace(/&lt;/g, '<')
-        .replace(/&gt;/g, '>')
-        .replace(/&amp;/g, '&');
-    const rootText =
-      rootStart >= 0 && rootEnd > rootStart
-        ? decodeEntities(html.slice(rootStart + '<div id="root">'.length, rootEnd).replace(/<[^>]+>/g, ' '))
-            .replace(/\s+/g, ' ')
-            .trim()
-        : '';
-    const rootChars = rootText.length;
-    if (rootChars < 1500) throw new Error(`prerendered #root holds only ${rootChars} characters of text`);
-
-    if (!rootText.includes(hit.post.title.replace(/\s+/g, ' '))) {
-      throw new Error('prerendered page does not carry the article title');
-    }
-
-    // Fingerprint the body by its longest words rather than by a byte-exact substring: the
-    // renderer collapses soft wraps and splits inline markup into separate elements, so an
-    // exact match would fail for reasons unrelated to the article being present.
-    const tokens = [...new Set((hit.post.body.match(/[A-Za-z]{8,}/g) || []).map((w) => w.toLowerCase()))];
-    const sample = tokens.slice(0, 14);
-    const haystack = rootText.toLowerCase();
-    const found = sample.filter((w) => haystack.includes(w));
-    if (sample.length < 5 || found.length < sample.length - 1) {
-      throw new Error(`prerendered page does not carry the article body (${found.length}/${sample.length} distinctive words present)`);
-    }
-
-    if (!html.includes(`https://www.hbcoser.com/blog/${hit.post.slug}`)) throw new Error('prerendered page has no self-referencing canonical');
+    const rootChars = verifyPrerendered(hit.post);
     console.log(`  verified dist/blog/${hit.post.slug}.html (${rootChars} chars in #root, canonical present)`);
 
     if (dryRun) {
@@ -638,6 +672,44 @@ async function cmdPublish(slug, { dryRun = false } = {}) {
   }
 }
 
+// Confirms a staged publish reached the prerendered output and the sitemap, then finalises it by
+// clearing the draft from the queue. Only meaningful after the caller has run the build.
+function cmdVerify(slug) {
+  const hit = readQueue().find((d) => d.post?.slug === slug);
+  const inBlog = POSTS.find((p) => p.slug === slug);
+  if (!inBlog) {
+    console.error(`verify: "${slug}" is not in blog.js, so it was never staged`);
+    process.exitCode = 1;
+    return;
+  }
+  const post = inBlog;
+  try {
+    const rootChars = verifyPrerendered(post);
+    const sitemap = fs.readFileSync(path.join(ROOT, 'public/sitemap.xml'), 'utf8');
+    const route = new RegExp(`/blog/${slug.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}</loc>`);
+    if (!route.test(sitemap)) throw new Error('public/sitemap.xml does not list the new route');
+
+    console.log(`  verified dist/blog/${slug}.html (${rootChars} chars in #root, canonical present)`);
+    console.log('  verified public/sitemap.xml lists the route');
+    if (hit) {
+      fs.rmSync(hit.file);
+      console.log(`  cleared ${hit.name} from the queue`);
+    }
+    console.log(JSON.stringify({
+      published: slug,
+      title: post.title,
+      words: wordCount(post.body),
+      route: `/blog/${slug}`,
+      posts: POSTS.length,
+      queueRemaining: readQueue().length,
+      next: 'git diff, then commit and push - Vercel will rebuild',
+    }, null, 2));
+  } catch (err) {
+    console.error(`\nverify: FAILED. Nothing was finalised; the draft is still queued.\n  ${err.message}`);
+    process.exitCode = 1;
+  }
+}
+
 // ---------------------------------------------------------------- entry
 
 const [command, ...rest] = process.argv.slice(2);
@@ -658,7 +730,13 @@ switch (command) {
     cmdReject(rest[0], rest.includes('--reason') ? rest[rest.indexOf('--reason') + 1] : '');
     break;
   case 'publish':
-    await cmdPublish(rest[0], { dryRun: rest.includes('--dry-run') });
+    await cmdPublish(rest[0], {
+      dryRun: rest.includes('--dry-run'),
+      build: !rest.includes('--no-build'),
+    });
+    break;
+  case 'verify':
+    cmdVerify(rest[0]);
     break;
   default:
     console.log(`blog-draft.mjs - draft queue for the daily programme-notes pipeline
