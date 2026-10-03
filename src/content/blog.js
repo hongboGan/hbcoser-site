@@ -5,6 +5,76 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'backdrop-judged-by-its-creases',
+    title: 'A backdrop is judged by its creases, not its artwork',
+    excerpt: 'A backdrop is bought for its print and judged on what shipping did to it. Substrate, finish and the way it is packed decide whether it hangs flat on the first try, so the specification is really a transport decision.',
+    date: '2026-10-02',
+    tags: ['Party', 'Packaging', 'Quality'],
+    cover: '/products/party-halloween-backdrop-set.jpg',
+    sources: [
+      'Buyers and set builders asking where to find a printed backdrop that survives transport without arriving wrinkled or torn (topic cue only)',
+      'Print trade guidance on removing creases from polyester backdrops and storing them rolled rather than folded (topic cue only)',
+      'Material comparisons describing dye-sublimated polyester as matte and glare-free under flash, against a more reflective vinyl (topic cue only)',
+    ],
+    body: `A backdrop is bought for its print and judged on what shipping did to it. The artwork rarely
+starts the complaint. The creases do, on the first day, in front of the people who ordered it.
+
+## Creases are a packing decision, not a printing one
+
+Polyester backdrop fabric creases when it is folded and stored that way. Fold a printed backdrop
+for long enough and the fold lines stop being temporary. Printers who handle these goods advise
+storing them rolled loosely around a sturdy tube, with the ends secured, because folding is what
+creates permanent lines.
+
+That makes the carton a specification item. A backdrop shipped rolled arrives hanging flat within
+hours of being hung under tension. The same fabric shipped folded arrives needing a steamer, and
+the person who has to steam it is your customer. Creases are recoverable, since hanging under
+tension and moisture both work, but recovery is unpaid labour and it is the first thing a buyer
+remembers about the order.
+
+## The substrate decides how it photographs
+
+Most printed backdrops are polyester printed by dye sublimation, where the ink is infused into the
+fibres rather than sitting on the surface. The result is a soft, matte face with almost no glare,
+which matters when the backdrop stands behind people who are being photographed with flash or lit
+by stage lights. Matte also avoids the hotspots that make an otherwise good print look cheap in a
+photograph.
+
+Vinyl behaves differently. It is a waterproof PVC, better suited to outdoor use where wind and
+ultraviolet light are the real risks, and it can be printed on both sides. Even in a matte finish
+vinyl stays more reflective than dye-sublimated polyester, so the two are not interchangeable
+simply because both accept a photograph.
+
+## The finish decides whether it hangs flat
+
+A backdrop needs a way to attach to something, and the options are not equivalent:
+
+- A pole pocket, a sleeve sewn along one edge to take a rod or a pipe
+- Grommets, metal eyelets set into a reinforced edge
+- A reinforced hem, which stops a weighted edge from tearing out
+- Hook-and-loop strips, where the backdrop meets the frame
+
+The pocket is where buyers lose usable print. Fabric folded back to make the sleeve is fabric that
+no longer shows artwork, so the printable area of a nominal size is smaller than the number on the
+order. Ask for the finished image area rather than the nominal size, and for a hanging method that
+matches the frame the venue actually owns.
+
+## What to settle before you commit
+
+- **Substrate and finish by where it will hang**, indoors under flash or outdoors in wind.
+- **Packed rolled on a tube**, with the tube written into the specification rather than left to
+  whoever packs the carton.
+- **Care and storage guidance printed on the pack**, because the customer stores it between events.
+- **The finished image area**, measured after the pocket has been taken.
+- **One sample hung under tension for a day**, which answers the crease question in a way a flat
+  photograph never will.
+
+None of this is exotic, and none of it is the artwork. It is the difference between a backdrop that
+goes back in its bag and one that goes into a bin. The [party range](/shop/party) shows how the
+pieces are specified across a full programme.`,
+  },
+
+  {
     slug: 'balloon-kit-perishable-specification',
     title: 'A balloon kit is perishable - specify it that way',
     excerpt: 'A balloon garland reads as a durable prop and behaves like a perishable good. Latex loses lift in a day, oxidises in light and carries a shelf life, so the specification is a sell-by decision.',
