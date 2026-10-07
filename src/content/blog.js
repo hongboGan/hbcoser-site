@@ -5,6 +5,50 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'paying-for-the-air-in-the-carton',
+    title: 'You are paying for the air in the carton',
+    excerpt: 'Costume and party goods are light, bulky and billed on the space they occupy rather than on what they weigh. Carton dimensions, compression and the volumetric divisor are costing decisions, so they belong on the order.',
+    date: '2026-10-04',
+    tags: ['Logistics', 'Packaging', 'Costing'],
+    cover: '/products/kids-fantasy-dress-set.jpg',
+    sources: [
+      'Freight references explaining that carriers charge the greater of actual and volumetric weight, and that the divisor differs between air and courier services (topic cue only)',
+      'Import guidance on billing bulky light goods on external packed dimensions, and on the cost effect of a carton only slightly oversized (topic cue only)',
+      'Sea freight material on charging loose cargo on the greater of weight or measure, and on usable volume per container (topic cue only)',
+      'Sourcing notes on compressing textiles, and on negotiating the volumetric basis rather than the rate (topic cue only)',
+    ],
+    body: `A costume that weighs a few hundred grams can still be billed as though it weighed several kilos. Nothing in the garment caused that. The carton did, because freight is priced on the space a shipment occupies as well as on its weight, and finished garments occupy a great deal of space.
+
+## Light goods are billed on space
+
+Carriers compare two numbers and charge the greater one: the actual gross weight, and the volumetric weight derived from the package dimensions. The volumetric figure is length times width times height, divided by a divisor that varies by service. Air freight is normally calculated on a divisor of six thousand with centimetres and kilograms, while express couriers commonly use five thousand, so a carton priced on the courier basis comes out heavier than the air standard would suggest.
+
+The arithmetic is unforgiving. A carton measuring sixty by forty by forty centimetres holds ninety-six thousand cubic centimetres, which works out at sixteen kilos of volumetric weight on a divisor of six thousand. If the goods inside weigh two kilos, the shipment is billed on sixteen.
+
+## Ocean freight counts the same space differently
+
+Sea freight uses no divisor, but the logic does not change. Loose cargo is charged on the greater of weight or measure, so a low-density shipment is priced on its volume. That volume is quoted in cubic metres, and a twenty-foot container holds roughly twenty-six to twenty-eight cubic metres of usable space.
+
+This is why a master carton specification belongs on the purchase order. A carton of half a metre by forty centimetres by twenty-eight and a half centimetres is a little over five hundredths of a cubic metre. Small differences in that number, repeated across a thousand cartons, decide whether a container closes comfortably or needs a second one.
+
+## Compression is the lever you can pull
+
+Textiles compress. Garments packed flat under pressure take up markedly less volume than the same garments packed loosely, and the saving lands in the freight bill rather than in a line anyone has to negotiate.
+
+There is a limit, and it differs by product. A printed backdrop that has to travel rolled, so that it arrives without permanent creases, will cube out far faster than one that can be folded flat, so the pack that protects the print is the pack that costs the most space. That tension belongs in the same conversation as the freight figure rather than in two separate ones, and the [packing note on backdrops](/blog/backdrop-judged-by-its-creases) works through the other side of it.
+
+## What to settle before you commit
+
+- **Packed dimensions, measured externally after packing**, rather than the flat product size.
+- **The divisor your forwarder actually uses**, because the same carton changes price between services.
+- **Whether the goods can be compressed**, and how far, before the print or the trim suffers.
+- **An inner pack count that fills the carton.** A carton three-quarters full is still billed as though it were full.
+- **Volume in cubic metres per carton, stated on the order**, so freight can be estimated before the goods exist.
+
+None of this changes what the product is. It changes what the product costs to move, and for bulky goods that is frequently the larger number.`,
+  },
+
+  {
     slug: 'backdrop-judged-by-its-creases',
     title: 'A backdrop is judged by its creases, not its artwork',
     excerpt: 'A backdrop is bought for its print and judged on what shipping did to it. Substrate, finish and the way it is packed decide whether it hangs flat on the first try, so the specification is really a transport decision.',
