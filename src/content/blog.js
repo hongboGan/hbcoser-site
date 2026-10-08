@@ -5,6 +5,56 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'why-the-reorder-does-not-match',
+    title: 'Why the reorder does not match the first shipment',
+    excerpt: 'Colour is approved before the bulk is dyed, and every dye lot differs slightly. The approved swatch, the light it was judged under and a written tolerance decide whether a repeat order lands next to the first one or beside it.',
+    date: '2026-10-08',
+    tags: ['Sampling', 'Quality', 'Specification'],
+    cover: '/products/kids-witch-cloak-set.jpg',
+    sources: [
+      'Merchandising guides describing the lab dip as a dyed swatch submitted for buyer colour approval before bulk dyeing, and the approval as dye-to-match (topic cue only)',
+      'Sourcing guidance noting that dye lots vary slightly from batch to batch, and that inconsistent colour across reorders is a frequent buyer complaint (topic cue only)',
+      'Reorder planning material advising a check of whether material, mill, construction, trim or finish changed, because an earlier approval only covers the inputs it was given (topic cue only)',
+      'Colour-matching references explaining metamerism, the use of D65 artificial daylight for approval alongside a source matching the selling environment, and the numeric colour-difference tolerance that decides a pass (topic cue only)',
+    ],
+    body: `A repeat order arrives and the colour is close, but not the same. Nobody changed the specification, the style number is identical, and the two shipments still cannot be merchandised side by side. The cause is usually decided long before the goods are cut.
+
+## The colour is approved before it exists
+
+Bulk fabric is not dyed to a colour. It is dyed to something that was approved first. That something is a lab dip: a small piece of fabric dyed to the target shade and submitted for approval ahead of the bulk run, with the approval recorded as dye-to-match.
+
+A buyer is therefore committing an order against a swatch the size of a business card. Everything that follows, across every repeat, is measured against whatever was accepted at that moment.
+
+## Every dye lot is slightly different
+
+Dyeing is chemistry run in batches. Each lot is mixed and processed separately, so lots vary slightly even when the recipe and the machine are unchanged. That is why two shipments of one style, made to one specification, can sit together and still read as two different colours: they were dyed in different lots.
+
+This is the ordinary case, not the defect case. The question is not how to eliminate the variation, but how much of it the order will accept and what it is measured against.
+
+## Your shop lighting is not the approval lighting
+
+Colours are judged under a defined light source, commonly D65 artificial daylight, with a second source chosen to resemble the environment where the product is actually sold. The reason is metamerism: two colours can look identical under one light and visibly different under another.
+
+A dip that matched in the viewing booth can therefore look wrong under a shop floor's warm lighting, and neither party is lying. Printed goods make the point sharper still, because print is conventionally assessed against a different reference illuminant from dyed textile, so a printed piece and a dyed piece matched to the same number are not automatically a pair.
+
+## Tolerance is a number, not a feeling
+
+Colour difference is measured, not argued. Instruments return a numeric value for how far a sample sits from the standard, and a pass is a threshold on that scale. Buyers often assume a pass means a visual match. It does not. A sample comfortably inside a tolerance can still look off against the first shipment once it is lit by the room it is sold in.
+
+That makes the tolerance a commercial decision. Set it in writing, set it against the light the goods will live under, and be explicit about which scale your supplier is measuring on.
+
+## What to settle before you commit
+
+- **The approved swatch, retained as the standard.** A repeat order should be matched to what you accepted, not to a freshly dyed dip.
+- **The light source used for approval**, named on the order, together with the lighting the product will be sold under.
+- **A written tolerance**, on the measuring scale your supplier actually reports.
+- **Whether anything changed on the repeat** — fabric, mill, trim, finish or decoration — because an approval only covers the inputs it was given.
+- **A production shade band or bulk swatch**, so the real range is visible before the container ships.
+
+The work here is not craftsmanship. It is specification, and it is cheap at the sampling stage and expensive in a container. The [note on what fails first in a dress-up programme](/blog/kids-dress-up-programme-what-breaks-first) takes the same approach to the parts that break rather than the colour that drifts.`,
+  },
+
+  {
     slug: 'paying-for-the-air-in-the-carton',
     title: 'You are paying for the air in the carton',
     excerpt: 'Costume and party goods are light, bulky and billed on the space they occupy rather than on what they weigh. Carton dimensions, compression and the volumetric divisor are costing decisions, so they belong on the order.',
