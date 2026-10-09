@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-28",
+  "updated": "2026-10-09",
   "note": "Real Alibaba.com listings. sourceUrl and sourceImage record where each item was quoted from. Every title describes the product category only - no character, studio or franchise names, and no supplier marketing keywords. Every image was visually checked for watermarks, supplier logos and Chinese marketing text before being accepted.",
   "products": [
     {
@@ -363,6 +363,58 @@
       "sourceUrl": "https://www.alibaba.com/product-detail/38-PCS-Christmas-Party-Photo-Booth_1601193240361.html",
       "sourceImage": "https://s.alicdn.com/@sc04/kf/H8809ca22bd934f7e96a5863e7526d4beL.jpg_960x960.jpg",
       "image": "/products/party-christmas-photobooth-38pc.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-skeleton-bodysuit",
+      "title": "Kids Skeleton Bodysuit Costume",
+      "category": "kids",
+      "priceUsdMin": 6.04,
+      "priceUsdMax": 6.04,
+      "moq": "1 piece",
+      "sourceUrl": "https://detail.1688.com/offer/1084272094096.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01kHFwsJOGsWD21stE_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-skeleton-bodysuit.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-lawyer-robe-costume",
+      "title": "Kids Lawyer Robe Costume for Role-Play",
+      "category": "kids",
+      "priceUsdMin": 6.04,
+      "priceUsdMax": 6.04,
+      "moq": "1 piece",
+      "sourceUrl": "https://detail.1688.com/offer/1084800602417.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01XrxCfn7Q8ZB21stE_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-lawyer-robe-costume.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-grey-alien-costume",
+      "title": "Kids Grey Alien Costume with Full Head Cover",
+      "category": "kids",
+      "priceUsdMin": 6.41,
+      "priceUsdMax": 6.41,
+      "moq": "1 piece",
+      "sourceUrl": "https://detail.1688.com/offer/1091427096047.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01bruWfpqfzzG3thOC_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-grey-alien-costume.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-zombie-vampire-bodysuit",
+      "title": "Kids Zombie and Vampire Bodysuit Costume",
+      "category": "kids",
+      "priceUsdMin": 6.04,
+      "priceUsdMax": 6.04,
+      "moq": "1 piece",
+      "sourceUrl": "https://detail.1688.com/offer/965433249591.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01dCSYsN1zrnh36DuOo_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-zombie-vampire-bodysuit.jpg",
       "width": 900,
       "height": 900
     }
