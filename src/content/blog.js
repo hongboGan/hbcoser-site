@@ -5,6 +5,54 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'the-poly-bag-has-its-own-rulebook',
+    title: 'The poly bag has its own rulebook',
+    excerpt: 'The bag a product ships in is a regulated item in its own right, and the rule that applies to it is set by the destination and the channel rather than by the product inside. Three lines in the packing specification settle it.',
+    date: '2026-10-09',
+    tags: ['Packaging', 'Compliance', 'Specification'],
+    cover: '/products/kids-pumpkin-set.jpg',
+    sources: [
+      'Packaging-compliance guidance explaining that there is no unified law governing suffocation warnings on plastic bags, while the EU toy safety framework requires toys and their packaging not to present a strangulation or suffocation risk for products intended for children under fourteen, and noting common exemptions such as industrial-use bags and small food bags (topic cue only)',
+      'US state-level material noting that bag suffocation warnings are mandatory in several large states, that only a handful of states and two large cities carry strict rules, and that they differ on bag dimensions, wording and placement (topic cue only)',
+      "Marketplace and retailer preparation rules cited by sellers stating that a poly bag with an opening of five inches or more, or of a low film thickness, triggers a suffocation warning whose size and placement follow the bag's dimensions (topic cue only)",
+      'Seller-forum and label-provider references quoting the standard warning wording and noting that presentation varies by jurisdiction, including required printing methods in one state and boldface type in another (topic cue only)',
+    ],
+    body: `A costume leaves the line packed in a printed poly bag. The product inside may be exactly right and the bag can still hold up the shipment, because the bag is a regulated item in its own right. The rule that applies to it is set by where the goods are sold and by who is selling them. None of that is decided by what the bag costs.
+
+## There is no single rule
+
+It would be convenient if one standard covered plastic bags everywhere. There is not one. In the European Union there is no unified law governing suffocation warnings specifically on plastic bags, although the toy safety framework requires that toys and their packaging not present a risk of strangulation or suffocation, and it covers products intended for children under fourteen.
+
+In the United States the requirement is set at state level rather than nationally. A handful of states and two large cities carry the strictest versions, and they do not agree with each other: they differ on bag dimensions, on the wording, and on where the warning sits.
+
+## What actually triggers a warning
+
+Two thresholds do most of the work, and neither is universal. One is the size of the bag or of its opening, where a minimum dimension is what turns a plain bag into a labelled one. The other is the film itself, since thin material is treated as the risk.
+
+Channel rules can also be stricter than any statute. Marketplace and retailer preparation requirements call for a suffocation warning on poly bags whose opening measures twelve point seven centimetres, or five inches, or more, placed prominently, with the type size tied to the dimensions of the bag. Guidance in the same vein treats a low film thickness as a second trigger. Either can bind an order where no law applies to it at all.
+
+Exemptions are worth knowing before you over-label. Industrial-use bags and small food bags, for instance, commonly sit outside the requirement.
+
+## The wording is not yours to invent
+
+The standard text runs: Keep this bag away from babies and children. Do not use in cribs, beds, carriages, or playpens. The thin film may cling to nose and mouth, preventing breathing.
+
+What varies is the presentation. The statement has to sit in a conspicuous place, either printed on the bag or on a label attached to it, and jurisdictions add their own conditions to how that is done. One state requires particular printing methods so the ink cannot smear into illegibility, and another requires boldface type.
+
+So the sentence is fixed and the execution is local. That combination is what a specification is for.
+
+## Write it into the packing spec
+
+Because the requirement is jurisdictional and channel-specific, it cannot be settled once for a whole production run. It has to be attached to a destination.
+
+Three lines in the packing specification carry it: which warning applies to this market, which dimension of the bag triggers it, and how it must be applied and sized. Where two customers buy the same style, the bagging may legitimately differ between them, and that difference belongs in the order rather than in a warehouse argument later.
+
+The cost of getting it wrong is not the label. It is goods that arrive, get counted, and then wait while somebody decides who pays to open and re-bag them. It sits beside the question of [who actually signs the product certificate](/blog/who-signs-the-childrens-product-certificate), because both are decided by the destination rather than by the product.
+
+A bagging line specified per destination is the smaller line item.`,
+  },
+
+  {
     slug: 'why-the-reorder-does-not-match',
     title: 'Why the reorder does not match the first shipment',
     excerpt: 'Colour is approved before the bulk is dyed, and every dye lot differs slightly. The approved swatch, the light it was judged under and a written tolerance decide whether a repeat order lands next to the first one or beside it.',
