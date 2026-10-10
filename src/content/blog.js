@@ -7,13 +7,13 @@ export const POSTS = [
   {
     slug: 'the-dye-has-to-stay-where-it-was-put',
     title: 'The dye has to stay where it was put',
-    excerpt: 'Colour that transfers onto skin, upholstery or the garment hanging next to it is not a fault anyone can prove on arrival. It is a test requirement nobody wrote down.',
+    excerpt: 'Colour that transfers onto skin, a seat surface or the garment hanging next to it is not a fault anyone can prove on arrival. It is a test requirement nobody wrote down.',
     date: '2026-10-10',
     tags: ['Quality', 'Specification', 'Retail'],
     cover: '/products/kids-stage-magician-set.jpg',
     sources: [
       'Textile testing material explaining that colour fastness to rubbing, or crocking, is assessed under a set pressure and split into two separate conditions, dry and wet, with the result expressed as a rating on a grey scale (topic cue only)',
-      'Technical write-ups describing crocking as colour transfer onto whatever the fabric rubs against, including furniture, shoes and skin, and stating that it happens when the dye has not bonded to the fibre as firmly as it should (topic cue only)',
+      'Technical write-ups describing crocking as colour transfer onto whatever the fabric rubs against, such as a seat surface, the garment worn under it or skin, and stating that it happens when the dye has not bonded to the fibre as firmly as it should (topic cue only)',
       'Test data showing that fastness to crocking measured on fabric as received differs from the same fabric after a laundering step, so before-wash and after-wash results are not interchangeable (topic cue only)',
       'Discussion among school and small theatre buyers looking for costume stock to reuse across productions, where garments are worn, cleaned and reissued repeatedly (topic cue only)',
     ],
@@ -21,7 +21,7 @@ export const POSTS = [
 
 ## The transfer has a name
 
-Colour moving under friction is called crocking. It is what happens when fabric rubs against something else, and that something is often not fabric at all: upholstery, a car seat, shoes, or skin. It occurs when the dye has not bonded to the fibre as firmly as it should, so the surface gives a little of itself away every time it is pressed or dragged.
+Colour moving under friction is called crocking. It is what happens when fabric rubs against something else, and that something is often not the garment itself: a seat surface, the garment worn under it, or bare skin. It occurs when the dye has not bonded to the fibre as firmly as it should, so the surface gives a little of itself away every time it is pressed or dragged.
 
 ## It is measured, not argued about
 
