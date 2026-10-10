@@ -5,6 +5,57 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'the-dye-has-to-stay-where-it-was-put',
+    title: 'The dye has to stay where it was put',
+    excerpt: 'Colour that transfers onto skin, upholstery or the garment hanging next to it is not a fault anyone can prove on arrival. It is a test requirement nobody wrote down.',
+    date: '2026-10-10',
+    tags: ['Quality', 'Specification', 'Retail'],
+    cover: '/products/kids-stage-magician-set.jpg',
+    sources: [
+      'Textile testing material explaining that colour fastness to rubbing, or crocking, is assessed under a set pressure and split into two separate conditions, dry and wet, with the result expressed as a rating on a grey scale (topic cue only)',
+      'Technical write-ups describing crocking as colour transfer onto whatever the fabric rubs against, including furniture, shoes and skin, and stating that it happens when the dye has not bonded to the fibre as firmly as it should (topic cue only)',
+      'Test data showing that fastness to crocking measured on fabric as received differs from the same fabric after a laundering step, so before-wash and after-wash results are not interchangeable (topic cue only)',
+      'Discussion among school and small theatre buyers looking for costume stock to reuse across productions, where garments are worn, cleaned and reissued repeatedly (topic cue only)',
+    ],
+    body: `A black bodysuit leaves grey on a child's forearms after twenty minutes. A red cape marks the white shirt it was folded against. Nothing is torn, nothing is the wrong size, and the goods still come back. The costume did not fail in any way the buyer can point at, and that is exactly the problem.
+
+## The transfer has a name
+
+Colour moving under friction is called crocking. It is what happens when fabric rubs against something else, and that something is often not fabric at all: upholstery, a car seat, shoes, or skin. It occurs when the dye has not bonded to the fibre as firmly as it should, so the surface gives a little of itself away every time it is pressed or dragged.
+
+## It is measured, not argued about
+
+Fastness to rubbing is assessed under a set pressure, and it is assessed twice: dry, and wet. Those are two different tests and they do not produce the same answer. The result comes out as a rating against a grey scale rather than as a pass or a remark.
+
+That distinction is commercial, not academic. A buyer saying the colour rubbed off is describing an experience. A buyer naming the test, the condition and the minimum rating is describing an order. Only one of those two can be checked at the factory gate.
+
+## The wash changes the answer
+
+Fastness measured on goods as received is not the same as fastness measured after laundering. Values shift after a wash step, which means before-wash and after-wash results cannot be used interchangeably. If the product is going to be cleaned before it is used, or cleaned between uses, then that is the condition the requirement has to be written against - not the condition it left the line in.
+
+## Some buyers feel this first
+
+The exposure is not the same for everyone. A costume bought for one evening carries one cycle of risk. The same garment bought, worn, collected, cleaned and issued again is exposed on every turn of that loop, and each pass is another chance for the surface to give something up.
+
+That is why the complaint tends to come from buyers running stock rather than from buyers filling a single order: schools, theatre departments, hire operations and anyone else whose costume has to survive being returned. When the goods are reused, fastness stops being a detail and becomes a running cost.
+
+## Put it in the order
+
+Four lines settle it, and none of them are expensive to write:
+
+- which rubbing test applies to this product;
+- whether wet is required as well as dry;
+- the minimum rating you will accept; and
+- the state it is tested in, as received or after a stated wash.
+
+Without those, the only answer available at the end of a dispute is that the sample looked fine. With them, the question is settled before the goods are cut.
+
+This sits next to [the colour question on a repeat order](/blog/why-the-reorder-does-not-match), and the two are often confused. One asks whether the shade matches the standard that was approved, which is a comparison. The other asks whether the colour stays where it was put, which is a test. A reorder can pass the first and fail the second.
+
+A garment that marks everything it touches is not, strictly speaking, a faulty garment. It is a specification that went unwritten, and it will keep going unwritten until someone puts a number on it.`,
+  },
+
+  {
     slug: 'the-poly-bag-has-its-own-rulebook',
     title: 'The poly bag has its own rulebook',
     excerpt: 'The bag a product ships in is a regulated item in its own right, and the rule that applies to it is set by the destination and the channel rather than by the product inside. Three lines in the packing specification settle it.',
