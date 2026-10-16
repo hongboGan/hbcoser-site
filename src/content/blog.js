@@ -5,6 +5,47 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'the-hangtag-is-not-a-tracking-label',
+    title: 'The hangtag is not a tracking label',
+    excerpt: 'The importer of record owns this marking requirement, it never appears on the certificate, and a hangtag does not satisfy it. What the order has to specify instead.',
+    date: '2026-10-12',
+    tags: ['Kids', 'Compliance', 'OEM'],
+    cover: '/products/kids-builder-costume.jpg',
+    sources: [
+      "Official business guidance on the children's product tracking label requirement, listing the four items that must be ascertainable from the permanent marks and placing the duty on the importer of record for goods made overseas (topic cue only)",
+      'Official FAQ answers to the same requirement, stating that hangtags and adhesive labels are not treated as permanent marks on textile-type items, that a month and a year satisfies the date of production, and that no size, position or format is prescribed (topic cue only)',
+      'Marketplace seller-forum threads where private sellers ask whether their own address must appear on every unit, whether it has to match the address on the certificate, and how very small items are supposed to be marked (topic cue only)',
+    ],
+    body: `A hangtag arrives on a sample, printed with the buyer's name, a month and a year. It looks like the compliance work is finished. For a textile item it is not, and the gap announces itself in no document at all.
+
+## Whoever imports it owns it
+
+Responsibility for this marking sits with the importer of record when the goods are made overseas, and with the domestic manufacturer when they are not. That is worth reading twice. A factory can print whatever it is told to print, but nothing in the requirement obliges it to work out what the buyer needs. If your name is on the import entry, the marking is yours to specify before the carton is closed.
+
+## Permanent is measured against the product's life
+
+The word the requirement uses is permanent, and it means a mark that can reasonably be expected to stay on the product through its useful life. Official guidance is blunt about the shortcut: hangtags and adhesive labels are not treated as permanent for textile-type items, because a label on a textile has to last the anticipated lifespan of the product when the consumer follows the care instructions. A swing tag survives the shop, not the wardrobe.
+
+So the mark belongs on the item itself - sewn in, printed on, or otherwise attached. There is a practicality escape: the requirement applies only to the extent practicable, and small surfaces such as elastics or small pieces of fabric are the recognised cases. Where the product genuinely cannot carry it, the packaging still has to.
+
+## Four things have to be findable
+
+The mark has to make four things ascertainable: the manufacturer, importer or private labeler name; the location and date of production; the batch, run or equivalent process detail; and anything else that pins down the specific source.
+
+Two of those are easier than buyers expect. A month and a year satisfy the date, and a range is acceptable if the goods were made over a period; for a set assembled from parts, the reference point is the date it was gathered into one package. Country plus city and state or province is enough for location. Codes are permitted for all of it, provided the firm's name is also identified, so a consumer with no internet still knows whom to ask.
+
+## It does not appear on the certificate
+
+This is the part that catches people who audit paperwork carefully. The requirement is not one that calls for assessment by an accepted third-party laboratory, and no citation for it is required in the children's product certificate. A compliance file can therefore be complete, current and signed, and still say nothing about the marking. A registered identification number covers part of the identity item, not all of it. The certificate question is a separate one, and it is answered [here](/blog/who-signs-the-childrens-product-certificate).
+
+## What to write into the order
+
+Four lines do it: where the mark goes, meaning the product, its packaging or both; what information it carries; whether it is plain or coded; and whose name is on it. Then add the instruction that is easiest to forget - no size, position or format is mandated, so the format is the buyer's decision to make and to record, not something to leave to a supplier's template.
+
+A hangtag still has work to do. It simply cannot be the mark this requirement is asking for.`,
+  },
+
+  {
     slug: 'the-dye-has-to-stay-where-it-was-put',
     title: 'The dye has to stay where it was put',
     excerpt: 'Colour that transfers onto skin, a seat surface or the garment hanging next to it is not a fault anyone can prove on arrival. It is a test requirement nobody wrote down.',
