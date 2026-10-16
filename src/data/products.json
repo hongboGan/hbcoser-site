@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-09",
-  "note": "Real Alibaba.com listings. sourceUrl and sourceImage record where each item was quoted from. Every title describes the product category only - no character, studio or franchise names, and no supplier marketing keywords. Every image was visually checked for watermarks, supplier logos and Chinese marketing text before being accepted.",
+  "updated": "2026-10-16",
+  "note": "Real Alibaba.com listings. sourceUrl and sourceImage record where each item was quoted from. Every title describes the product category only - no character, studio or franchise names, and no supplier marketing keywords. Every image was visually checked for watermarks, supplier logos, Chinese marketing text and recognizable protected characters before being accepted.",
   "products": [
     {
       "id": "kids-witch-cloak-set",
@@ -415,6 +415,45 @@
       "sourceUrl": "https://detail.1688.com/offer/965433249591.html",
       "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01dCSYsN1zrnh36DuOo_!!4120606768-0-cib.jpg",
       "image": "/products/kids-zombie-vampire-bodysuit.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-skeleton-bones-costume",
+      "title": "Kids Skeleton Bones Costume",
+      "category": "kids",
+      "priceUsdMin": 6.41,
+      "priceUsdMax": 6.41,
+      "moq": "1 piece",
+      "sourceUrl": "https://detail.1688.com/offer/673282593176.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN0121ctka1zrngz4Yxgn_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-skeleton-bones-costume.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-werewolf-costume",
+      "title": "Kids Werewolf Bodysuit Costume with 3D Mask",
+      "category": "kids",
+      "priceUsdMin": 7.32,
+      "priceUsdMax": 7.32,
+      "moq": "2 pieces",
+      "sourceUrl": "https://detail.1688.com/offer/687216939318.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01ltvQWx1zrnh07g89h_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-werewolf-costume.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "kids-green-snake-bodysuit",
+      "title": "Kids Green Snake Bodysuit Costume",
+      "category": "kids",
+      "priceUsdMin": 6.04,
+      "priceUsdMax": 6.04,
+      "moq": "2 pieces",
+      "sourceUrl": "https://detail.1688.com/offer/673607346696.html",
+      "sourceImage": "https://cbu01.alicdn.com/img/ibank/O1CN01lSkdGa1zrnh07xn08_!!4120606768-0-cib.jpg",
+      "image": "/products/kids-green-snake-bodysuit.jpg",
       "width": 900,
       "height": 900
     }
