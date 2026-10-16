@@ -1085,33 +1085,54 @@ p { margin: 0 0 1em; }
   color: var(--ink-faint);
 }
 
-/* ---------- floating whatsapp ---------- */
+/* ---------- floating contact buttons ---------- */
 
-.wa {
+/* A fixed flex bar rather than one fixed element per button: the two buttons then sit side by
+   side with no hand-computed offset, so editing either label can never make them collide. */
+.fab-bar {
   position: fixed;
   right: 18px;
   bottom: 18px;
   z-index: 45;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 0.18s ease, visibility 0.18s;
+}
+/* visibility rather than display, and no transform: the box keeps its exact metrics, so
+   the overlap test in Layout.jsx measures the same rectangle whether or not it is hidden. */
+.fab-bar--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.wa,
+.ig {
   display: inline-flex;
   align-items: center;
   gap: 9px;
   padding: 14px 20px;
   border-radius: var(--pill);
-  background: var(--cyan);
-  color: #fff;
   font-weight: 600;
   font-size: 0.9rem;
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+.wa {
+  background: var(--cyan);
+  color: #fff;
   box-shadow: 0 10px 28px rgba(11, 110, 127, 0.32);
-  transition: opacity 0.18s ease, visibility 0.18s, background-color 0.18s ease,
-    transform 0.18s ease;
 }
 .wa:hover { background: var(--cyan-strong); transform: translateY(-2px); }
-/* visibility rather than display, and no transform: the box keeps its exact metrics, so
-   the overlap test in Layout.jsx measures the same rectangle whether or not it is hidden. */
-.wa--hidden {
-  opacity: 0;
-  visibility: hidden;
+
+/* Solid ink, not the Instagram gradient: this palette carries every accent in one deep cyan
+   and admits no second brand colour, so the new button is structural ink instead. */
+.ig {
+  background: var(--ink);
+  color: var(--paper);
+  box-shadow: 0 10px 28px rgba(12, 24, 33, 0.28);
 }
+.ig:hover { background: #000; transform: translateY(-2px); }
 
 /* ---------- misc ---------- */
 
@@ -1147,18 +1168,23 @@ p { margin: 0 0 1em; }
   .stats div { border-right: 0; border-bottom: 1px solid var(--line-soft); padding-right: 0; }
   .stats div:last-child { border-bottom: 0; }
   .eyebrow::before { width: 18px; }
-  /* Compact circle rather than a labelled pill: on a narrow column a wide floating button
+  /* Compact circles rather than labelled pills: on a narrow column a wide floating button
      sits on top of body text far more often than a small round one does. */
-  .wa {
+  .fab-bar {
     right: 14px;
     bottom: 14px;
+    gap: 8px;
+  }
+  .wa,
+  .ig {
     width: 50px;
     height: 50px;
     padding: 0;
     gap: 0;
     justify-content: center;
   }
-  .wa span { display: none; }
+  .wa span,
+  .ig span { display: none; }
   .band { padding: 26px 22px; }
 }
 
@@ -1171,5 +1197,6 @@ p { margin: 0 0 1em; }
   .post-card:hover { transform: none; }
   .contact-way:hover { transform: none; }
   .wa:hover { transform: none; }
+  .ig:hover { transform: none; }
   .btn--primary:hover { transform: none; }
 }

@@ -2,6 +2,8 @@ import raw from './products.json';
 
 export const CONTACT = {
   email: 'stellagaoxin@gmail.com',
+  instagramHandle: 'stellagaoxin',
+  instagramUrl: 'https://www.instagram.com/stellagaoxin/',
   whatsappDisplay: '+86 15107146833',
   whatsappUrl: 'https://wa.me/8615107146833',
 };

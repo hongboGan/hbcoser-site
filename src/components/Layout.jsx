@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { CATEGORIES, CONTACT, countIn, products } from '../data/products.js';
-import { MailIcon, WhatsAppIcon } from './icons.jsx';
+import { InstagramIcon, MailIcon, WhatsAppIcon } from './icons.jsx';
 
 function Wordmark() {
   return (
@@ -15,7 +15,7 @@ export default function Layout() {
   const [shopOpen, setShopOpen] = useState(false);
   const [drawer, setDrawer] = useState(false);
   const shopRef = useRef(null);
-  const waRef = useRef(null);
+  const fabRef = useRef(null);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -23,27 +23,28 @@ export default function Layout() {
     setDrawer(false);
   }, [pathname]);
 
-  // The CTA is fixed to the bottom corner. On a narrow screen the product title sits low,
-  // because the hero image comes first, so the CTA can land on top of it and the page reads
-  // as broken. Shrink it away only while it actually overlaps the heading — on the pages
-  // where there is no collision this changes nothing.
+  // The contact bar is fixed to the bottom corner. On a narrow screen the product title sits
+  // low, because the hero image comes first, so the bar can land on top of it and the page
+  // reads as broken. Shrink it away only while it actually overlaps the heading — on the
+  // pages where there is no collision this changes nothing. Measured on the bar, not on one
+  // button, so the pair always hides together and never leaves a stranded half.
   useEffect(() => {
-    const wa = waRef.current;
-    if (!wa) return undefined;
+    const bar = fabRef.current;
+    if (!bar) return undefined;
     let frame = 0;
 
     const update = () => {
       frame = 0;
       const heading = document.querySelector('main h1');
       if (!heading) {
-        wa.classList.remove('wa--hidden');
+        bar.classList.remove('fab-bar--hidden');
         return;
       }
-      const a = wa.getBoundingClientRect();
+      const a = bar.getBoundingClientRect();
       const b = heading.getBoundingClientRect();
       const overlaps =
         b.bottom > a.top && b.top < a.bottom && b.right > a.left && b.left < a.right;
-      wa.classList.toggle('wa--hidden', overlaps);
+      bar.classList.toggle('fab-bar--hidden', overlaps);
     };
 
     const schedule = () => {
@@ -191,6 +192,11 @@ export default function Layout() {
             <p>
               <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
             </p>
+            <p>
+              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer">
+                Instagram @{CONTACT.instagramHandle}
+              </a>
+            </p>
           </div>
         </div>
       )}
@@ -246,6 +252,11 @@ export default function Layout() {
               <li>
                 <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
               </li>
+              <li>
+                <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer">
+                  Instagram @{CONTACT.instagramHandle}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -255,15 +266,26 @@ export default function Layout() {
         </div>
       </footer>
 
-      <a
-        ref={waRef}
-        className="wa"
-        href={CONTACT.whatsappUrl}
-        aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}
-      >
-        <WhatsAppIcon />
-        <span>WhatsApp</span>
-      </a>
+      <div className="fab-bar" ref={fabRef}>
+        <a
+          className="ig"
+          href={CONTACT.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Instagram @${CONTACT.instagramHandle}`}
+        >
+          <InstagramIcon />
+          <span>@{CONTACT.instagramHandle}</span>
+        </a>
+        <a
+          className="wa"
+          href={CONTACT.whatsappUrl}
+          aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}
+        >
+          <WhatsAppIcon />
+          <span>WhatsApp</span>
+        </a>
+      </div>
     </>
   );
 }
