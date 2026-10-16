@@ -110,7 +110,9 @@ Rules:
 - `--ink` carries the primary button and every heading. One decisive black surface per
   viewport is the gallery move.
 - `--cyan` is for anything *interactive or labelling*: eyebrows, links, active filter chip,
-  hover edges, focus ring, the floating WhatsApp button. It is never body copy.
+  hover edges, focus ring, the WhatsApp button in the floating contact bar. It is never body copy.
+- The floating Instagram button is neither cyan nor the Instagram gradient: it takes structural
+  `--ink`. One element in the bar carries the accent, and that is WhatsApp.
 - `--mat` is mandatory under every product photograph. There are no exceptions.
 - `--cyan-light` exists for one purpose: deep cyan on near-black measures about 1.6:1 and is
   unreadable. It is used **only on `--ink` and `--cyan` surfaces** — never on `--paper`.
@@ -194,8 +196,11 @@ line in mono. Hover lights the 1px edge in cyan and lifts 2px.
 ## 4. Inquiry path
 
 Every page carries a persistent path to contact: header CTA, in-flow CTA after each product
-grid, and a floating WhatsApp button — a labelled pill on wide screens, a 50×50 icon-only
-circle below 560px, so it grazes less body text on a narrow column.
+grid, and a floating contact bar — WhatsApp plus Instagram, labelled pills on wide screens and
+50×50 icon-only circles below 560px, so they graze less body text on a narrow column. The two
+buttons are placed by a flex bar rather than by hand-computed offsets, and the bar hides as a
+unit (never leaving one button stranded) when it would cover a page heading. Instagram is also
+listed in the footer contact column and in the drawer, beside the email and WhatsApp lines.
 
 The form posts via FormSubmit to `stellagaoxin@gmail.com`. Fields: name, company, email,
 country, product or category, quantity, target date, message. Client-side validation with
@@ -227,4 +232,4 @@ flight.
   a paragraph.
 - No horizontal overflow at any width; verify at 375px, 768px, 1440px.
 - Layout uses `min-height: 100dvh` and stays vertically scrollable; nothing may be clipped
-  by fixed chrome. The footer carries 76px of bottom padding to clear the floating button.
+  by fixed chrome. The footer carries 76px of bottom padding to clear the floating bar.
