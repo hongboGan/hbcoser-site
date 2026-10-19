@@ -69,6 +69,12 @@ export default function ProductDetail() {
                   <span>Minimum order</span>
                   <span>{product.moq || 'On request'}</span>
                 </li>
+                {product.sizes && (
+                  <li>
+                    <span>Sizes</span>
+                    <span>{product.sizes}</span>
+                  </li>
+                )}
                 <li>
                   <span>Customisation</span>
                   <span>Colour, sizing, branding</span>
