@@ -1,6 +1,6 @@
 {
-  "updated": "2026-10-16",
-  "note": "Real Alibaba.com listings. sourceUrl and sourceImage record where each item was quoted from. Every title describes the product category only - no character, studio or franchise names, and no supplier marketing keywords. Every image was visually checked for watermarks, supplier logos, Chinese marketing text and recognizable protected characters before being accepted.",
+  "updated": "2026-10-19",
+  "note": "Real Alibaba.com listings. sourceUrl and sourceImage record where each item was quoted from. Every title describes the product category only - no character, studio or franchise names, and no supplier marketing keywords. Every image was visually checked for watermarks, supplier logos, Chinese marketing text and recognizable protected characters before being accepted. The red stretch bodysuit was supplied directly by the buyer rather than quoted from a listing, so it carries neither a source link nor a price yet.",
   "products": [
     {
       "id": "kids-witch-cloak-set",
@@ -456,6 +456,14 @@
       "image": "/products/kids-green-snake-bodysuit.jpg",
       "width": 900,
       "height": 900
+    },
+    {
+      "id": "kids-red-stretch-bodysuit",
+      "title": "Kids Red Stretch Bodysuit with Head Cover",
+      "category": "kids",
+      "image": "/products/kids-red-stretch-bodysuit.jpg",
+      "width": 750,
+      "height": 1000
     }
   ]
 }
