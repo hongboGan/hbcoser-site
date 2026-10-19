@@ -5,6 +5,80 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'the-halloween-spirit-is-built-not-licensed',
+    title: 'The Halloween spirit is built, not licensed',
+    excerpt: 'A generic seasonal range does not read as Halloween because of a character it cannot use. It reads as the season because a small set of constraints is held across every item - and that belongs in the brief, not the artwork.',
+    date: '2026-10-19',
+    tags: ['Seasonality', 'Retail', 'Specification'],
+    cover: '/products/kids-pumpkin-set.jpg',
+    sources: [
+      'Supplier guidance aimed at seasonal buyers setting out the extra control a licensed range needs - artwork approval, packaging compliance, labelling, safety testing and timing - and warning that if one part of that process slips a launch stalls or a shipment misses its retail window (topic cue only)',
+      'Seasonal selling guidance stating that original spooky artwork, general concepts such as witches and ghosts, and fall imagery need no licence while characters, brands and logos do, and naming a pumpkin, a hot dog and a ghost as the looks that cover most of the demand in one seasonal category (topic cue only)',
+    ],
+    body: `The season is a set of cues, not a character. A buyer who will not take a licence still has to put
+something on a shelf in September that reads as Halloween from four metres away. That is a design
+problem before it is a legal one, and most generic ranges get it wrong in the same way.
+
+## The licence is a schedule cost before it is a legal one
+
+A licensed seasonal range is not simply a different set of artwork. It carries artwork approval,
+packaging compliance, labelling, safety testing and timing that all have to hold together, and the
+material written for buyers is blunt about what happens when one part slips - a launch stalls, or a
+shipment misses its retail window entirely. [That window is its own calculation](/blog/when-to-place-a-halloween-order),
+and it does not move because the artwork was late.
+
+So the licence buys recognition and it also buys a queue of people who must say yes before anything
+is printed. A generic range has no queue.
+
+## The generic route is not the thin option
+
+Generic seasonal work needs no permission at all. Original spooky artwork, general concepts such as
+witches and ghosts, and fall imagery are open; characters, brands and logos are not.
+
+The useful question is where the demand actually sits. In one seasonal category, the looks named as
+covering most of the demand are a pumpkin, a hot dog and a ghost - three generic concepts with no
+property attached to any of them. The season does not belong to anybody.
+
+## A range reads as a range because of constraints
+
+This is where generic ranges usually fail, and it is not for lack of a character. It is because every
+item is written to its own brief. Ten independently designed products are ten products, and a buyer
+looking at them sees a pile rather than a season.
+
+What makes a collection read as a collection is a small set of constraints held across all of it: the
+same repeated palette, two or three silhouettes at different sizes, one surface treatment rather than
+three, one motif family drawn once and re-cut. The licensed side of the trade describes the same
+discipline when it talks about design and packaging working as one system across a line rather than
+as a set of unrelated items.
+
+## Take the copy away and look again
+
+There is a cheap test. Lay the whole range out with the packaging copy covered. If it still reads as
+the season, the design is doing the work. If the copy was carrying it, the range is a commodity
+wearing a seasonal label, and it will be bought on price and replaced next year.
+
+## Generic also re-cuts without a queue
+
+Channel shape matters more than most ranges admit. A grocery buyer wants fast-turning core items in a
+compact footprint. A discounter wants opening price points and broad impulse appeal. A specialist can
+carry depth and a longer story. The same printed graphics can serve all three, but the build around
+them cannot.
+
+Without a licence in the middle, a generic range can be re-cut for a channel in the time it takes to
+redo the size and pack plan. With one, every change goes back into the same approval queue that the
+artwork came out of.
+
+## Write the constraint set down
+
+The failure is almost always upstream of production. If the brief for each item says only what that
+item is, the range dissolves into individuals and the tenth product has no relation to the first.
+
+The brief has to carry the shared constraints as well: how many colours and which ones, how many
+silhouettes, which trim treatment, and which motif file. Written down once and applied to every item,
+a generic range stops looking like a compromise and starts looking like a season.`,
+  },
+
+  {
     slug: 'the-hangtag-is-not-a-tracking-label',
     title: 'The hangtag is not a tracking label',
     excerpt: 'The importer of record owns this marking requirement, it never appears on the certificate, and a hangtag does not satisfy it. What the order has to specify instead.',
