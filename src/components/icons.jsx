@@ -15,14 +15,14 @@ export function MailIcon({ size = 18 }) {
   );
 }
 
-// Outline glyph in the same 1.6 stroke as the other contact icons, so the floating bar reads
-// as one family rather than as a borrowed brand logo.
-export function InstagramIcon({ size = 18 }) {
+// Same 1.6 stroke family as the WhatsApp and mail glyphs: an outline "f" inside the rounded
+// square, so the contact bar does not import a second brand logo into the palette.
+export function FacebookIcon({ size = 18 }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true" focusable="false">
       <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4.2" />
-      <circle cx="17.3" cy="6.7" r="1.05" fill="currentColor" stroke="none" />
+      <path d="M13.4 7.2h-1.1a2.1 2.1 0 0 0-2.1 2.1V17" />
+      <path d="M9.1 11.4h4.1" />
     </svg>
   );
 }

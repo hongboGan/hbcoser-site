@@ -1,9 +1,13 @@
 import raw from './products.json';
 
 export const CONTACT = {
-  email: 'stellagaoxin@gmail.com',
-  instagramHandle: 'stellagaoxin',
-  instagramUrl: 'https://www.instagram.com/stellagaoxin/',
+  email: 'sales01@hoburn.group',
+  // The public inbound mailbox and the FormSubmit destination are kept apart on purpose:
+  // FormSubmit only delivers to an address that has been activated, so swapping the address
+  // customers see must not silently redirect the form to an unverified one.
+  formEmail: 'stellagaoxin@gmail.com',
+  facebookName: 'Hbmc Costume',
+  facebookUrl: 'https://www.facebook.com/profile.php?id=61595292675761',
   whatsappDisplay: '+86 15107146833',
   whatsappUrl: 'https://wa.me/8615107146833',
 };

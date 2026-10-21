@@ -47,7 +47,7 @@ export default function Inquiry() {
   // show "thank you" for an inquiry that never sent. The same discipline applies to the
   // backup channel and to concluding that both have failed.
   async function sendPrimary(payload) {
-    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT.email}`, {
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT.formEmail || CONTACT.email}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify(payload),

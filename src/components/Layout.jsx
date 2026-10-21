@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { CATEGORIES, CONTACT, countIn, products } from '../data/products.js';
-import { InstagramIcon, MailIcon, WhatsAppIcon } from './icons.jsx';
+import { FacebookIcon, MailIcon, WhatsAppIcon } from './icons.jsx';
 
 function Wordmark() {
   return (
@@ -199,8 +199,8 @@ export default function Layout() {
               <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
             </p>
             <p>
-              <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer">
-                Instagram @{CONTACT.instagramHandle}
+              <a href={CONTACT.facebookUrl} target="_blank" rel="noopener noreferrer">
+                Facebook {CONTACT.facebookName}
               </a>
             </p>
           </div>
@@ -262,8 +262,8 @@ export default function Layout() {
                 <a href={CONTACT.whatsappUrl}>WhatsApp {CONTACT.whatsappDisplay}</a>
               </li>
               <li>
-                <a href={CONTACT.instagramUrl} target="_blank" rel="noopener noreferrer">
-                  Instagram @{CONTACT.instagramHandle}
+                <a href={CONTACT.facebookUrl} target="_blank" rel="noopener noreferrer">
+                  Facebook {CONTACT.facebookName}
                 </a>
               </li>
             </ul>
@@ -277,14 +277,14 @@ export default function Layout() {
 
       <div className="fab-bar" ref={fabRef}>
         <a
-          className="ig"
-          href={CONTACT.instagramUrl}
+          className="fb"
+          href={CONTACT.facebookUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Instagram @${CONTACT.instagramHandle}`}
+          aria-label={`Facebook ${CONTACT.facebookName}`}
         >
-          <InstagramIcon />
-          <span>@{CONTACT.instagramHandle}</span>
+          <FacebookIcon />
+          <span>Facebook</span>
         </a>
         <a
           className="wa"
