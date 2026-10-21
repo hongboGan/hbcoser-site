@@ -17,6 +17,11 @@ export default function About() {
             pet-product sellers, event producers and theme venues. The catalogue is the front door;
             most of the business is made-to-order.
           </p>
+          <p className="mt-2">
+            <Link to="/factory" style={{ color: 'var(--cyan)' }}>
+              How the factory got here, and what it can actually do &rarr;
+            </Link>
+          </p>
         </div>
       </section>
 

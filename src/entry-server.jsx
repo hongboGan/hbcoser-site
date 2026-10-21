@@ -13,6 +13,7 @@ export const ROUTES = [
   '/shop',
   '/custom',
   '/about',
+  '/factory',
   '/blog',
   '/inquiry',
   ...CATEGORIES.map((c) => `/shop/${c.slug}`),

@@ -30,6 +30,11 @@ const STATIC = {
     description:
       "A children's cosplay, pet costume and party-supply manufacturer serving importers, distributors, retailers and event producers on wholesale and OEM terms.",
   },
+  '/factory': {
+    title: 'The factory',
+    description:
+      'Wuhan Hongbo Mingchuang: a costume workshop running since 2014, 18 people, 10-piece minimums and 3-day custom runs. What we make, where it ships, and what we will show you.',
+  },
   '/blog': {
     title: 'Programme notes',
     description:

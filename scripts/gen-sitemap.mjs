@@ -20,6 +20,7 @@ const urls = [
   ...CATEGORIES.map((c) => ({ loc: `/shop/${c}`, priority: '0.8', freq: 'weekly' })),
   { loc: '/custom', priority: '0.9', freq: 'monthly' },
   { loc: '/about', priority: '0.6', freq: 'monthly' },
+  { loc: '/factory', priority: '0.7', freq: 'monthly' },
   { loc: '/inquiry', priority: '0.9', freq: 'monthly' },
   { loc: '/blog', priority: '0.8', freq: 'weekly' },
   ...POSTS.map((p) => ({ loc: `/blog/${p.slug}`, priority: '0.7', freq: 'monthly' })),
