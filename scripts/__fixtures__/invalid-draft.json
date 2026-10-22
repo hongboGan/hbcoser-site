@@ -1,0 +1,14 @@
+{
+  "_comment": "Deliberately invalid draft. Guards a pipeline that runs unattended: if this file ever passes `check`, the guardrails have regressed and must be repaired before the daily job is trusted. Run: node scripts/blog-draft.mjs check scripts/__fixtures__/invalid-draft.json",
+  "sourceCues": ["negative-test fixture, not a real draft"],
+  "post": {
+    "slug": "Bad_Slug_With_Caps",
+    "title": "Top 5 Disney costumes.",
+    "excerpt": "Short.",
+    "date": "2027-01-01",
+    "tags": ["Halloween"],
+    "cover": "/products/does-not-exist.jpg",
+    "sources": ["A reddit thread about costumes"],
+    "body": "# Why buyers get this wrong\n\nThis draft is written to fail every guardrail in scripts/blog-draft.mjs, so that a green result on this file is treated as a broken validator rather than a good article.\n\n## 1. It names a franchise\n\nThe article references Marvel and Bluey and Pixar, which this site does not supply. 供应商图片里残留的中文也会被这里抓住。\n\n## 2. It makes claims we cannot back\n\nWe are BSCI certified and ISO 9001 audited, and we guarantee delivery in 15 days at 4.20 USD each.\n\n1. A numbered list is not supported by the renderer\n2. It would render as plain paragraphs\n\n| Column | Column |\n| --- | --- |\n| table | not rendered |\n\n![a screenshot](https://example.com/shot.png)\n\n## 3. It links out\n\nRead more at https://www.reddit.com/r/costumes and see `inline code` which the renderer prints literally.\n\n## 4. It is far too short\n\nThe house format runs to several hundred words because a thin page earns nothing."
+  }
+}
