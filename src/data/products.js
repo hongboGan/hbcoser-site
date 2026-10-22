@@ -8,8 +8,8 @@ export const CONTACT = {
   formEmail: 'stellagaoxin@gmail.com',
   facebookName: 'Hbmc Costume',
   facebookUrl: 'https://www.facebook.com/profile.php?id=61595292675761',
-  whatsappDisplay: '+86 15107146833',
-  whatsappUrl: 'https://wa.me/8615107146833',
+  whatsappDisplay: '+86 15926072590',
+  whatsappUrl: 'https://wa.me/8615926072590',
 };
 
 // The third site. The same number also takes chats from the other two sites, so the code

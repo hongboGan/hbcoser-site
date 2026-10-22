@@ -20,7 +20,7 @@ OEM/ODM is not a footnote here — it is the third pillar and gets its own page,
 Contact is fixed and appears on every page:
 
 - Email — `stellagaoxin@gmail.com`
-- WhatsApp — `wa.me/8615107146833` (country code required in the link)
+- WhatsApp — `wa.me/8615926072590` (country code required in the link)
 
 ## 2. Visual direction — "gallery white, poster rhythm"
 
