@@ -44,7 +44,7 @@ be restored at any time.
 | | |
 |---|---|
 | Repository | `hbcoser-site` (public, branch `main`) |
-| Contents | 59 prerendered routes, design system, 36-product catalogue, all product images, fonts, build scripts |
+| Contents | 129 prerendered routes, design system, 105-product catalogue, all product images, fonts, build scripts |
 
 Everything needed to rebuild the site is here. The only things outside it are the Namecheap
 account — which holds both the domain and its DNS — the GitHub and Vercel accounts, and the
@@ -94,7 +94,7 @@ Two rules when touching it:
 **Role in the target architecture:** a separate object store (Cloudflare R2) for images and
 video, served through a dedicated asset hostname.
 
-**Status: deliberately not adopted.** All 28 product images and the self-hosted fonts are
+**Status: deliberately not adopted.** All 105 product images and the self-hosted fonts are
 committed to the repository and served by Vercel.
 
 - **At this scale a separate store would be over-engineering.** The images are a few

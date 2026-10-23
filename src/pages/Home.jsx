@@ -122,7 +122,7 @@ export default function Home() {
             <span className="sec-head__n">01</span>
             <div className="sec-head__body">
               <p className="eyebrow">Who we are</p>
-              <h2>Three lines, one manufacturing floor.</h2>
+              <h2>Four lines, one manufacturing floor.</h2>
               <p>
                 HB Coser supplies children&apos;s cosplay, pet costumes and party/event programmes to
                 importers, distributors, retailers, event producers and family-entertainment

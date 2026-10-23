@@ -27,9 +27,8 @@ export function waLink(ref, tail) {
   return `${CONTACT.whatsappUrl}?text=${encodeURIComponent(text)}`;
 }
 
-// Three lines, deliberately kept apart from the other two sites: children's cosplay,
-// pets, and party/event supply. Nothing here overlaps the adult costume range or the
-// masks, wigs, armour and props catalogue.
+// Four lines: children's cosplay, pet costumes, party/event supply, and general costumes
+// and cosplay. The fourth line contains the authorized expanded costume catalogue.
 export const CATEGORIES = [
   {
     slug: 'kids',
@@ -46,6 +45,11 @@ export const CATEGORIES = [
     slug: 'party',
     name: 'Party & Event',
     blurb: 'Photo-booth kits, balloon garlands, backdrops and occasion sets for event programmes.',
+  },
+  {
+    slug: 'costumes',
+    name: 'Costumes & Cosplay',
+    blurb: 'Adult and general cosplay, seasonal outfits, career costumes and accessories for wholesale programmes.',
   },
 ];
 

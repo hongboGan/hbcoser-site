@@ -31,7 +31,7 @@ export default function About() {
             <span className="sec-head__n">01</span>
             <div className="sec-head__body">
               <p className="eyebrow">What we produce</p>
-              <h2>Three lines, kept deliberately separate.</h2>
+              <h2>Four lines, kept deliberately clear.</h2>
             </div>
           </div>
           <ul className="spec mt-2" style={{ maxWidth: '62ch' }}>

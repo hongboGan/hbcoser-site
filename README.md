@@ -33,12 +33,12 @@ node scripts/serve-dist.mjs 4173      # tiny static server with SPA fallback, fo
 `/` · `/shop` · `/shop/:category` · `/product/:id` · `/custom` · `/about` · `/blog` ·
 `/blog/:slug` · `/inquiry` · 404 fallback
 
-Three categories: `kids`, `pets`, `party`.
+Four categories: `kids`, `pets`, `party`, `costumes`.
 
 ## Prerendering
 
 `npm run build` runs three steps: the client build, an SSR bundle of `src/entry-server.jsx`,
-then `scripts/prerender.mjs`, which renders all 59 public routes with `react-dom/server` and
+then `scripts/prerender.mjs`, which renders all 129 public routes with `react-dom/server` and
 writes real HTML — including that route's title, description, canonical and og tags — so a
 crawler that never runs JavaScript still receives a complete page. No SSR framework and no
 new runtime dependency.
@@ -57,7 +57,7 @@ Three things to preserve when touching this:
 ## Adding or changing products
 
 `src/data/products.json` is the single source of truth. Each entry carries `id`, `title`,
-`category` (`kids` | `pets` | `party`), `priceUsdMin` / `priceUsdMax`, `moq`, `sourceUrl`,
+`category` (`kids` | `pets` | `party` | `costumes`), `priceUsdMin` / `priceUsdMax`, `moq`, `sourceUrl`,
 `sourceImage` and `image`.
 
 Then run `node scripts/fetch-product-images.mjs`. It downloads each `sourceImage`, resizes the

@@ -166,7 +166,7 @@ oversight. The mono for labels is the loudest typographic break from both other 
 |---|---|
 | `/` | Hero, three-line overview, category tiles, featured products, OEM capability, inquiry CTA |
 | `/shop` | Full catalogue with category filter chips |
-| `/shop/:category` | Category listing (`kids`, `pets`, `party`) |
+| `/shop/:category` | Category listing (`kids`, `pets`, `party`, `costumes`) |
 | `/product/:id` | Product detail — image, spec table, MOQ, prefilled inquiry CTA |
 | `/custom` | OEM/ODM capability: what we change, how sampling works, what we need from you |
 | `/about` | What we produce, how we work, sourcing policy |
