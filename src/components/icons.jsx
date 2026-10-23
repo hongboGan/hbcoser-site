@@ -26,3 +26,59 @@ export function FacebookIcon({ size = 18 }) {
     </svg>
   );
 }
+
+export function SearchIcon({ size = 19 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true" focusable="false">
+      <circle cx="10.8" cy="10.8" r="6.4" />
+      <path d="m16 16 5 5" />
+    </svg>
+  );
+}
+
+export function MenuIcon({ size = 22 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true" focusable="false">
+      <path d="M3 6h18M3 12h18M3 18h18" />
+    </svg>
+  );
+}
+
+export function StoreIcon({ size = 21 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M4 10v10h16V10" />
+      <path d="M3 10 5 4h14l2 6" />
+      <path d="M3 10c.5 1.4 1.7 2.1 3 2.1S8.5 11.4 9 10c.5 1.4 1.7 2.1 3 2.1s2.5-.7 3-2.1c.5 1.4 1.7 2.1 3 2.1s2.5-.7 3-2.1" />
+      <path d="M8 20v-5h8v5" />
+    </svg>
+  );
+}
+
+export function LocationIcon({ size = 21 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true" focusable="false">
+      <path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z" />
+      <circle cx="12" cy="10" r="2.2" />
+    </svg>
+  );
+}
+
+export function UserIcon({ size = 21 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true" focusable="false">
+      <circle cx="12" cy="7" r="3.2" />
+      <path d="M5 21a7 7 0 0 1 14 0" />
+    </svg>
+  );
+}
+
+export function CartIcon({ size = 22 }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+      <path d="M3 4h2l2 12h10l2-8H6" />
+      <circle cx="9" cy="20" r="1.2" />
+      <circle cx="17" cy="20" r="1.2" />
+    </svg>
+  );
+}

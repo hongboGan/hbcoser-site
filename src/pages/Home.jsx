@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CATEGORIES, CONTACT, byCategory, countIn, getProduct, products, waLink } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
@@ -10,12 +11,31 @@ const FEATURED = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(0, 4));
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
 const HERO = [
-  { id: 'kids-witch-cloak-set', tile: 'hero__tile hero__tile--tall' },
-  { id: 'pets-panda-hat-cape', tile: 'hero__tile hero__tile--short' },
-  { id: 'kids-pumpkin-set', tile: 'hero__tile hero__tile--short' },
-]
-  .map((t) => ({ ...t, product: getProduct(t.id) }))
-  .filter((t) => t.product);
+  {
+    image: '/banners/halloween-costumes-banner.jpg',
+    kicker: 'Halloween wholesale edit · Factory direct',
+    title: <>Make the night <em>unforgettable.</em></>,
+    copy: 'Costumes, masks and party-ready pieces for seasonal retailers, event teams and OEM buyers.',
+    cta: 'Shop the Halloween edit',
+    href: '/shop/costumes',
+  },
+  {
+    image: '/banners/halloween-props-banner.jpg',
+    kicker: 'Masks · props · seasonal stock',
+    title: <>Build a <em>scene</em> they remember.</>,
+    copy: 'Source the accessories and atmosphere that turn a costume line into a complete event programme.',
+    cta: 'Browse masks & props',
+    href: '/shop/party',
+  },
+  {
+    image: '/banners/halloween-collection-banner.jpg',
+    kicker: 'Custom colour · sizing · packaging',
+    title: <>Your label. Our <em>workshop.</em></>,
+    copy: 'Start with a stock silhouette, then move into your artwork, size chart and retail-ready pack.',
+    cta: 'Start an OEM brief',
+    href: '/custom',
+  },
+];
 
 const OEM = [
   {
@@ -38,77 +58,61 @@ const OEM = [
 
 export default function Home() {
   usePageMeta();
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const current = HERO[slide];
+
+  useEffect(() => {
+    if (paused) return undefined;
+    const timer = window.setInterval(() => setSlide((value) => (value + 1) % HERO.length), 3000);
+    return () => window.clearInterval(timer);
+  }, [paused]);
+
+  useEffect(() => {
+    const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
+    if (reduce?.matches) setPaused(true);
+  }, []);
+
+  function move(delta) {
+    setSlide((value) => (value + delta + HERO.length) % HERO.length);
+  }
 
   return (
     <>
-      <section className="hero">
+      <section className="hero hero--carousel" aria-roledescription="carousel" aria-label="Halloween campaign banners">
         <div className="hero__moon" aria-hidden="true" />
         <div className="hero__stars" aria-hidden="true">✦　·　✧　·　✦</div>
+        <div className="hero__banner-image" key={current.image} style={{ backgroundImage: `url(${current.image})` }} aria-hidden="true" />
         <div className="shell hero__inner">
           <div className="hero__grid">
-            <div>
-              <p className="eyebrow">Halloween wholesale edit · Factory direct</p>
-              <h1>Make the night <em>unforgettable.</em></h1>
-              <p className="lede">
-                Costumes, masks and party-ready pieces for seasonal retailers, event teams and OEM buyers.
-                Pick from the catalogue or send us the colourway, size chart and label for your own run.
-              </p>
+            <div className="hero__copy" aria-live="polite">
+              <p className="eyebrow">{current.kicker}</p>
+              <h1>{current.title}</h1>
+              <p className="lede">{current.copy}</p>
               <div className="hero__actions">
-                <Link className="btn btn--primary" to="/shop/costumes">
-                  Shop the Halloween edit
-                </Link>
-                <Link className="btn btn--ghost" to="/inquiry">
-                  Request a wholesale quote
-                </Link>
+                <Link className="btn btn--primary" to={current.href}>{current.cta}</Link>
+                <Link className="btn btn--ghost" to="/inquiry">Request a wholesale quote</Link>
               </div>
               <div className="hero__proof">
                 <span><strong>105</strong> stocked references</span>
                 <span><strong>OEM</strong> colour + label</span>
-                <span><strong>1</strong> direct inquiry path</span>
+                <span><strong>3s</strong> seasonal rotation</span>
               </div>
             </div>
-
-            <div className="hero__stage">
-              <div className="hero__mosaic">
-                {HERO.map(({ product, tile }) => (
-                  <div className={tile} key={product.id}>
-                    <img
-                      src={product.image}
-                      alt={product.title}
-                      width={product.width || 900}
-                      height={product.height || 900}
-                      decoding="async"
-                    />
-                  </div>
-                ))}
-              </div>
+            <div className="hero__stage hero__stage--banner">
               <div className="stage__card">
-                <strong>Your programme, our floor</strong>
-                <span>
-                  MOQ from 1 pc on stock lines · OEM on artwork, sizing and packaging · sample approved
-                  before bulk
-                </span>
+                <strong>Seasonal edit · {String(slide + 1).padStart(2, '0')} / 03</strong>
+                <span>Factory-direct pieces for retail, events and custom programmes.</span>
               </div>
             </div>
           </div>
-
-          <div className="stats">
-            <div>
-              <strong>{products.length}</strong>
-              <span>Stock references</span>
-            </div>
-            <div>
-              <strong>{CATEGORIES.length}</strong>
-              <span>Product lines</span>
-            </div>
-            <div>
-              <strong>OEM</strong>
-              <span>Your artwork &amp; label</span>
-            </div>
-            <div>
-              <strong>0</strong>
-              <span>Licensed characters sold</span>
-            </div>
+          <div className="hero__controls" aria-label="Banner controls">
+            <button type="button" onClick={() => move(-1)} aria-label="Previous banner">←</button>
+            {HERO.map((item, index) => (
+              <button key={item.image} type="button" className={index === slide ? 'is-active' : ''} onClick={() => setSlide(index)} aria-label={`Show banner ${index + 1}`} aria-current={index === slide ? 'true' : undefined} />
+            ))}
+            <button type="button" onClick={() => move(1)} aria-label="Next banner">→</button>
+            <button type="button" className="hero__pause" onClick={() => setPaused((value) => !value)} aria-label={paused ? 'Resume banner rotation' : 'Pause banner rotation'}>{paused ? 'Play' : 'Pause'}</button>
           </div>
         </div>
       </section>

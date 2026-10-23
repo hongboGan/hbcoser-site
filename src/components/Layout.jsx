@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
 import { CATEGORIES, CONTACT, countIn, products, waLink } from '../data/products.js';
-import { FacebookIcon, MailIcon, WhatsAppIcon } from './icons.jsx';
+import { CartIcon, FacebookIcon, LocationIcon, MailIcon, MenuIcon, SearchIcon, StoreIcon, UserIcon, WhatsAppIcon } from './icons.jsx';
 
 // Shared chrome is on every page, so the tag has to follow the route rather than be fixed.
 function refForPath(pathname) {
@@ -23,6 +23,29 @@ function Wordmark() {
     <Link className="wordmark" to="/">
       HB<span> Coser</span>
     </Link>
+  );
+}
+
+function HeaderUtility() {
+  return (
+    <div className="header-utility" aria-label="Quick contact and shopping tools">
+      <a href={waLink('HEADER')} className="header-utility__location">
+        <StoreIcon />
+        <span>Wholesale desk · Wuhan, China</span>
+      </a>
+      <a href={waLink('HEADER')} aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}>
+        <LocationIcon />
+        <span>Chat on WhatsApp</span>
+      </a>
+      <a href={`mailto:${CONTACT.email}`} aria-label="Email sales">
+        <UserIcon />
+        <span>Sales</span>
+      </a>
+      <button type="button" className="header-tool" aria-label="Cart preview">
+        <CartIcon />
+        <b>0</b>
+      </button>
+    </div>
   );
 }
 
@@ -117,9 +140,25 @@ export default function Layout() {
       </div>
 
       <header className="header">
-        <div className="shell header__inner">
+        <div className="shell header__topline">
+          <button
+            type="button"
+            className="header-menu-toggle"
+            aria-label="Open menu"
+            aria-expanded={drawer}
+            onClick={() => setDrawer(true)}
+          >
+            <MenuIcon />
+          </button>
           <Wordmark />
-
+          <div className="header-search">
+            <label htmlFor="site-search" className="sr-only">Search products</label>
+            <input id="site-search" type="search" placeholder="Search costumes, props and OEM styles" />
+            <SearchIcon />
+          </div>
+          <HeaderUtility />
+        </div>
+        <div className="shell header__inner">
           <nav className="nav" aria-label="Primary">
             <div ref={shopRef} style={{ position: 'relative' }}>
               <button
@@ -152,16 +191,6 @@ export default function Layout() {
           <Link className="btn btn--primary header__cta" to="/inquiry">
             Get a quote
           </Link>
-
-          <button
-            type="button"
-            className="burger"
-            aria-label="Open menu"
-            aria-expanded={drawer}
-            onClick={() => setDrawer(true)}
-          >
-            <span />
-          </button>
         </div>
 
         {shopOpen && (
