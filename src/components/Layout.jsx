@@ -107,6 +107,15 @@ export default function Layout() {
         Skip to content
       </a>
 
+      <div className="season-strip" role="note">
+        <div className="shell season-strip__inner">
+          <span className="season-strip__mark">13</span>
+          <strong>Halloween wholesale edit</strong>
+          <span>Stock costumes · event props · OEM colourways</span>
+          <Link to="/shop/costumes">Shop the seasonal line <span aria-hidden="true">↗</span></Link>
+        </div>
+      </div>
+
       <header className="header">
         <div className="shell header__inner">
           <Wordmark />
@@ -123,11 +132,11 @@ export default function Layout() {
                 Shop {shopOpen ? '▴' : '▾'}
               </button>
             </div>
+            <NavLink className="nav__link" to="/shop/costumes">
+              Halloween edit
+            </NavLink>
             <NavLink className="nav__link" to="/custom">
               Custom / OEM
-            </NavLink>
-            <NavLink className="nav__link" to="/about">
-              About
             </NavLink>
             <NavLink className="nav__link" to="/factory">
               Factory
@@ -189,6 +198,9 @@ export default function Layout() {
             ))}
             <li>
               <Link to="/shop">All products</Link>
+            </li>
+            <li>
+              <Link to="/shop/costumes">Halloween edit</Link>
             </li>
             <li>
               <Link to="/custom">Custom / OEM</Link>

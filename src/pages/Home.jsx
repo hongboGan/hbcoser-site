@@ -42,23 +42,29 @@ export default function Home() {
   return (
     <>
       <section className="hero">
+        <div className="hero__moon" aria-hidden="true" />
+        <div className="hero__stars" aria-hidden="true">✦　·　✧　·　✦</div>
         <div className="shell hero__inner">
           <div className="hero__grid">
             <div>
-              <p className="eyebrow">Wholesale &amp; OEM · Made to order</p>
-              <h1>Cosplay for kids, pets and the party floor.</h1>
+              <p className="eyebrow">Halloween wholesale edit · Factory direct</p>
+              <h1>Make the night <em>unforgettable.</em></h1>
               <p className="lede">
-                Dress-up outfits for children, costumes sized for cats and dogs, and photo-booth,
-                balloon and backdrop programmes for events. Buy the stock line as it is, or have it
-                built to your own artwork, size chart and label.
+                Costumes, masks and party-ready pieces for seasonal retailers, event teams and OEM buyers.
+                Pick from the catalogue or send us the colourway, size chart and label for your own run.
               </p>
               <div className="hero__actions">
-                <Link className="btn btn--primary" to="/shop">
-                  Browse the catalogue
+                <Link className="btn btn--primary" to="/shop/costumes">
+                  Shop the Halloween edit
                 </Link>
                 <Link className="btn btn--ghost" to="/inquiry">
-                  Request a quote
+                  Request a wholesale quote
                 </Link>
+              </div>
+              <div className="hero__proof">
+                <span><strong>105</strong> stocked references</span>
+                <span><strong>OEM</strong> colour + label</span>
+                <span><strong>1</strong> direct inquiry path</span>
               </div>
             </div>
 
@@ -109,9 +115,9 @@ export default function Home() {
 
       <div className="wallstrip">
         <div className="shell wallstrip__row">
-          {CATEGORIES.map((c) => (
-            <span key={c.slug}>{c.name}</span>
-          ))}
+          <span>HALLOWEEN COSTUMES</span>
+          <span>MASKS &amp; PROPS</span>
+          <span>SEASONAL STOCK</span>
           <span>OEM / ODM</span>
         </div>
       </div>
