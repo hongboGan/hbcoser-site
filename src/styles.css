@@ -629,10 +629,49 @@ p { margin: 0 0 1em; }
 .factory-showcase__copy { max-width: 34ch; }
 .factory-showcase__copy h3 { font-size: clamp(1.8rem, 3vw, 3rem); line-height: 0.98; margin: 14px 0; }
 .factory-showcase__copy p:not(.eyebrow) { color: var(--ink-muted); font-size: 0.95rem; line-height: 1.65; margin-bottom: 22px; }
-.factory-showcase__visual { position: relative; min-height: 390px; overflow: hidden; background: var(--ink); border: 3px solid var(--ink); box-shadow: 9px 9px 0 var(--cyan); }
-.factory-showcase__visual img { width: 100%; height: 100%; min-height: 390px; display: block; object-fit: cover; animation: factoryFade 0.5s ease both; }
-.factory-showcase__count { position: absolute; right: 16px; bottom: 14px; background: var(--cyan-light); color: var(--ink); border: 2px solid var(--ink); padding: 7px 10px; font-family: var(--mono); font-size: 0.72rem; font-weight: 700; }
-@keyframes factoryFade { from { opacity: 0.25; transform: scale(1.02); } to { opacity: 1; transform: scale(1); } }
+.factory-showcase__rail,
+.factory-gallery__rail {
+  overflow: hidden;
+  min-width: 0;
+  border: 3px solid var(--ink);
+  background: var(--ink);
+  box-shadow: 9px 9px 0 var(--cyan);
+}
+.factory-showcase__track,
+.factory-gallery__track {
+  display: flex;
+  width: max-content;
+  gap: 14px;
+  padding: 14px;
+  animation: factoryMarquee 26s linear infinite;
+}
+.factory-showcase__rail:hover .factory-showcase__track,
+.factory-gallery__rail:hover .factory-gallery__track,
+.factory-showcase__rail:focus-within .factory-showcase__track,
+.factory-gallery__rail:focus-within .factory-gallery__track {
+  animation-play-state: paused;
+}
+.factory-showcase__frame,
+.factory-gallery__item {
+  flex: 0 0 clamp(220px, 32vw, 390px);
+  aspect-ratio: 4 / 3;
+  margin: 0;
+  overflow: hidden;
+  border: 2px solid var(--paper);
+  background: var(--mat);
+}
+.factory-showcase__frame img,
+.factory-gallery__item img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+@keyframes factoryMarquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(calc(-50% - 7px)); }
+}
 
 .reviews-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px; margin-top: 38px; }
 .review-card { background: var(--paper); border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); }
@@ -651,11 +690,9 @@ p { margin: 0 0 1em; }
 .custom-cases__grid--ink .custom-case { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.5); box-shadow: 5px 5px 0 var(--cyan); }
 .custom-cases__grid--ink .custom-case img { aspect-ratio: 1 / 1; }
 
-.factory-gallery__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 180px; gap: 14px; margin-top: 38px; }
-.factory-gallery__item { margin: 0; overflow: hidden; border: 2px solid var(--ink); background: var(--mat); box-shadow: 5px 5px 0 var(--ink); }
-.factory-gallery__item img { display: block; width: 100%; height: 100%; object-fit: cover; }
-.factory-gallery__item--1 { grid-column: span 2; grid-row: span 2; }
-.factory-gallery__item--2 { grid-column: span 2; }
+.factory-gallery__rail { margin-top: 38px; }
+.factory-gallery__track { animation-duration: 32s; }
+.factory-gallery__item { box-shadow: 5px 5px 0 var(--cyan); }
 
 .card { display: block; }
 /* A square frame, not 4:5. The photographs are square, so a 4:5 frame left the mat showing
@@ -1220,6 +1257,8 @@ p { margin: 0 0 1em; }
 
 @media (max-width: 900px) {
   .factory-showcase { grid-template-columns: 1fr; }
+  .factory-showcase__track { animation-duration: 22s; }
+  .factory-gallery__track { animation-duration: 26s; }
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .reviews-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .custom-cases__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1563,11 +1602,11 @@ body { background: var(--paper); }
   .factory-showcase { margin-top: 54px; }
   .tiles { grid-template-columns: 1fr; }
   .tile { min-height: 320px; }
-  .factory-showcase__visual, .factory-showcase__visual img { min-height: 260px; }
-  .reviews-grid { grid-template-columns: 1fr; }
+  .factory-showcase__frame,
+  .factory-gallery__item { flex-basis: min(78vw, 320px); }
+  .factory-showcase__track { animation-duration: 18s; }
+  .factory-gallery__track { animation-duration: 22s; }
   .custom-cases__grid { grid-template-columns: 1fr; }
-  .factory-gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 220px; }
-  .factory-gallery__item--1, .factory-gallery__item--2 { grid-column: auto; grid-row: auto; }
   .header-utility { gap: 8px; }
   .header-utility > a, .header-tool { transform: scale(0.9); }
   .header__topline .wordmark { font-size: 1.1rem; }

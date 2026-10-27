@@ -102,7 +102,6 @@ export default function Home() {
   usePageMeta();
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [factorySlide, setFactorySlide] = useState(0);
   const current = HERO[slide];
 
   useEffect(() => {
@@ -114,11 +113,6 @@ export default function Home() {
   useEffect(() => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
     if (reduce?.matches) setPaused(true);
-  }, []);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => setFactorySlide((value) => (value + 1) % FACTORY_IMAGES.length), 2000);
-    return () => window.clearInterval(timer);
   }, []);
 
   function move(delta) {
@@ -216,9 +210,14 @@ export default function Home() {
               <p>Printing, finishing, packing and a live costume reference wall — built for buyer visits and repeat programmes.</p>
               <Link className="btn btn--ghost" to="/factory">Visit the factory page</Link>
             </div>
-            <div className="factory-showcase__visual">
-              <img src={FACTORY_IMAGES[factorySlide]} alt="Factory production showcase" />
-              <span className="factory-showcase__count">0{factorySlide + 1} / 05</span>
+            <div className="factory-showcase__rail" aria-label="Scrolling factory image display">
+              <div className="factory-showcase__track">
+                {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
+                  <figure className="factory-showcase__frame" key={`${image}-${index}`}>
+                    <img src={image} alt={`Factory production showcase ${(index % FACTORY_IMAGES.length) + 1}`} loading="lazy" />
+                  </figure>
+                ))}
+              </div>
             </div>
           </div>
         </div>

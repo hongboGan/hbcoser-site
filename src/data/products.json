@@ -483,7 +483,7 @@
     {
       "id": "victorian-tailcoat-boys",
       "title": "Boys' Victorian Tailcoat 3-Piece Suit",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 9.99,
       "priceUsdMax": 9.99,
       "moq": null,
@@ -496,7 +496,7 @@
     {
       "id": "renaissance-velvet-cloak",
       "title": "Girls' Renaissance Velvet Dress & Cloak",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 16.29,
       "priceUsdMax": 16.29,
       "moq": null,
@@ -663,7 +663,7 @@
     {
       "id": "scientist-lab-coat",
       "title": "Kids' Scientist Lab Coat Set",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 5.59,
       "priceUsdMax": 5.59,
       "moq": null,
@@ -676,7 +676,7 @@
     {
       "id": "crossing-guard-girls",
       "title": "Girls' Crossing Guard Costume",
-      "category": "costumes",
+      "category": "kids",
       "moq": null,
       "sourceUrl": "https://www.hongbocostumes.com/products/crossing-guard-girls",
       "sourceImage": "https://sc04.alicdn.com/kf/He64fab74131f4a8cadecf99caf5806e1l.png",
@@ -687,7 +687,7 @@
     {
       "id": "beer-mug-kids",
       "title": "Kids' Beer Mug Oktoberfest Suit",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 6.59,
       "priceUsdMax": 6.59,
       "moq": null,
@@ -713,7 +713,7 @@
     {
       "id": "santa-family-set",
       "title": "Santa Claus Family Outfit Set",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 10.56,
       "priceUsdMax": 10.56,
       "moq": null,
@@ -726,7 +726,7 @@
     {
       "id": "christmas-tree-kids",
       "title": "Kids' Christmas Tree Costume Suit",
-      "category": "party",
+      "category": "kids",
       "priceUsdMin": 6.5,
       "priceUsdMax": 6.5,
       "moq": null,
@@ -739,7 +739,7 @@
     {
       "id": "gingerbread-onesie",
       "title": "Gingerbread Man Bodysuit Onesie",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 7.14,
       "priceUsdMax": 7.14,
       "moq": null,
@@ -750,22 +750,9 @@
       "height": 900
     },
     {
-      "id": "bloody-bride",
-      "title": "Adult Bloody Bride Gown with Veil",
-      "category": "costumes",
-      "priceUsdMin": 11.06,
-      "priceUsdMax": 11.06,
-      "moq": null,
-      "sourceUrl": "https://www.hongbocostumes.com/products/bloody-bride",
-      "sourceImage": "https://sc04.alicdn.com/kf/H954ba1514f2c4aad97419e5e793564eco/Adult-Bloody-Bride-Costume-Red-Sleeveless-Tulle.jpg",
-      "image": "/products/bloody-bride.jpg",
-      "width": 900,
-      "height": 900
-    },
-    {
       "id": "mummy-kids",
       "title": "Kids' Horror Mummy Hooded Jumpsuit",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 7.19,
       "priceUsdMax": 7.19,
       "moq": null,
@@ -785,19 +772,6 @@
       "sourceUrl": "https://www.hongbocostumes.com/products/skull-king",
       "sourceImage": "https://sc04.alicdn.com/kf/He0ac442e61bd4a81823b3bd1476ec99f1/Mens-Skull-King-Cosplay-Costume-Blue-Muscle.png",
       "image": "/products/skull-king.jpg",
-      "width": 900,
-      "height": 900
-    },
-    {
-      "id": "retro-clown",
-      "title": "Adult Retro Clown Jumpsuit Set",
-      "category": "costumes",
-      "priceUsdMin": 17.63,
-      "priceUsdMax": 17.63,
-      "moq": null,
-      "sourceUrl": "https://www.hongbocostumes.com/products/retro-clown",
-      "sourceImage": "https://sc04.alicdn.com/kf/H7d9fc6f3da48406e9ec4e5b932ae8b374/Adult-Retro-Clown-Costume-Jumpsuit-Ruffled-Collar.png",
-      "image": "/products/retro-clown.jpg",
       "width": 900,
       "height": 900
     },
@@ -843,7 +817,7 @@
     {
       "id": "pink-nurse-girls",
       "title": "Girls' Pink Nurse Career Set",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 8.49,
       "priceUsdMax": 8.49,
       "moq": null,
@@ -856,7 +830,7 @@
     {
       "id": "firefighter-kids",
       "title": "Kids' Firefighter Stage Set",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 5.5,
       "priceUsdMax": 5.5,
       "moq": null,
@@ -869,7 +843,7 @@
     {
       "id": "cop-boys",
       "title": "Boys' Police Costume Set",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 10.48,
       "priceUsdMax": 10.48,
       "moq": null,
@@ -882,7 +856,7 @@
     {
       "id": "surgeon-dr-set",
       "title": "6-Piece Doctor & Surgeon Set",
-      "category": "costumes",
+      "category": "kids",
       "priceUsdMin": 7.3,
       "priceUsdMax": 7.3,
       "moq": null,
@@ -934,7 +908,7 @@
     {
       "id": "king-crown-kids",
       "title": "Kids' King Crown & Prince Tiara",
-      "category": "party",
+      "category": "kids",
       "priceUsdMin": 0.7,
       "priceUsdMax": 0.7,
       "moq": null,
@@ -947,7 +921,7 @@
     {
       "id": "phantom-mask",
       "title": "Phantom Half-Face Carnival Mask",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 1.67,
       "priceUsdMax": 1.67,
       "moq": null,
@@ -960,7 +934,7 @@
     {
       "id": "xmas-tutu-girls",
       "title": "Girls' Christmas Tutu Party Skirt",
-      "category": "party",
+      "category": "kids",
       "priceUsdMin": 2.78,
       "priceUsdMax": 2.78,
       "moq": null,
@@ -973,7 +947,7 @@
     {
       "id": "golden-santa",
       "title": "Men's Golden Santa Claus Full Set",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 15.48,
       "priceUsdMax": 15.48,
       "moq": null,
@@ -1142,7 +1116,7 @@
     {
       "id": "hero-capes-set",
       "title": "Marvel Superhero Capes Set",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 2.03,
       "priceUsdMax": 2.03,
       "moq": null,
@@ -1181,7 +1155,7 @@
     {
       "id": "christmas-baby-bodysuit-set",
       "title": "Baby's Christmas 4-Piece Bodysuit & Tutu Set",
-      "category": "party",
+      "category": "kids",
       "priceUsdMin": 6.65,
       "priceUsdMax": 6.65,
       "moq": null,
@@ -1194,7 +1168,7 @@
     {
       "id": "tactical-ghost-mask",
       "title": "Tactical Ghost Half-Mask with Mesh Eyes",
-      "category": "party",
+      "category": "costumes",
       "priceUsdMin": 1.43,
       "priceUsdMax": 1.43,
       "moq": null,
@@ -1309,19 +1283,6 @@
       "height": 900
     },
     {
-      "id": "womens-gothic-witch-gown",
-      "title": "Women's Gothic Witch Gown",
-      "category": "costumes",
-      "priceUsdMin": 12.08,
-      "priceUsdMax": 12.08,
-      "moq": null,
-      "sourceUrl": "https://www.hongbocostumes.com/products/womens-gothic-witch-gown",
-      "sourceImage": "https://www.hongbocostumes.com/products/womens-gothic-witch-gown.jpg",
-      "image": "/products/womens-gothic-witch-gown.jpg",
-      "width": 900,
-      "height": 900
-    },
-    {
       "id": "mens-ringmaster-tailcoat",
       "title": "Men's Ringmaster Tailcoat",
       "category": "costumes",
@@ -1331,32 +1292,6 @@
       "sourceUrl": "https://www.hongbocostumes.com/products/mens-ringmaster-tailcoat",
       "sourceImage": "https://www.hongbocostumes.com/products/mens-ringmaster-tailcoat.jpg",
       "image": "/products/mens-ringmaster-tailcoat.jpg",
-      "width": 900,
-      "height": 900
-    },
-    {
-      "id": "womens-camo-jumpsuit",
-      "title": "Women's Camo Utility Jumpsuit",
-      "category": "costumes",
-      "priceUsdMin": 12.33,
-      "priceUsdMax": 12.33,
-      "moq": null,
-      "sourceUrl": "https://www.hongbocostumes.com/products/womens-camo-jumpsuit",
-      "sourceImage": "https://www.hongbocostumes.com/products/womens-camo-jumpsuit.jpg",
-      "image": "/products/womens-camo-jumpsuit.jpg",
-      "width": 900,
-      "height": 900
-    },
-    {
-      "id": "witch-broom-prop",
-      "title": "Gothic Witch Broom Prop",
-      "category": "party",
-      "priceUsdMin": 4.63,
-      "priceUsdMax": 4.63,
-      "moq": null,
-      "sourceUrl": "https://www.hongbocostumes.com/products/witch-broom-prop",
-      "sourceImage": "https://www.hongbocostumes.com/products/witch-broom-prop.jpg",
-      "image": "/products/witch-broom-prop.jpg",
       "width": 900,
       "height": 900
     }

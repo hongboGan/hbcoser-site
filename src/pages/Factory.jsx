@@ -143,12 +143,14 @@ export default function Factory() {
               <p>Production, finishing and the costume reference wall from the same floor that supports custom runs.</p>
             </div>
           </div>
-          <div className="factory-gallery__grid">
-            {FACTORY_IMAGES.map((image, index) => (
-              <figure key={image} className={`factory-gallery__item factory-gallery__item--${index + 1}`}>
-                <img src={image} alt={`Factory showcase ${index + 1}`} loading="lazy" />
-              </figure>
-            ))}
+          <div className="factory-gallery__rail" aria-label="Scrolling factory image display">
+            <div className="factory-gallery__track">
+              {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
+                <figure key={`${image}-${index}`} className="factory-gallery__item">
+                  <img src={image} alt={`Factory showcase ${(index % FACTORY_IMAGES.length) + 1}`} loading="lazy" />
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
       </section>
