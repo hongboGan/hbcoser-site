@@ -4,9 +4,15 @@ import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
-// Two per category. Products are read in catalogue order, so the newest appended listing
-// for each category appears first in this homepage section after every catalogue update.
-const FEATURED = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(-2).reverse());
+// Two per category, plus two additional newest catalogue items. Products are read in
+// catalogue order, so newly appended listings appear automatically after each catalogue update.
+const FEATURED_BY_CATEGORY = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(-2).reverse());
+const FEATURED_EXTRAS = products
+  .slice()
+  .reverse()
+  .filter((p) => !FEATURED_BY_CATEGORY.some((featured) => featured.id === p.id))
+  .slice(0, 2);
+const FEATURED = [...FEATURED_BY_CATEGORY, ...FEATURED_EXTRAS];
 
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
