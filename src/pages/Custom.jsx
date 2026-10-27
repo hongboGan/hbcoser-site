@@ -38,6 +38,13 @@ const STEPS = [
   { n: 'Step 05', t: 'Inspection and shipping', v: 'A final check against the approved sample before packing, with photos of the packed cartons. We ship on your forwarder or ours.' },
 ];
 
+const CASE_STUDIES = [
+  { image: '/custom/custom-case-01.webp', title: 'Retail packaging and garment presentation' },
+  { image: '/custom/custom-case-02.webp', title: 'Licensed-style costume sample development' },
+  { image: '/custom/custom-case-03.webp', title: 'Custom hangtag and brand identity details' },
+  { image: '/custom/custom-case-04.webp', title: 'Production-ready garment and trim packaging' },
+];
+
 export default function Custom() {
   usePageMeta();
 
@@ -75,10 +82,31 @@ export default function Custom() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--raised custom-cases">
         <div className="shell">
           <div className="sec-head">
             <span className="sec-head__n">02</span>
+            <div className="sec-head__body">
+              <p className="eyebrow">Real case references</p>
+              <h2>From sample detail to retail-ready finish.</h2>
+              <p>Selected examples of packaging, labelling and costume development for custom programmes.</p>
+            </div>
+          </div>
+          <div className="custom-cases__grid">
+            {CASE_STUDIES.map((item) => (
+              <figure key={item.image} className="custom-case">
+                <img src={item.image} alt={item.title} loading="lazy" />
+                <figcaption>{item.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="shell">
+          <div className="sec-head">
+            <span className="sec-head__n">03</span>
             <div className="sec-head__body">
               <p className="eyebrow">How it works</p>
               <h2>Sample first. Then bulk.</h2>
@@ -99,7 +127,7 @@ export default function Custom() {
       <section className="section section--raised">
         <div className="shell">
           <div className="sec-head">
-            <span className="sec-head__n">03</span>
+            <span className="sec-head__n">04</span>
             <div className="sec-head__body">
               <p className="eyebrow">Working terms</p>
               <h2>What we need from you.</h2>

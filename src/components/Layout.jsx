@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { CATEGORIES, CONTACT, countIn, products, waLink } from '../data/products.js';
-import { CartIcon, FacebookIcon, LocationIcon, MailIcon, MenuIcon, SearchIcon, StoreIcon, UserIcon, WhatsAppIcon } from './icons.jsx';
+import { CATEGORIES, CONTACT, waLink } from '../data/products.js';
+import { FacebookIcon, MailIcon, MenuIcon, SearchIcon, WhatsAppIcon } from './icons.jsx';
 
 // Shared chrome is on every page, so the tag has to follow the route rather than be fixed.
 function refForPath(pathname) {
@@ -26,38 +26,12 @@ function Wordmark() {
   );
 }
 
-function HeaderUtility() {
-  return (
-    <div className="header-utility" aria-label="Quick contact and shopping tools">
-      <a href={waLink('HEADER')} className="header-utility__location">
-        <StoreIcon />
-        <span>Wholesale desk · Wuhan, China</span>
-      </a>
-      <a href={waLink('HEADER')} aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}>
-        <LocationIcon />
-        <span>Chat on WhatsApp</span>
-      </a>
-      <a href={`mailto:${CONTACT.email}`} aria-label="Email sales">
-        <UserIcon />
-        <span>Sales</span>
-      </a>
-      <button type="button" className="header-tool" aria-label="Cart preview">
-        <CartIcon />
-        <b>0</b>
-      </button>
-    </div>
-  );
-}
-
 export default function Layout() {
-  const [shopOpen, setShopOpen] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const shopRef = useRef(null);
   const fabRef = useRef(null);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    setShopOpen(false);
     setDrawer(false);
   }, [pathname]);
 
@@ -100,21 +74,11 @@ export default function Layout() {
   }, [pathname]);
 
   useEffect(() => {
-    function onDown(e) {
-      if (shopRef.current && !shopRef.current.contains(e.target)) setShopOpen(false);
-    }
     function onKey(e) {
-      if (e.key === 'Escape') {
-        setShopOpen(false);
-        setDrawer(false);
-      }
+      if (e.key === 'Escape') setDrawer(false);
     }
-    document.addEventListener('mousedown', onDown);
     document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('mousedown', onDown);
-      document.removeEventListener('keydown', onKey);
-    };
+    return () => document.removeEventListener('keydown', onKey);
   }, []);
 
   useEffect(() => {
@@ -129,15 +93,6 @@ export default function Layout() {
       <a className="skip" href="#main">
         Skip to content
       </a>
-
-      <div className="season-strip" role="note">
-        <div className="shell season-strip__inner">
-          <span className="season-strip__mark">13</span>
-          <strong>Halloween wholesale edit</strong>
-          <span>Stock costumes · event props · OEM colourways</span>
-          <Link to="/shop/costumes">Shop the seasonal line <span aria-hidden="true">↗</span></Link>
-        </div>
-      </div>
 
       <header className="header">
         <div className="shell header__topline">
@@ -156,59 +111,33 @@ export default function Layout() {
             <input id="site-search" type="search" placeholder="Search costumes, props and OEM styles" />
             <SearchIcon />
           </div>
-          <HeaderUtility />
+
         </div>
         <div className="shell header__inner">
           <nav className="nav" aria-label="Primary">
-            <div ref={shopRef} style={{ position: 'relative' }}>
-              <button
-                type="button"
-                className="nav__link"
-                aria-expanded={shopOpen}
-                aria-haspopup="true"
-                onClick={() => setShopOpen((v) => !v)}
-              >
-                Shop {shopOpen ? '▴' : '▾'}
-              </button>
-            </div>
-            <NavLink className="nav__link" to="/shop/costumes">
-              Halloween edit
+            <NavLink className="nav__link" to="/">
+              Home
             </NavLink>
+            <NavLink className="nav__link" to="/shop">
+              All products
+            </NavLink>
+            {CATEGORIES.map((c) => (
+              <NavLink key={c.slug} className="nav__link" to={`/shop/${c.slug}`}>
+                {c.name}
+              </NavLink>
+            ))}
             <NavLink className="nav__link" to="/custom">
               Custom / OEM
             </NavLink>
             <NavLink className="nav__link" to="/factory">
               Factory
             </NavLink>
-            <NavLink className="nav__link" to="/blog">
-              Notes
-            </NavLink>
-            <NavLink className="nav__link" to="/inquiry">
-              Inquiry
-            </NavLink>
           </nav>
-
-          <Link className="btn btn--primary header__cta" to="/inquiry">
-            Get a quote
-          </Link>
+ 
+          <a className="btn btn--primary header__cta" href={waLink('HEADER')}>
+            WhatsApp us
+          </a>
         </div>
-
-        {shopOpen && (
-          <div className="mega">
-            <div className="shell mega__grid">
-              {CATEGORIES.map((c) => (
-                <Link key={c.slug} className="mega__item" to={`/shop/${c.slug}`}>
-                  <strong>{c.name}</strong>
-                  <em>{countIn(c.slug)} products</em>
-                </Link>
-              ))}
-              <Link className="mega__item" to="/shop">
-                <strong>All products</strong>
-                <em>{products.length} references</em>
-              </Link>
-            </div>
-          </div>
-        )}
       </header>
 
       {drawer && (
@@ -220,17 +149,17 @@ export default function Layout() {
             </button>
           </div>
           <ul className="drawer__list">
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/shop">All products</Link>
+            </li>
             {CATEGORIES.map((c) => (
               <li key={c.slug}>
                 <Link to={`/shop/${c.slug}`}>{c.name}</Link>
               </li>
             ))}
-            <li>
-              <Link to="/shop">All products</Link>
-            </li>
-            <li>
-              <Link to="/shop/costumes">Halloween edit</Link>
-            </li>
             <li>
               <Link to="/custom">Custom / OEM</Link>
             </li>
@@ -239,12 +168,6 @@ export default function Layout() {
             </li>
             <li>
               <Link to="/factory">Factory</Link>
-            </li>
-            <li>
-              <Link to="/blog">Programme notes</Link>
-            </li>
-            <li>
-              <Link to="/inquiry">Inquiry</Link>
             </li>
           </ul>
           <div className="drawer__meta">

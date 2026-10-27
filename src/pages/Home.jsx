@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CATEGORIES, CONTACT, byCategory, countIn, getProduct, products, waLink } from '../data/products.js';
+import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
-// Four per line, so every category is represented and the grid fills whole rows. Three per
-// line left a single orphaned card on the last row at desktop width.
-const FEATURED = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(0, 4));
+// Two per category. Products are read in catalogue order, so the newest appended listing
+// for each category appears first in this homepage section after every catalogue update.
+const FEATURED = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(-2).reverse());
 
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
@@ -14,26 +14,26 @@ const HERO = [
   {
     image: '/banners/halloween-costumes-banner.jpg',
     kicker: 'Halloween wholesale edit · Factory direct',
-    title: <>Make the night <em>unforgettable.</em></>,
-    copy: 'Costumes, masks and party-ready pieces for seasonal retailers, event teams and OEM buyers.',
-    cta: 'Shop the Halloween edit',
-    href: '/shop/costumes',
+    title: null,
+    copy: null,
+    cta: 'Shop now',
+    href: '/shop/character',
   },
   {
-    image: '/banners/halloween-props-banner.jpg',
-    kicker: 'Masks · props · seasonal stock',
-    title: <>Build a <em>scene</em> they remember.</>,
-    copy: 'Source the accessories and atmosphere that turn a costume line into a complete event programme.',
-    cta: 'Browse masks & props',
-    href: '/shop/party',
+    image: '/banners/superhero-ensemble-banner.jpg',
+    kicker: 'Hero costume collection · Factory direct',
+    title: null,
+    copy: null,
+    cta: 'Shop now',
+    href: '/shop/character',
   },
   {
     image: '/banners/halloween-collection-banner.jpg',
-    kicker: 'Custom colour · sizing · packaging',
-    title: <>Your label. Our <em>workshop.</em></>,
-    copy: 'Start with a stock silhouette, then move into your artwork, size chart and retail-ready pack.',
-    cta: 'Start an OEM brief',
-    href: '/custom',
+    kicker: 'Seasonal costume collection · Factory direct',
+    title: null,
+    copy: null,
+    cta: 'Shop now',
+    href: '/shop/character',
   },
 ];
 
@@ -56,10 +56,47 @@ const OEM = [
   },
 ];
 
+const FACTORY_IMAGES = [
+  '/factory/factory-01.webp',
+  '/factory/factory-02.webp',
+  '/factory/factory-03.webp',
+  '/factory/factory-04.webp',
+  '/factory/factory-05.webp',
+];
+
+const REVIEWS = [
+  {
+    image: '/reviews/review-01.webp',
+    market: 'Buyer showcase · Europe',
+    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+  },
+  {
+    image: '/reviews/review-02.webp',
+    market: 'Buyer showcase · North America',
+    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+  },
+  {
+    image: '/reviews/review-03.webp',
+    market: 'Buyer showcase · Australia',
+    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+  },
+  {
+    image: '/reviews/review-04.webp',
+    market: 'Buyer showcase · Middle East',
+    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+  },
+  {
+    image: '/reviews/review-05.webp',
+    market: 'Buyer showcase · Latin America',
+    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+  },
+];
+
 export default function Home() {
   usePageMeta();
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [factorySlide, setFactorySlide] = useState(0);
   const current = HERO[slide];
 
   useEffect(() => {
@@ -71,6 +108,11 @@ export default function Home() {
   useEffect(() => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
     if (reduce?.matches) setPaused(true);
+  }, []);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setFactorySlide((value) => (value + 1) % FACTORY_IMAGES.length), 2000);
+    return () => window.clearInterval(timer);
   }, []);
 
   function move(delta) {
@@ -86,45 +128,17 @@ export default function Home() {
         <div className="shell hero__inner">
           <div className="hero__grid">
             <div className="hero__copy" aria-live="polite">
-              <p className="eyebrow">{current.kicker}</p>
-              <h1>{current.title}</h1>
-              <p className="lede">{current.copy}</p>
               <div className="hero__actions">
                 <Link className="btn btn--primary" to={current.href}>{current.cta}</Link>
-                <Link className="btn btn--ghost" to="/inquiry">Request a wholesale quote</Link>
               </div>
-              <div className="hero__proof">
-                <span><strong>105</strong> stocked references</span>
-                <span><strong>OEM</strong> colour + label</span>
-                <span><strong>3s</strong> seasonal rotation</span>
-              </div>
+
             </div>
             <div className="hero__stage hero__stage--banner">
-              <div className="stage__card">
-                <strong>Seasonal edit · {String(slide + 1).padStart(2, '0')} / 03</strong>
-                <span>Factory-direct pieces for retail, events and custom programmes.</span>
-              </div>
+
             </div>
-          </div>
-          <div className="hero__controls" aria-label="Banner controls">
-            <button type="button" onClick={() => move(-1)} aria-label="Previous banner">←</button>
-            {HERO.map((item, index) => (
-              <button key={item.image} type="button" className={index === slide ? 'is-active' : ''} onClick={() => setSlide(index)} aria-label={`Show banner ${index + 1}`} aria-current={index === slide ? 'true' : undefined} />
-            ))}
-            <button type="button" onClick={() => move(1)} aria-label="Next banner">→</button>
-            <button type="button" className="hero__pause" onClick={() => setPaused((value) => !value)} aria-label={paused ? 'Resume banner rotation' : 'Pause banner rotation'}>{paused ? 'Play' : 'Pause'}</button>
           </div>
         </div>
       </section>
-
-      <div className="wallstrip">
-        <div className="shell wallstrip__row">
-          <span>HALLOWEEN COSTUMES</span>
-          <span>MASKS &amp; PROPS</span>
-          <span>SEASONAL STOCK</span>
-          <span>OEM / ODM</span>
-        </div>
-      </div>
 
       <section className="section section--raised">
         <div className="shell">
@@ -144,7 +158,9 @@ export default function Home() {
 
           <div className="tiles">
             {CATEGORIES.map((c, i) => {
-              const first = byCategory(c.slug)[0];
+              const first = c.slug === 'character'
+                ? { image: '/categories/costumes-cosplay.webp' }
+                : byCategory(c.slug)[0];
               return (
                 <Link key={c.slug} className="tile" to={`/shop/${c.slug}`}>
                   <span className="tile__n" aria-hidden="true">
@@ -186,6 +202,19 @@ export default function Home() {
               See all {products.length} products
             </Link>
           </div>
+
+          <div className="factory-showcase" aria-label="Factory showcase">
+            <div className="factory-showcase__copy">
+              <p className="eyebrow">Factory floor</p>
+              <h3>See how the range comes together.</h3>
+              <p>Printing, finishing, packing and a live costume reference wall — built for buyer visits and repeat programmes.</p>
+              <Link className="btn btn--ghost" to="/factory">Visit the factory page</Link>
+            </div>
+            <div className="factory-showcase__visual">
+              <img src={FACTORY_IMAGES[factorySlide]} alt="Factory production showcase" />
+              <span className="factory-showcase__count">0{factorySlide + 1} / 05</span>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -208,6 +237,13 @@ export default function Home() {
               </div>
             ))}
           </div>
+          <div className="custom-cases__grid custom-cases__grid--ink" aria-label="Custom and OEM case references">
+            {['/custom/custom-case-01.webp', '/custom/custom-case-02.webp', '/custom/custom-case-03.webp', '/custom/custom-case-04.webp'].map((image) => (
+              <figure key={image} className="custom-case">
+                <img src={image} alt="Custom and OEM case reference" loading="lazy" />
+              </figure>
+            ))}
+          </div>
           <div className="mt-3">
             <Link className="btn btn--light" to="/custom">
               How custom orders work
@@ -216,24 +252,32 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section">
+      <section className="section section--raised testimonials-section">
         <div className="shell">
-          <div className="band">
-            <div>
-              <h2>Send us the item and the quantity.</h2>
-              <p className="mt-1">Quotes within one working day, by email or WhatsApp — whichever you prefer.</p>
+          <div className="sec-head">
+            <span className="sec-head__n">04</span>
+            <div className="sec-head__body">
+              <p className="eyebrow">Customer proof</p>
+              <h2>Made for buyers who need the range to work.</h2>
+              <p>Five visual references for the kinds of programmes our wholesale partners build.</p>
             </div>
-            <div className="band__actions">
-              <Link className="btn btn--primary" to="/inquiry">
-                Start an inquiry
-              </Link>
-              <a className="btn btn--ghost" href={waLink('HOME')}>
-                WhatsApp us
-              </a>
-            </div>
+          </div>
+          <div className="reviews-grid">
+            {REVIEWS.map((review, index) => (
+              <article className="review-card" key={review.image}>
+                <div className="review-card__image"><img src={review.image} alt="Customer costume showcase" loading="lazy" /></div>
+                <div className="review-card__body">
+                  <span className="review-card__index">0{index + 1}</span>
+                  <p className="review-card__market">{review.market}</p>
+                  <p className="review-card__quote">“{review.quote}”</p>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
+
+
     </>
   );
 }

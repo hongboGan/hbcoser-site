@@ -2,6 +2,14 @@ import { Link } from 'react-router-dom';
 import { CONTACT } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 
+const FACTORY_IMAGES = [
+  '/factory/factory-01.webp',
+  '/factory/factory-02.webp',
+  '/factory/factory-03.webp',
+  '/factory/factory-04.webp',
+  '/factory/factory-05.webp',
+];
+
 // Every number on this page comes from the company's own operating records for 2025
 // (the 极目新闻 interview published 2025-11-19). Nothing here is rounded up or invented.
 // If a figure cannot be sourced, it is left out rather than estimated.
@@ -121,6 +129,26 @@ export default function Factory() {
               <strong>10</strong>
               <span>Pieces, minimum order</span>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--raised factory-gallery">
+        <div className="shell">
+          <div className="sec-head">
+            <span className="sec-head__n">00</span>
+            <div className="sec-head__body">
+              <p className="eyebrow">Factory showcase</p>
+              <h2>A closer look at the floor.</h2>
+              <p>Production, finishing and the costume reference wall from the same floor that supports custom runs.</p>
+            </div>
+          </div>
+          <div className="factory-gallery__grid">
+            {FACTORY_IMAGES.map((image, index) => (
+              <figure key={image} className={`factory-gallery__item factory-gallery__item--${index + 1}`}>
+                <img src={image} alt={`Factory showcase ${index + 1}`} loading="lazy" />
+              </figure>
+            ))}
           </div>
         </div>
       </section>

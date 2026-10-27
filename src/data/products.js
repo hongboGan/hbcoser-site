@@ -27,15 +27,16 @@ export function waLink(ref, tail) {
   return `${CONTACT.whatsappUrl}?text=${encodeURIComponent(text)}`;
 }
 
-// Four lines: children's cosplay, pet costumes, party/event supply, and general costumes
-// and cosplay. The fourth line contains the authorized expanded costume catalogue.
+// Three storefront lines: character cosplay combines the original kids and general costume
+// catalogues, followed by pets and party/event supply. Product records remain unchanged.
+const CHARACTER_CATEGORY = {
+  slug: 'character',
+  name: 'Character Cosplay',
+  blurb: 'Kids, adult and general character costumes, seasonal outfits and cosplay references for wholesale programmes.',
+};
+
 export const CATEGORIES = [
-  {
-    slug: 'kids',
-    name: "Kids' Cosplay",
-    blurb:
-      "Role-play and character outfits from toddler to teen, built for children's dress-up ranges.",
-  },
+  CHARACTER_CATEGORY,
   {
     slug: 'pets',
     name: 'Pet Cosplay',
@@ -46,20 +47,20 @@ export const CATEGORIES = [
     name: 'Party & Event',
     blurb: 'Photo-booth kits, balloon garlands, backdrops and occasion sets for event programmes.',
   },
-  {
-    slug: 'costumes',
-    name: 'Costumes & Cosplay',
-    blurb: 'Adult and general cosplay, seasonal outfits, career costumes and accessories for wholesale programmes.',
-  },
 ];
 
 export const products = raw.products;
 
 export const getProduct = (id) => products.find((p) => p.id === id) || null;
 
-export const getCategory = (slug) => CATEGORIES.find((c) => c.slug === slug) || null;
+export const getCategory = (slug) => {
+  if (slug === 'kids' || slug === 'costumes') return CHARACTER_CATEGORY;
+  return CATEGORIES.find((c) => c.slug === slug) || null;
+};
 
-export const byCategory = (slug) => products.filter((p) => p.category === slug);
+export const byCategory = (slug) => slug === 'character'
+  ? products.filter((p) => p.category === 'kids' || p.category === 'costumes')
+  : products.filter((p) => p.category === slug);
 
 export const countIn = (slug) => byCategory(slug).length;
 
