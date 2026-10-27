@@ -4,15 +4,30 @@ import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
-// Two per category, plus two additional newest catalogue items. Products are read in
-// catalogue order, so newly appended listings appear automatically after each catalogue update.
-const FEATURED_BY_CATEGORY = CATEGORIES.flatMap((c) => byCategory(c.slug).slice(-2).reverse());
+// The requested superhero range leads section 02 in the same order as the supplied reference.
+// If a priority item is ever removed from the catalogue, the newest remaining products fill the
+// open slot automatically so this section always has ten links.
+const PRIORITY_PRODUCT_IDS = [
+  'miles-morales-spiderman',
+  'spider-gwen',
+  'iron-spider',
+  'venom-symbiote',
+  'spiderman-peter-parker',
+  'venom-carnage-red',
+  'lightning-venom',
+  'venom-blackpanther-kids',
+  'captain-america-muscle',
+  'deadpool-cosplay',
+];
+const PRIORITY_PRODUCTS = PRIORITY_PRODUCT_IDS
+  .map((id) => products.find((product) => product.id === id))
+  .filter(Boolean);
 const FEATURED_EXTRAS = products
   .slice()
   .reverse()
-  .filter((p) => !FEATURED_BY_CATEGORY.some((featured) => featured.id === p.id))
-  .slice(0, 2);
-const FEATURED = [...FEATURED_BY_CATEGORY, ...FEATURED_EXTRAS];
+  .filter((p) => !PRIORITY_PRODUCT_IDS.includes(p.id))
+  .slice(0, Math.max(0, 10 - PRIORITY_PRODUCTS.length));
+const FEATURED = [...PRIORITY_PRODUCTS, ...FEATURED_EXTRAS];
 
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
@@ -189,6 +204,7 @@ export default function Home() {
             <div className="sec-head__body">
               <p className="eyebrow">Selected references</p>
               <h2>Recent additions to the catalogue.</h2>
+              <p>Ten priority character references, led by the superhero range.</p>
             </div>
           </div>
 
