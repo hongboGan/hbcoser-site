@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { CATEGORIES, products, countIn } from '../data/products.js';
+import { CATEGORIES, byCategory, products, countIn } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
@@ -8,7 +8,7 @@ export default function Shop() {
 
   usePageMeta();
 
-  const shown = filter === 'all' ? products : products.filter((p) => p.category === filter);
+  const shown = filter === 'all' ? products : byCategory(filter);
 
   return (
     <section className="section">

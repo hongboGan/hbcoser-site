@@ -1294,6 +1294,62 @@
       "image": "/products/mens-ringmaster-tailcoat.jpg",
       "width": 900,
       "height": 900
+    },
+    {
+      "id": "mascot-teddy-bear",
+      "title": "Teddy Bear Mascot Costume",
+      "category": "mascot",
+      "priceUsdMin": 151.52,
+      "priceUsdMax": 151.52,
+      "moq": null,
+      "sizes": "2m / 2.6m / 3m",
+      "sourceUrl": "",
+      "sourceImage": "",
+      "image": "/products/mascot-teddy-bear.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "mascot-polar-bear",
+      "title": "Polar Bear Mascot Costume",
+      "category": "mascot",
+      "priceUsdMin": 151.52,
+      "priceUsdMax": 151.52,
+      "moq": null,
+      "sizes": "2m / 2.6m / 3m",
+      "sourceUrl": "",
+      "sourceImage": "",
+      "image": "/products/mascot-polar-bear.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "mascot-panda-bear",
+      "title": "Panda Bear Mascot Costume",
+      "category": "mascot",
+      "priceUsdMin": 151.52,
+      "priceUsdMax": 151.52,
+      "moq": null,
+      "sizes": "2m / 2.6m / 3m",
+      "sourceUrl": "",
+      "sourceImage": "",
+      "image": "/products/mascot-panda-bear.jpg",
+      "width": 900,
+      "height": 900
+    },
+    {
+      "id": "mascot-brown-bear",
+      "title": "Brown Bear Mascot Costume",
+      "category": "mascot",
+      "priceUsdMin": 151.52,
+      "priceUsdMax": 151.52,
+      "moq": null,
+      "sizes": "2m / 2.6m / 3m",
+      "sourceUrl": "",
+      "sourceImage": "",
+      "image": "/products/mascot-brown-bear.jpg",
+      "width": 900,
+      "height": 900
     }
   ]
 }

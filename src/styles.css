@@ -399,10 +399,9 @@ p { margin: 0 0 1em; }
   box-shadow: 0 6px 0 rgba(27, 12, 43, 0.55), 0 14px 26px rgba(27, 12, 43, 0.24);
 }
 .hero__grid { grid-template-columns: 1fr; }
-.hero__banner-image::after { background: linear-gradient(90deg, rgba(27, 12, 43, 0.42) 0%, rgba(27, 12, 43, 0.08) 42%, rgba(27, 12, 43, 0.16) 100%); }
-.hero__banner-image { position: absolute; inset: 0; background-position: center; background-size: cover; opacity: 1; transition: opacity 0.35s ease; }
+.hero__banner-image { position: absolute; inset: 0; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; opacity: 1; transition: opacity 0.35s ease; }
 .hero__banner-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(27, 12, 43, 0.08) 0%, rgba(27, 12, 43, 0) 42%, rgba(27, 12, 43, 0.05) 100%); }
-.hero--carousel .hero__inner { z-index: 2; }
+.hero--carousel .hero__inner { position: relative; z-index: 2; }
 .hero--carousel .hero__grid { min-height: 460px; }
 .hero__controls { position: relative; z-index: 4; display: flex; align-items: center; gap: 10px; margin-top: 18px; }
 .hero__controls > button { width: 30px; height: 30px; padding: 0; border: 1px solid rgba(255,255,255,0.46); border-radius: 50%; background: transparent; color: #fff; cursor: pointer; }
@@ -537,7 +536,7 @@ p { margin: 0 0 1em; }
 
 .tiles {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 24px;
   margin-top: 40px;
 }
@@ -1610,7 +1609,7 @@ body { background: var(--paper); }
 
 @media (max-width: 560px) {
   .factory-showcase { margin-top: 54px; }
-  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; margin-top: 24px; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 24px; }
   .tile { min-height: 184px; padding: 8px; border-radius: 5px; }
   .tile__bloom { inset: 7px 7px 58px; border-radius: 4px; }
   .tile__n { top: 5px; right: 7px; font-size: 1rem; opacity: 0.34; }

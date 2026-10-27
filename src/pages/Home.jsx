@@ -139,7 +139,7 @@ export default function Home() {
       <section className="hero hero--carousel" aria-roledescription="carousel" aria-label="Halloween campaign banners">
         <div className="hero__moon" aria-hidden="true" />
         <div className="hero__stars" aria-hidden="true">✦　·　✧　·　✦</div>
-        <div className="hero__banner-image" key={current.image} style={{ backgroundImage: `url(${current.image})` }} aria-hidden="true" />
+        <img className="hero__banner-image" key={current.image} src={current.image} alt="" aria-hidden="true" />
         <div className="shell hero__inner">
           <div className="hero__grid">
             <div className="hero__copy" aria-live="polite">

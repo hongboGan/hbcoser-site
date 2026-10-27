@@ -27,16 +27,23 @@ export function waLink(ref, tail) {
   return `${CONTACT.whatsappUrl}?text=${encodeURIComponent(text)}`;
 }
 
-// Three storefront lines: character cosplay combines the original kids and general costume
-// catalogues, followed by pets and party/event supply. Product records remain unchanged.
+// Four storefront lines: character cosplay combines the original kids and general costume
+// catalogues, followed by mascot, pets and party/event supply. Product records remain unchanged.
 const CHARACTER_CATEGORY = {
   slug: 'character',
   name: 'Character Cosplay',
   blurb: 'Kids, adult and general character costumes, seasonal outfits and cosplay references for wholesale programmes.',
 };
 
+const MASCOT_CATEGORY = {
+  slug: 'mascot',
+  name: 'Mascot',
+  blurb: 'Large-format mascot costumes for brand activations, events, retail promotions and public appearances.',
+};
+
 export const CATEGORIES = [
   CHARACTER_CATEGORY,
+  MASCOT_CATEGORY,
   {
     slug: 'pets',
     name: 'Pet Cosplay',

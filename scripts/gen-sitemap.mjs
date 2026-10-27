@@ -11,7 +11,7 @@ const OUT = path.resolve('public/sitemap.xml');
 
 const { products } = JSON.parse(fs.readFileSync(DATA, 'utf8'));
 
-const CATEGORIES = ['character', 'pets', 'party'];
+const CATEGORIES = ['character', 'mascot', 'pets', 'party'];
 const today = new Date().toISOString().slice(0, 10);
 
 const urls = [
