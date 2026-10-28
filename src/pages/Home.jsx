@@ -4,9 +4,10 @@ import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
-// The requested superhero range leads section 02 in the same order as the supplied reference.
-// If a priority item is ever removed from the catalogue, the newest remaining products fill the
-// open slot automatically so this section always has ten links.
+// Section 02 always leads with the four newest records in products.json. The catalogue
+// append order is the source of truth for “latest”; the remaining six slots use the
+// previously requested superhero range, then newest non-duplicate products as fallback.
+const LATEST_PRODUCTS = products.slice(-4).reverse();
 const PRIORITY_PRODUCT_IDS = [
   'miles-morales-spiderman',
   'spider-gwen',
@@ -21,41 +22,21 @@ const PRIORITY_PRODUCT_IDS = [
 ];
 const PRIORITY_PRODUCTS = PRIORITY_PRODUCT_IDS
   .map((id) => products.find((product) => product.id === id))
-  .filter(Boolean);
+  .filter((product) => product && !LATEST_PRODUCTS.some((latest) => latest.id === product.id));
 const FEATURED_EXTRAS = products
   .slice()
   .reverse()
-  .filter((p) => !PRIORITY_PRODUCT_IDS.includes(p.id))
-  .slice(0, Math.max(0, 10 - PRIORITY_PRODUCTS.length));
-const FEATURED = [...PRIORITY_PRODUCTS, ...FEATURED_EXTRAS];
+  .filter((p) => !LATEST_PRODUCTS.some((latest) => latest.id === p.id)
+    && !PRIORITY_PRODUCT_IDS.includes(p.id))
+  .slice(0, Math.max(0, 10 - LATEST_PRODUCTS.length - PRIORITY_PRODUCTS.length));
+const FEATURED = [...LATEST_PRODUCTS, ...PRIORITY_PRODUCTS, ...FEATURED_EXTRAS].slice(0, 10);
 
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
 const HERO = [
-  {
-    image: '/banners/halloween-costumes-banner.jpg',
-    kicker: 'Halloween wholesale edit · Factory direct',
-    title: null,
-    copy: null,
-    cta: 'Shop now',
-    href: '/shop/character',
-  },
-  {
-    image: '/banners/superhero-ensemble-banner.jpg',
-    kicker: 'Hero costume collection · Factory direct',
-    title: null,
-    copy: null,
-    cta: 'Shop now',
-    href: '/shop/character',
-  },
-  {
-    image: '/banners/halloween-collection-banner.jpg',
-    kicker: 'Seasonal costume collection · Factory direct',
-    title: null,
-    copy: null,
-    cta: 'Shop now',
-    href: '/shop/character',
-  },
+  { image: '/banners/banner-career.jpg', href: '/shop/character' },
+  { image: '/banners/banner-christmas.jpg', href: '/shop/character' },
+  { image: '/banners/banner-princess.jpg', href: '/shop/character' },
 ];
 
 const OEM = [
@@ -113,6 +94,14 @@ const REVIEWS = [
   },
 ];
 
+const CUSTOM_CASE_IMAGES = [
+  '/custom/custom-case-01.webp',
+  '/custom/custom-case-02.webp',
+  '/custom/custom-case-03.webp',
+  '/custom/custom-case-04.webp',
+  ...Array.from({ length: 13 }, (_, index) => `/custom/client-case-web/client-case-${String(index + 1).padStart(2, '0')}.jpg`),
+];
+
 export default function Home() {
   usePageMeta();
   const [slide, setSlide] = useState(0);
@@ -136,23 +125,9 @@ export default function Home() {
 
   return (
     <>
-      <section className="hero hero--carousel" aria-roledescription="carousel" aria-label="Halloween campaign banners">
-        <div className="hero__moon" aria-hidden="true" />
-        <div className="hero__stars" aria-hidden="true">✦　·　✧　·　✦</div>
-        <img className="hero__banner-image" key={current.image} src={current.image} alt="" aria-hidden="true" />
-        <div className="shell hero__inner">
-          <div className="hero__grid">
-            <div className="hero__copy" aria-live="polite">
-              <div className="hero__actions">
-                <Link className="btn btn--primary" to={current.href}>{current.cta}</Link>
-              </div>
-
-            </div>
-            <div className="hero__stage hero__stage--banner">
-
-            </div>
-          </div>
-        </div>
+      <section className="hero hero--carousel hero--wide-banner" aria-roledescription="carousel" aria-label="Costume collection banners">
+        <img className="hero__banner-image" key={current.image} src={current.image} alt="Costume collection banner" />
+        <Link className="hero__banner-link" to={current.href} aria-label="Shop this collection" />
       </section>
 
       <section className="section section--raised">
@@ -204,7 +179,7 @@ export default function Home() {
             <div className="sec-head__body">
               <p className="eyebrow">Selected references</p>
               <h2>Recent additions to the catalogue.</h2>
-              <p>Ten priority character references, led by the superhero range.</p>
+              <p>Four latest additions lead the section, followed by priority character references.</p>
             </div>
           </div>
 
@@ -239,16 +214,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bleed bleed--ink">
+      <section className="bleed bleed--ink combined-custom-section">
         <div className="shell">
           <div className="sec-head sec-head--ink">
             <span className="sec-head__n">03</span>
             <div className="sec-head__body">
               <p className="eyebrow">Custom / OEM</p>
               <h2>Your programme, whoever&apos;s label is on it.</h2>
+              <p>From artwork and sampling to finished costume programmes, packaging and buyer-ready production.</p>
             </div>
           </div>
-
           <div className="features">
             {OEM.map((f, i) => (
               <div className="feature" key={f.t}>
@@ -258,17 +233,18 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="custom-cases__grid custom-cases__grid--ink" aria-label="Custom and OEM case references">
-            {['/custom/custom-case-01.webp', '/custom/custom-case-02.webp', '/custom/custom-case-03.webp', '/custom/custom-case-04.webp'].map((image) => (
-              <figure key={image} className="custom-case">
-                <img src={image} alt="Custom and OEM case reference" loading="lazy" />
-              </figure>
-            ))}
+          <p className="custom-roll__label">Custom case references · artwork, sampling and finished applications</p>
+          <div className="custom-roll" aria-label="Scrolling custom case references">
+            <div className="custom-roll__track">
+              {[...CUSTOM_CASE_IMAGES, ...CUSTOM_CASE_IMAGES].map((image, index) => (
+                <figure className="custom-roll__item" key={`${image}-${index}`}>
+                  <img src={image} alt={`Custom case reference ${(index % CUSTOM_CASE_IMAGES.length) + 1}`} loading="lazy" />
+                </figure>
+              ))}
+            </div>
           </div>
           <div className="mt-3">
-            <Link className="btn btn--light" to="/custom">
-              How custom orders work
-            </Link>
+            <Link className="btn btn--light" to="/custom">How custom orders work</Link>
           </div>
         </div>
       </section>

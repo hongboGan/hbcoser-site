@@ -370,6 +370,10 @@ p { margin: 0 0 1em; }
 
 .hero { position: relative; background: var(--paper); overflow: hidden; }
 .hero__inner { position: static; padding-block: clamp(18px, 3vw, 34px) clamp(24px, 4vw, 44px); }
+.hero--wide-banner { aspect-ratio: 1920 / 650; min-height: 0; }
+.hero--wide-banner .hero__banner-image { object-fit: contain; object-position: center; background: var(--paper); }
+.hero__banner-link { position: absolute; inset: 0; z-index: 3; display: block; }
+.hero--wide-banner .hero__banner-image { position: absolute; inset: 0; }
 
 .hero__grid {
   display: grid;
@@ -688,6 +692,14 @@ p { margin: 0 0 1em; }
 .custom-cases__grid--ink { margin-top: 38px; }
 .custom-cases__grid--ink .custom-case { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.5); box-shadow: 5px 5px 0 var(--cyan); }
 .custom-cases__grid--ink .custom-case img { aspect-ratio: 1 / 1; }
+.category-subcategories { margin-top: 24px; }
+.custom-roll__label { margin: 34px 0 14px; color: rgba(255,255,255,0.72); font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.custom-roll { overflow: hidden; border-block: 2px solid rgba(255,255,255,0.28); }
+.custom-roll__track { display: flex; width: max-content; gap: 14px; padding: 14px 0; animation: customMarquee 82s linear infinite; }
+.custom-roll:hover .custom-roll__track { animation-play-state: paused; }
+.custom-roll__item { flex: 0 0 220px; aspect-ratio: 1 / 1; margin: 0; overflow: hidden; border: 2px solid rgba(255,255,255,0.66); background: #fff; }
+.custom-roll__item img { display: block; width: 100%; height: 100%; object-fit: cover; }
+@keyframes customMarquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 7px)); } }
 
 .factory-gallery__rail { margin-top: 38px; }
 .factory-gallery__track { animation-duration: 32s; }
@@ -1074,7 +1086,7 @@ p { margin: 0 0 1em; }
 /* Impact on a white site comes from alternating whole-bleed blocks. The page rhythm is
    white → tinted → white → ink → cyan, so the reader hits a hard cut three times. */
 .bleed { position: relative; overflow: hidden; padding-block: clamp(56px, 7vw, 100px); }
-.bleed--ink { background: var(--ink); color: rgba(255, 255, 255, 0.78); }
+.bleed--ink { background: #101f3d; color: rgba(255, 255, 255, 0.84); }
 .bleed--cyan { background: var(--cyan); color: rgba(255, 255, 255, 0.88); }
 .bleed--ink h2, .bleed--cyan h2 { color: #fff; }
 .bleed--ink h3, .bleed--cyan h3 { color: #fff; }
@@ -1085,21 +1097,8 @@ p { margin: 0 0 1em; }
 .bleed--ink .feature__n { color: var(--cyan-light); }
 .bleed--cyan .feature { border-top-color: rgba(255, 255, 255, 0.34); }
 .bleed--cyan .feature__n { color: #fff; }
-/* One graphic element per dark block, same idea as the hero disc. */
-/* Sized and offset so it reads as the arc of a much larger circle running off the edge —
-   a deliberate poster device. At a smaller size the clipped arc looked like a mistake. */
-.bleed--ink::after {
-  content: '';
-  position: absolute;
-  right: -14%;
-  bottom: -44%;
-  width: 64%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: 2px solid var(--cyan-light);
-  opacity: 0.3;
-  pointer-events: none;
-}
+/* Keep the Custom/OEM block clear so decorative geometry never covers copy or the image rail. */
+.bleed--ink::after { display: none; }
 
 /* ---------- cta band (cyan block, used at the foot of most pages) ---------- */
 
@@ -1577,12 +1576,12 @@ body { background: var(--paper); }
 .chip:hover { color: var(--ink); border-color: var(--cyan); background: var(--cyan-tint); }
 .chip[aria-pressed='true'] { background: var(--cyan); border-color: var(--ink); color: #fff; }
 
-.bleed--ink { background: var(--ink); }
-.bleed--cyan, .post-cta { background: var(--cyan); }
-.bleed--ink .feature { border-top-color: rgba(255, 255, 255, 0.3); }
-.bleed--ink .feature:hover { border-top-color: var(--cyan-light); }
-.bleed--ink .feature__n { color: var(--cyan-light); }
-.bleed--ink::after { border-color: var(--cyan-light); }
+  .bleed--ink { background: #101f3d; }
+  .bleed--cyan, .post-cta { background: var(--cyan); }
+  .bleed--ink .feature { border-top-color: rgba(255, 255, 255, 0.3); }
+  .bleed--ink .feature:hover { border-top-color: var(--cyan-light); }
+  .bleed--ink .feature__n { color: var(--cyan-light); }
+  .bleed--ink::after { display: none; }
 .band { background: var(--cyan); border: 3px solid var(--ink); border-radius: 12px; box-shadow: 8px 8px 0 var(--ink); }
 .band .btn--primary, .post-cta .btn--primary { background: var(--ink); color: #fff; }
 .band .btn--ghost, .post-cta .btn--ghost { border-color: #fff; color: #fff; background: transparent; box-shadow: 4px 4px 0 rgba(10, 23, 48, 0.72); }
@@ -1631,13 +1630,16 @@ body { background: var(--paper); }
   .season-strip__inner > span:not(.season-strip__mark) { display: none; }
   .season-strip__inner a { margin-left: auto; }
   .hero { min-height: auto; }
+  .hero--wide-banner { aspect-ratio: 1920 / 650; }
+  .hero--wide-banner .hero__banner-image { object-fit: contain; }
+  .custom-roll__track { animation-duration: 58s; }
+  .custom-roll__item { flex-basis: 150px; }
   .hero--carousel .hero__grid { min-height: 350px; }
   .hero__stage--banner { min-height: 170px; }
   .hero__copy { min-height: 170px; }
   .hero__title { padding: 16px 18px 0; font-size: 1.05rem; line-height: 1.25; }
-  .hero__moon { width: 38vw; right: -8%; top: 7%; }
-  .hero__copy .btn--primary { left: 4%; bottom: 7%; min-width: 112px; min-height: 44px; padding: 11px 18px; font-size: 0.82rem; }
-  .hero__stars { right: 18%; top: 5%; font-size: 0.82rem; }
+  .hero__moon { display: none; }
+  .hero__stars { display: none; }
   .hero__tile { box-shadow: 6px 6px 0 rgba(255, 117, 31, 0.72); }
   .hero__proof { gap: 8px 14px; font-size: 0.62rem; }
   .hero__proof span { flex: 1 1 42%; }

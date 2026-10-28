@@ -65,9 +65,18 @@ export const getCategory = (slug) => {
   return CATEGORIES.find((c) => c.slug === slug) || null;
 };
 
-export const byCategory = (slug) => slug === 'character'
-  ? products.filter((p) => p.category === 'kids' || p.category === 'costumes')
-  : products.filter((p) => p.category === slug);
+export const byCategory = (slug, subcategory = null) => {
+  const items = slug === 'character'
+    ? products.filter((p) => p.category === 'kids' || p.category === 'costumes')
+    : products.filter((p) => p.category === slug);
+  return subcategory ? items.filter((p) => p.subcategory === subcategory) : items;
+};
+
+export const CHARACTER_SUBCATEGORIES = [
+  { slug: 'hero', name: 'Hero' },
+  { slug: 'dress', name: 'Dress' },
+  { slug: 'occupation', name: 'Occupation' },
+];
 
 export const countIn = (slug) => byCategory(slug).length;
 
