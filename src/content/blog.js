@@ -5,6 +5,102 @@
 // is presented as a fact about our own factory that is not true.
 export const POSTS = [
   {
+    slug: 'how-to-choose-kids-cosplay-sizes-for-wholesale',
+    title: 'How to Choose Kids Cosplay Sizes for Wholesale',
+    excerpt: 'A practical buying guide for choosing a children\'s cosplay size range, checking measurements, approving samples and reducing avoidable returns in wholesale orders.',
+    date: '2026-11-03',
+    tags: ['Wholesale Buying', 'Sizing', 'OEM'],
+    cover: '/products/kids-builder-costume.webp',
+    sources: [],
+    body: `Choosing children\'s cosplay sizes for wholesale is not just a matter of matching an age label to a product photo. A workable size range has to fit the children in your market, make sense on your sales channel and remain clear enough for a parent, retailer or event operator to choose confidently.
+
+The safest approach is to treat sizing as part of the buying specification from the beginning — alongside fabric, colour, packaging, quantity and delivery timing.
+
+## Start with the measurements your market actually uses
+
+Age labels are useful for navigation, but they are not a reliable measurement system. Children of the same age can have very different heights, body proportions and comfort requirements. For a wholesale range, start with the measurements your buyers and end customers can understand:
+
+- height
+- chest or bust
+- waist, where the garment is fitted
+- hip, where the design requires it
+- shoulder-to-crotch or garment length for one-piece styles
+- sleeve or trouser length when movement depends on it
+
+If the product is loose, adjustable or designed to be worn over everyday clothing, the finished garment measurements and the recommended body measurements should be kept separate. Mixing the two creates confusion at the point of sale.
+
+## Build the range around a clear size ladder
+
+A practical children\'s cosplay range usually works better when the size steps are easy to read than when it contains many overlapping labels. Decide which size ladder fits your sales channel, then keep the same logic across the collection.
+
+For example, a buyer may choose a range based on height bands rather than labels such as small, medium and large. Another buyer may need age-facing labels for a retail listing. Either can work if the underlying measurements are documented and the same measurement method is used for every style.
+
+Avoid creating a separate, unexplained size system for every costume. When a retailer has to interpret each product from scratch, customer questions and returns increase.
+
+## Measure the sample before approving production
+
+Before bulk production, measure the approved sample with a written checklist. Record where each measurement starts and ends, whether the garment is laid flat, and whether stretch fabric is measured relaxed or extended.
+
+Pay particular attention to:
+
+1. neck and arm openings — children need movement and easy dressing;
+2. closures — zips, hook-and-loop fasteners and elastic should not make the garment difficult to put on;
+3. one-piece length — a costume that is too long can affect walking and play;
+4. headwear and masks — check visibility, ventilation and adjustability;
+5. room for layers — seasonal costumes may be worn over a shirt, tights or a base layer.
+
+A sample approval should confirm both the measurements and the intended use. A stage costume, a retail dress-up set and an event mascot do not have the same fit priorities.
+
+## Separate fit decisions from design decisions
+
+A product can look correct in a photograph and still need a fit adjustment. Keep a short record of the decisions that affect production:
+
+- body measurements for each size;
+- finished garment measurements;
+- tolerance allowed in production;
+- fabric stretch and lining;
+- closure position;
+- accessories included in the set;
+- packaging label and size wording.
+
+This record becomes especially important when a successful sample is repeated in a new colourway or seasonal collection.
+
+## Plan your wholesale range before placing the order
+
+The best size mix depends on where the products will be sold. A retailer may need a balanced size run for a catalogue. An event company may need more of a few practical sizes for a specific age group. A distributor may want a broader range but smaller quantities per size for the first order.
+
+Before confirming quantities, ask:
+
+- Which customer age or height bands are the priority?
+- Will the costume be worn over normal clothing?
+- Is the product for retail, performance, promotion or an event?
+- Which sizes need to be available for replenishment?
+- Does the packaging show measurements clearly?
+- Can the size chart be reused across the range?
+
+## OEM buyers should provide their own size chart
+
+For a custom programme, send the intended size chart with the artwork or tech pack. Include the measurement names, units and the target market. If your market uses centimetres, keep centimetres in the working specification even if the customer-facing copy later includes another unit.
+
+A supplier can help review the chart, but the buyer should approve the final fit standard. That keeps the responsibility clear and makes future repeat orders easier.
+
+## A simple pre-production checklist
+
+Before releasing a children\'s cosplay order to bulk production, confirm:
+
+- the size range matches the target market;
+- body and finished garment measurements are not mixed;
+- one sample from the intended size range has been measured;
+- movement, closures and accessories have been checked;
+- the packaging and online listing use the same size wording;
+- the quantity mix reflects the sales channel;
+- any tolerance or fit changes are written into the approval record.
+
+Clear sizing does not remove every return, but it reduces avoidable uncertainty. For wholesale buyers, that means fewer customer questions, more consistent replenishment and a product range that is easier for retailers and families to understand.
+
+If you already have a size chart, reference image or tech pack, send it with your target quantities. The HB Coser team can review the intended range and prepare a quotation for stock or OEM development. [Request a quote](/inquiry) or explore the [Character Cosplay catalogue](/shop/character).`,
+  },
+  {
     slug: 'the-halloween-spirit-is-built-not-licensed',
     title: 'The Halloween spirit is built, not licensed',
     excerpt: 'A generic seasonal range does not read as Halloween because of a character it cannot use. It reads as the season because a small set of constraints is held across every item - and that belongs in the brief, not the artwork.',
