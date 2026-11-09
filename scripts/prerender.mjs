@@ -12,6 +12,7 @@ const DIST = path.resolve('dist');
 const SSR_ENTRY = path.resolve('dist-ssr/entry-server.js');
 
 const HEAD_BLOCK = /<!--head:start-->[\s\S]*?<!--head:end-->/;
+const SCHEMA_BLOCK = /<!--schema:start-->[\s\S]*?<!--schema:end-->/;
 const ROOT_PLACEHOLDER = '<div id="root"></div>';
 
 const escapeHtml = (value) =>
@@ -40,13 +41,18 @@ function headBlock(head) {
   return headLines(head).join('\n    ');
 }
 
+function schemaBlock(route, schemas, breadcrumb) {
+  const values = [...schemas, breadcrumb].filter(Boolean);
+  return values.map((value) => `<script type="application/ld+json">${JSON.stringify(value)}</script>`).join('\n    ');
+}
+
 // `detail/x` -> dist/detail/x.html. Flat files, because Vercel resolves /detail/x to
 // x.html without issuing a trailing-slash redirect that would break the canonical.
 function outputPath(route) {
   return route === '/' ? path.join(DIST, 'index.html') : path.join(DIST, `${route}.html`);
 }
 
-const { ROUTES, render, headFor, metaForPath } = await import(pathToFileURL(SSR_ENTRY).href);
+const { ROUTES, render, headFor, metaForPath, structuredDataForPath, breadcrumbData } = await import(pathToFileURL(SSR_ENTRY).href);
 
 if (!ROUTES || !ROUTES.length) {
   console.error('prerender: entry-server exported no routes — refusing to write anything');
@@ -70,6 +76,7 @@ function writeNotFound() {
   const head = headFor(metaForPath('/__not-found__'));
   let html = template.replace(ROOT_PLACEHOLDER, `<div id="root">${appHtml}</div>`);
   html = html.replace(HEAD_BLOCK, headBlock(head));
+  html = html.replace(SCHEMA_BLOCK, '');
   fs.writeFileSync(path.join(DIST, '404.html'), html);
 }
 
@@ -80,6 +87,7 @@ for (const route of ROUTES) {
 
     let html = template.replace(ROOT_PLACEHOLDER, `<div id="root">${appHtml}</div>`);
     html = html.replace(HEAD_BLOCK, headBlock(head));
+    html = html.replace(SCHEMA_BLOCK, schemaBlock(route, structuredDataForPath(route), breadcrumbData(route)));
 
     const file = outputPath(route);
     fs.mkdirSync(path.dirname(file), { recursive: true });

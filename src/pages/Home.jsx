@@ -34,9 +34,9 @@ const FEATURED = [...LATEST_PRODUCTS, ...PRIORITY_PRODUCTS, ...FEATURED_EXTRAS].
 // Above the fold, so these are preloaded rather than lazy — a lazy hero has produced a
 // blank first paint on this stack before, and scrolling hides the defect.
 const HERO = [
-  { image: '/banners/banner-career.jpg', href: '/shop/character' },
-  { image: '/banners/banner-christmas.jpg', href: '/shop/character' },
-  { image: '/banners/banner-princess.jpg', href: '/shop/character' },
+  { image: '/banners/banner-career.webp', href: '/shop/character', alt: 'Character cosplay collection banner' },
+  { image: '/banners/banner-christmas.webp', href: '/shop/character', alt: 'Seasonal Christmas costume collection banner' },
+  { image: '/banners/banner-princess.webp', href: '/shop/character', alt: 'Princess dress and character costume collection banner' },
 ];
 
 const OEM = [
@@ -69,28 +69,28 @@ const FACTORY_IMAGES = [
 const REVIEWS = [
   {
     image: '/reviews/review-01.webp',
-    market: 'Buyer showcase · Europe',
-    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+    market: 'Programme reference · Europe',
+    quote: 'Visual reference from our costume programme catalogue — not a customer testimonial.',
   },
   {
     image: '/reviews/review-02.webp',
-    market: 'Buyer showcase · North America',
-    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+    market: 'Programme reference · North America',
+    quote: 'Visual reference from our costume programme catalogue — not a customer testimonial.',
   },
   {
     image: '/reviews/review-03.webp',
-    market: 'Buyer showcase · Australia',
-    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+    market: 'Programme reference · Australia',
+    quote: 'Visual reference from our costume programme catalogue — not a customer testimonial.',
   },
   {
     image: '/reviews/review-04.webp',
-    market: 'Buyer showcase · Middle East',
-    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+    market: 'Programme reference · Middle East',
+    quote: 'Visual reference from our costume programme catalogue — not a customer testimonial.',
   },
   {
     image: '/reviews/review-05.webp',
-    market: 'Buyer showcase · Latin America',
-    quote: 'Sample review copy — replace with a verified buyer quote before publishing.',
+    market: 'Programme reference · Latin America',
+    quote: 'Visual reference from our costume programme catalogue — not a customer testimonial.',
   },
 ];
 
@@ -99,7 +99,7 @@ const CUSTOM_CASE_IMAGES = [
   '/custom/custom-case-02.webp',
   '/custom/custom-case-03.webp',
   '/custom/custom-case-04.webp',
-  ...Array.from({ length: 13 }, (_, index) => `/custom/client-case-web/client-case-${String(index + 1).padStart(2, '0')}.jpg`),
+  ...Array.from({ length: 13 }, (_, index) => `/custom/client-case-web/client-case-${String(index + 1).padStart(2, '0')}.webp`),
 ];
 
 export default function Home() {
@@ -124,10 +124,25 @@ export default function Home() {
   }
 
   return (
-    <>
+    <main className="home-bg-editorial">
       <section className="hero hero--carousel hero--wide-banner" aria-roledescription="carousel" aria-label="Costume collection banners">
-        <img className="hero__banner-image" key={current.image} src={current.image} alt="Costume collection banner" />
+          <picture className="hero__banner-picture">
+            <source media="(max-width: 640px)" srcSet={current.image.replace(/\.webp$/, '-mobile.webp')} />
+            <img
+              className="hero__banner-image"
+              key={current.image}
+              src={current.image}
+              alt={current.alt}
+              loading={slide === 0 ? 'eager' : 'lazy'}
+              fetchpriority={slide === 0 ? 'high' : 'low'}
+              decoding="async"
+            />
+          </picture>
         <Link className="hero__banner-link" to={current.href} aria-label="Shop this collection" />
+        <div className="hero__actions hero__actions--overlay">
+          <Link className="btn btn--primary" to="/shop">Shop all products</Link>
+          <Link className="btn btn--ghost" to="/inquiry">Request a quote</Link>
+        </div>
       </section>
 
       <section className="section section--raised">
@@ -158,7 +173,7 @@ export default function Home() {
                   </span>
                   {first && (
                     <span className="tile__bloom">
-                      <img src={first.image} alt="" aria-hidden="true" loading="lazy" decoding="async" />
+                      <img src={first.image} alt={`${c.name} category preview`} loading="lazy" decoding="async" />
                     </span>
                   )}
                   <span className="tile__body">
@@ -190,8 +205,9 @@ export default function Home() {
           </div>
           <div className="mt-3">
             <Link className="btn btn--ghost" to="/shop">
-              See all {products.length} products
+              Browse all {products.length} products
             </Link>
+            <Link className="btn btn--primary" to="/inquiry">Request a wholesale quote</Link>
           </div>
 
           <div className="factory-showcase" aria-label="Factory showcase">
@@ -199,13 +215,19 @@ export default function Home() {
               <p className="eyebrow">Factory floor</p>
               <h3>See how the range comes together.</h3>
               <p>Printing, finishing, packing and a live costume reference wall — built for buyer visits and repeat programmes.</p>
-              <Link className="btn btn--ghost" to="/factory">Visit the factory page</Link>
+              <div className="home-cta-row">
+                <Link className="btn btn--ghost" to="/factory">Visit the factory page</Link>
+                <Link className="btn btn--primary" to="/inquiry">Plan a production run</Link>
+              </div>
             </div>
             <div className="factory-showcase__rail" aria-label="Scrolling factory image display">
               <div className="factory-showcase__track">
                 {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                   <figure className="factory-showcase__frame" key={`${image}-${index}`}>
-                    <img src={image} alt={`Factory production showcase ${(index % FACTORY_IMAGES.length) + 1}`} loading="lazy" />
+                    <picture>
+                      <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
+                      <img src={image} alt={`Factory production showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} loading="lazy" decoding="async" />
+                    </picture>
                   </figure>
                 ))}
               </div>
@@ -238,13 +260,19 @@ export default function Home() {
             <div className="custom-roll__track">
               {[...CUSTOM_CASE_IMAGES, ...CUSTOM_CASE_IMAGES].map((image, index) => (
                 <figure className="custom-roll__item" key={`${image}-${index}`}>
-                  <img src={image} alt={`Custom case reference ${(index % CUSTOM_CASE_IMAGES.length) + 1}`} loading="lazy" />
+                  <picture>
+                    <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
+                    <img src={image} alt={`Custom OEM case reference ${(index % CUSTOM_CASE_IMAGES.length) + 1}: costume artwork and finished application`} loading="lazy" decoding="async" />
+                  </picture>
                 </figure>
               ))}
             </div>
           </div>
           <div className="mt-3">
-            <Link className="btn btn--light" to="/custom">How custom orders work</Link>
+            <div className="home-cta-row">
+              <Link className="btn btn--light" to="/custom">How custom orders work</Link>
+              <Link className="btn btn--light" to="/inquiry">Start an OEM enquiry</Link>
+            </div>
           </div>
         </div>
       </section>
@@ -254,15 +282,15 @@ export default function Home() {
           <div className="sec-head">
             <span className="sec-head__n">04</span>
             <div className="sec-head__body">
-              <p className="eyebrow">Customer proof</p>
-              <h2>Made for buyers who need the range to work.</h2>
-              <p>Five visual references for the kinds of programmes our wholesale partners build.</p>
+              <p className="eyebrow">Programme references</p>
+              <h2>Visual directions for buyer programmes.</h2>
+              <p>Five visual references showing the kinds of costume programmes we can develop and supply.</p>
             </div>
           </div>
           <div className="reviews-grid">
             {REVIEWS.map((review, index) => (
               <article className="review-card" key={review.image}>
-                <div className="review-card__image"><img src={review.image} alt="Customer costume showcase" loading="lazy" /></div>
+                <div className="review-card__image"><img src={review.image} alt={`${review.market} costume showcase`} loading="lazy" /></div>
                 <div className="review-card__body">
                   <span className="review-card__index">0{index + 1}</span>
                   <p className="review-card__market">{review.market}</p>
@@ -275,6 +303,6 @@ export default function Home() {
       </section>
 
 
-    </>
+    </main>
   );
 }

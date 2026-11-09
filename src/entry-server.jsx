@@ -6,6 +6,7 @@ import App from './App.jsx';
 import { CATEGORIES, products } from './data/products.js';
 import { POSTS } from './content/blog.js';
 import { headFor, metaForPath } from './lib/route-meta.js';
+import { breadcrumbData, structuredDataForPath } from './lib/structured-data.js';
 
 // Every public route. 404 is deliberately absent: it must stay a rewrite, not a file.
 export const ROUTES = [
@@ -29,4 +30,4 @@ export function render(pathname) {
   );
 }
 
-export { headFor, metaForPath };
+export { headFor, metaForPath, breadcrumbData, structuredDataForPath };

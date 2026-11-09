@@ -20,6 +20,12 @@ const STATIC = {
     description:
       "The full HB Coser catalogue — kids' cosplay, pet costumes and party & event supply, all available for wholesale and OEM orders.",
   },
+  '/products': {
+    title: 'Catalogue',
+    description:
+      "The full HB Coser catalogue — kids' cosplay, pet costumes and party & event supply, all available for wholesale and OEM orders.",
+    path: '/shop',
+  },
   '/custom': {
     title: 'Custom / OEM manufacturing',
     description:
@@ -96,6 +102,7 @@ export function metaForPath(pathname) {
 export function headFor(meta) {
   const title = meta.title ? `${meta.title} | ${SITE}` : SITE;
   const canonical = meta.path == null ? null : `${ORIGIN}${meta.path}`;
+  const ogImage = meta.image || '/banners/banner-career.webp';
   const description = meta.description || '';
   return {
     title,
@@ -104,6 +111,6 @@ export function headFor(meta) {
     ogTitle: title,
     ogDescription: description,
     ogUrl: canonical,
-    ogImage: meta.image ? `${ORIGIN}${meta.image}` : null,
+    ogImage: `${ORIGIN}${ogImage}`,
   };
 }

@@ -47,6 +47,9 @@ export function usePageMeta(meta) {
       document.head.querySelector('link[rel="canonical"]')?.remove();
       document.head.querySelector('meta[property="og:url"]')?.remove();
     }
-    if (ogImage) upsertMeta('property', 'og:image', ogImage);
+    if (ogImage) {
+      upsertMeta('property', 'og:image', ogImage);
+      upsertMeta('property', 'og:image:alt', ogTitle);
+    }
   }, [title, description, canonical, ogTitle, ogDescription, ogUrl, ogImage]);
 }
