@@ -29,7 +29,7 @@ export default function Blog() {
           <div className="shell">
             <Link className="post-lead" to={`/blog/${lead.slug}`}>
               <div className="post-lead__media">
-                <img src={lead.cover} alt="" width="900" height="900" decoding="async" />
+                <img src={lead.cover} alt={`${lead.title} article cover`} width="900" height="900" loading="eager" decoding="async" />
               </div>
               <div className="post-lead__body">
                 <p className="post-meta">
@@ -55,7 +55,7 @@ export default function Blog() {
             {rest.map((post) => (
               <Link className="post-card" to={`/blog/${post.slug}`} key={post.slug}>
                 <div className="post-card__media">
-                  <img src={post.cover} alt="" width="900" height="900" loading="lazy" decoding="async" />
+                  <img src={post.cover} alt={`${post.title} article cover`} width="900" height="900" loading="lazy" decoding="async" />
                 </div>
                 <p className="post-meta">
                   <time dateTime={post.date}>{formatDate(post.date)}</time>

@@ -9,7 +9,7 @@ const ORIGIN = 'https://www.hbcoser.com';
 const DATA = path.resolve('src/data/products.json');
 const OUT = path.resolve('public/sitemap.xml');
 
-const { products } = JSON.parse(fs.readFileSync(DATA, 'utf8'));
+const { products } = JSON.parse(fs.readFileSync(DATA, 'utf8').replace(/^\uFEFF/, ''));
 
 const CATEGORIES = ['character', 'mascot', 'pets', 'party'];
 const today = new Date().toISOString().slice(0, 10);

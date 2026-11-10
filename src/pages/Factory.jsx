@@ -147,7 +147,10 @@ export default function Factory() {
             <div className="factory-gallery__track">
               {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                 <figure key={`${image}-${index}`} className="factory-gallery__item">
-                  <img src={image} alt={`Factory showcase ${(index % FACTORY_IMAGES.length) + 1}`} loading="lazy" />
+                  <picture>
+                    <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
+                    <img src={image} alt={`Factory showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} loading="lazy" decoding="async" />
+                  </picture>
                 </figure>
               ))}
             </div>

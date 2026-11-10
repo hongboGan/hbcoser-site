@@ -36,7 +36,7 @@ export default function BlogPost() {
         <p className="lede mt-1">{post.excerpt}</p>
 
         <div className="post-cover">
-          <img src={post.cover} alt="" width="900" height="900" decoding="async" />
+          <img src={post.cover} alt={`${post.title} article cover`} width="900" height="900" decoding="async" />
         </div>
 
         <Markdown text={post.body} />

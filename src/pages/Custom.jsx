@@ -95,7 +95,10 @@ export default function Custom() {
           <div className="custom-cases__grid">
             {CASE_STUDIES.map((item) => (
               <figure key={item.image} className="custom-case">
-                <img src={item.image} alt={item.title} loading="lazy" />
+                <picture>
+                  <source media="(max-width: 640px)" srcSet={item.image.replace(/\.webp$/, '-mobile.webp')} />
+                  <img src={item.image} alt={`${item.title} custom costume case study`} loading="lazy" decoding="async" />
+                </picture>
                 <figcaption>{item.title}</figcaption>
               </figure>
             ))}
