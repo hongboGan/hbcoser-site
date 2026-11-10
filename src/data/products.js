@@ -2,10 +2,9 @@ import raw from './products.json';
 
 export const CONTACT = {
   email: 'sales01@hoburn.group',
-  // The public inbound mailbox and the FormSubmit destination are kept apart on purpose:
-  // FormSubmit only delivers to an address that has been activated, so swapping the address
-  // customers see must not silently redirect the form to an unverified one.
-  formEmail: 'stellagaoxin@gmail.com',
+  // FormSubmit sends website inquiries to this mailbox. After deployment, complete
+  // FormSubmit's one-time activation email for this address before testing delivery.
+  formEmail: 'sales01@hoburn.group',
   facebookName: 'Hbmc Costume',
   facebookUrl: 'https://www.facebook.com/profile.php?id=61595292675761',
   whatsappDisplay: '+86 15926072590',
