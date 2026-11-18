@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES, CONTACT, waLink } from '../data/products.js';
 import { FacebookIcon, MailIcon, MenuIcon, SearchIcon, WhatsAppIcon } from './icons.jsx';
@@ -28,7 +28,6 @@ function Wordmark() {
 
 export default function Layout() {
   const [drawer, setDrawer] = useState(false);
-  const fabRef = useRef(null);
   const { pathname, search } = useLocation();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState(() => new URLSearchParams(search).get('search') || '');
@@ -46,44 +45,6 @@ export default function Layout() {
     if (query) params.set('search', query);
     navigate(`/shop${query ? `?${params}` : ''}`);
   }
-
-  // The contact bar is fixed to the bottom corner. On a narrow screen the product title sits
-  // low, because the hero image comes first, so the bar can land on top of it and the page
-  // reads as broken. Shrink it away only while it actually overlaps the heading — on the
-  // pages where there is no collision this changes nothing. Measured on the bar, not on one
-  // button, so the pair always hides together and never leaves a stranded half.
-  useEffect(() => {
-    const bar = fabRef.current;
-    if (!bar) return undefined;
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const heading = document.querySelector('main h1');
-      if (!heading) {
-        bar.classList.remove('fab-bar--hidden');
-        return;
-      }
-      const a = bar.getBoundingClientRect();
-      const b = heading.getBoundingClientRect();
-      const overlaps =
-        b.bottom > a.top && b.top < a.bottom && b.right > a.left && b.left < a.right;
-      bar.classList.toggle('fab-bar--hidden', overlaps);
-    };
-
-    const schedule = () => {
-      if (!frame) frame = window.requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener('scroll', schedule, { passive: true });
-    window.addEventListener('resize', schedule);
-    return () => {
-      window.removeEventListener('scroll', schedule);
-      window.removeEventListener('resize', schedule);
-      if (frame) window.cancelAnimationFrame(frame);
-    };
-  }, [pathname]);
 
   useEffect(() => {
     function onKey(e) {
@@ -159,6 +120,10 @@ export default function Layout() {
             WhatsApp us
           </a>
         </div>
+        <nav className="mobile-contact" aria-label="Contact options">
+          <Link to="/inquiry">Request a quote</Link>
+          <a href={waLink(refForPath(pathname))}><WhatsAppIcon size={18} /> WhatsApp</a>
+        </nav>
       </header>
 
       {drawer && (
@@ -275,26 +240,7 @@ export default function Layout() {
         </div>
       </footer>
 
-      <div className="fab-bar" ref={fabRef}>
-        <a
-          className="fb"
-          href={CONTACT.facebookUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={`Facebook ${CONTACT.facebookName}`}
-        >
-          <FacebookIcon />
-          <span>Facebook</span>
-        </a>
-        <a
-          className="wa"
-          href={waLink(refForPath(pathname))}
-          aria-label={`WhatsApp ${CONTACT.whatsappDisplay}`}
-        >
-          <WhatsAppIcon />
-          <span>WhatsApp</span>
-        </a>
-      </div>
+
     </>
   );
 }

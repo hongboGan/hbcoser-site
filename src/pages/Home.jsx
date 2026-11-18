@@ -106,26 +106,40 @@ export default function Home() {
   usePageMeta();
   const [slide, setSlide] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
   const current = HERO[slide];
 
   useEffect(() => {
-    if (paused) return undefined;
-    const timer = window.setInterval(() => setSlide((value) => (value + 1) % HERO.length), 3000);
+    if (paused || hovered || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return undefined;
+    const timer = window.setInterval(() => setSlide((value) => (value + 1) % HERO.length), 6000);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, hovered]);
 
   useEffect(() => {
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)');
-    if (reduce?.matches) setPaused(true);
+    const stopForReducedMotion = () => { if (reduce?.matches) setPaused(true); };
+    stopForReducedMotion();
+    reduce?.addEventListener('change', stopForReducedMotion);
+    return () => reduce?.removeEventListener('change', stopForReducedMotion);
   }, []);
 
   function move(delta) {
+    setPaused(true);
     setSlide((value) => (value + delta + HERO.length) % HERO.length);
   }
 
   return (
-    <main className="home-bg-editorial">
-      <section className="hero hero--carousel hero--wide-banner" aria-roledescription="carousel" aria-label="Costume collection banners">
+    <div className="home-bg-editorial">
+      <section className="hero hero--carousel hero--wide-banner" aria-label="Wholesale and OEM costume supply">
+        <div
+          className="hero__media"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Costume collection banners"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocusCapture={(event) => { if (!event.target.closest('[data-rotation-toggle]')) setPaused(true); }}
+        >
           <picture className="hero__banner-picture">
             <source media="(max-width: 640px)" srcSet={current.image.replace(/\.webp$/, '-mobile.webp')} />
             <img
@@ -133,15 +147,33 @@ export default function Home() {
               key={current.image}
               src={current.image}
               alt={current.alt}
-              loading={slide === 0 ? 'eager' : 'lazy'}
+              width="1920"
+              height="650"
+              loading="eager"
               fetchpriority={slide === 0 ? 'high' : 'low'}
               decoding="async"
             />
           </picture>
-        <Link className="hero__banner-link" to={current.href} aria-label="Shop this collection" />
-        <div className="hero__actions hero__actions--overlay">
-          <Link className="btn btn--primary" to="/shop">Shop all products</Link>
-          <Link className="btn btn--ghost" to="/inquiry">Request a quote</Link>
+          <Link className="hero__banner-link" to={current.href} aria-label="Shop this collection" />
+          <div className="hero-carousel-controls" aria-label="Banner controls">
+            <button type="button" onClick={() => move(-1)} aria-label="Previous banner">←</button>
+            <span aria-live={paused ? 'polite' : 'off'} aria-atomic="true">{slide + 1} / {HERO.length}</span>
+            <button type="button" onClick={() => move(1)} aria-label="Next banner">→</button>
+            <button type="button" data-rotation-toggle onClick={() => setPaused((value) => !value)} aria-pressed={!paused} aria-label={paused ? 'Start banner rotation' : 'Pause banner rotation'}>
+              {paused ? 'Play' : 'Pause'}
+            </button>
+          </div>
+        </div>
+        <div className="shell hero-intro">
+          <div>
+            <p className="eyebrow">Wholesale &amp; OEM</p>
+            <h1>Costumes for your next programme.</h1>
+            <p className="hero-intro__text">Explore costumes, mascots, pet outfits and party supplies. Tell us your product, quantity and customisation needs.</p>
+          </div>
+          <div className="hero-intro__actions">
+            <Link className="btn hero-quote" to="/inquiry">Request a quote</Link>
+            <Link className="btn hero-catalogue" to="/shop">Shop all products</Link>
+          </div>
         </div>
       </section>
 
@@ -303,6 +335,6 @@ export default function Home() {
       </section>
 
 
-    </main>
+    </div>
   );
 }
