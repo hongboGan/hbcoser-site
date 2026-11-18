@@ -1569,8 +1569,8 @@ body { background: var(--paper); }
 .stage__card span { color: var(--ink-muted); }
 .stats { border-top-color: rgba(255, 255, 255, 0.24); }
 .stats div { border-right-color: rgba(255, 255, 255, 0.18); }
-.stats div strong { color: #fff; }
-.stats div span { color: var(--cyan-light); }
+.stats div strong { color: var(--ink); }
+.stats div span { color: var(--ink-muted); }
 
 .wallstrip { background: var(--cyan); border-block: 3px solid var(--ink); }
 .wallstrip__row { color: #fff; font-weight: 700; letter-spacing: 0.18em; }

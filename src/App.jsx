@@ -6,6 +6,7 @@ import Shop from './pages/Shop.jsx';
 import CategoryPage from './pages/CategoryPage.jsx';
 import ProductDetail from './pages/ProductDetail.jsx';
 import Custom from './pages/Custom.jsx';
+import Ecommerce from './pages/Ecommerce.jsx';
 import About from './pages/About.jsx';
 import Factory from './pages/Factory.jsx';
 import Blog from './pages/Blog.jsx';
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/shop/:category" element={<CategoryPage />} />
           <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/custom" element={<Custom />} />
+          <Route path="/ecommerce-sourcing" element={<Ecommerce />} />
           <Route path="/about" element={<About />} />
           <Route path="/factory" element={<Factory />} />
           <Route path="/blog" element={<Blog />} />

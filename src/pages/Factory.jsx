@@ -3,6 +3,8 @@ import { CONTACT } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import GalleryImage from '../components/GalleryImage.jsx';
 import { ADDED_FACTORY_IMAGES } from '../data/added-gallery-images.js';
+import TradeTerms from '../components/TradeTerms.jsx';
+import { COMPANY_NAME } from '../data/trade-terms.js';
 
 const FACTORY_IMAGES = [
   ...ADDED_FACTORY_IMAGES.map((item) => item.image),
@@ -44,9 +46,9 @@ const TIMELINE = [
   },
   {
     year: '2023',
-    title: '10-piece minimums, 3-day custom runs',
+    title: 'Small-batch custom production takes shape',
     body:
-      'Small-batch, fast-turn production was formalised: 10 pieces minimum and a three-day custom turnaround. A horror-themed series was designed, sampled and listed in seven days, and carried 30% of that month\u2019s sales.',
+      'Small-batch, fast-turn production was formalised. A horror-themed series was designed, sampled and listed in seven days, and carried 30% of that month\u2019s sales. This is a historical project, not the current MOQ or lead-time policy.',
   },
   {
     year: '2025',
@@ -67,7 +69,7 @@ const CAPABILITIES = [
     n: '02',
     title: 'Small runs are the normal case, not a favour',
     body:
-      'The floor is set up for 10-piece minimums and three-day custom turnaround. That is what lets a buyer test a design before committing to a season, and it is the capability the whole export business was built on.',
+      'Current MOQ is 2 per style, with mixed sizes and colours within one style. Light customisation starts from 7 days; custom sampling generally starts from 10 days and custom bulk production from 15 days. In-stock orders dispatch within 3 days.',
   },
   {
     n: '03',
@@ -109,7 +111,7 @@ export default function Factory() {
             Twelve years on one floor in Wuhan, and the year it nearly closed.
           </h1>
           <p className="lede mt-1">
-            HB Coser is the export business of Wuhan Hongbo Mingchuang E-commerce Co., Ltd.,
+            HB Coser is the export business of {COMPANY_NAME},
             registered in Wuhan, Hubei. We started in 2014 as a two-person sewing workshop and now
             run an 18-person team supplying children&apos;s costumes, pet costumes and party
             material to importers, retailers and event producers. Most of what leaves the floor is
@@ -129,10 +131,11 @@ export default function Factory() {
               <span>2025 export sales</span>
             </div>
             <div>
-              <strong>10</strong>
-              <span>Pieces, minimum order</span>
+              <strong>2</strong>
+              <span>Minimum order per style</span>
             </div>
           </div>
+          <TradeTerms />
         </div>
       </section>
 

@@ -3,12 +3,13 @@ import { CONTACT, waLink } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import GalleryImage from '../components/GalleryImage.jsx';
 import { ADDED_CUSTOM_IMAGES } from '../data/added-gallery-images.js';
+import TradeTerms from '../components/TradeTerms.jsx';
 
 const CHANGES = [
   {
     k: 'Colour',
     v:
-      'Anything in our catalogue can be run in your colourway. Send a Pantone reference or a physical swatch and we match against it rather than against a screen.',
+      'Mix available colours within one style. For a custom colourway, send a colour reference or physical swatch for specification and quotation confirmation.',
   },
   {
     k: 'Sizing',
@@ -18,17 +19,17 @@ const CHANGES = [
   {
     k: 'Material',
     v:
-      'Shell fabric, lining, wadding and trims can be substituted — including lower-flammability treatments and softer finishes for younger age groups.',
+      'The fabric used for textile products is polyester. Non-textile parts, accessories and any requested changes need separate specification confirmation.',
   },
   {
     k: 'Branding',
     v:
-      'Woven labels, printed neck tags, hangtags and gift boxes applied in production. Your marque ships on the goods, ours does not have to appear anywhere.',
+      'Custom hangtags and label application for Amazon and other ecommerce buyers. Send the artwork, product-to-label mapping and placement requirements for confirmation.',
   },
   {
     k: 'Packaging',
     v:
-      'Polybag with or without a printed header card, retail cartons, and mixed-carton assortments if you sell in sets rather than single units.',
+      'Standard packing is a zip bag and carton. Packaging bags, shipping marks and hangtags can be customised. We can apply labels for Amazon and other ecommerce buyers using your confirmed files and instructions.',
   },
 ];
 
@@ -137,6 +138,7 @@ export default function Custom() {
               <h2>What we need from you.</h2>
             </div>
           </div>
+          <TradeTerms />
           <div className="features mt-2">
             <div className="feature">
               <h3>Artwork or reference</h3>
@@ -148,8 +150,8 @@ export default function Custom() {
             <div className="feature">
               <h3>A quantity to quote against</h3>
               <p>
-                Unit price moves with volume, so a range is more useful than a single figure. Stock
-                lines start from the MOQ shown on the product page.
+                MOQ is 2 per style, with mixed sizes and colours within one style. All listed product
+                prices are EXW; freight is paid by the buyer. Custom specifications are quoted separately.
               </p>
             </div>
             <div className="feature">

@@ -2,6 +2,7 @@ import { Link, useParams } from 'react-router-dom';
 import { CONTACT, byCategory, getCategory, getProduct, moqLabel, priceLabel, shortTitle, waLink } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
+import TradeTerms from '../components/TradeTerms.jsx';
 import NotFound from './NotFound.jsx';
 import { MailIcon, WhatsAppIcon } from '../components/icons.jsx';
 
@@ -46,7 +47,7 @@ export default function ProductDetail() {
             <div>
               <h1 style={{ fontSize: 'clamp(1.6rem, 3.2vw, 2.4rem)' }}>{product.title}</h1>
               <p className="detail__price">{priceLabel(product)}</p>
-              <p className="mt-0">{moqLabel(product)}</p>
+              <p className="mt-0">{moqLabel(product)} per style · Mix sizes and colours within the same style.</p>
 
               <ul className="spec">
                 <li>
@@ -58,12 +59,12 @@ export default function ProductDetail() {
                   <span>{cat ? cat.name : product.category}</span>
                 </li>
                 <li>
-                  <span>Wholesale price</span>
+                  <span>EXW price</span>
                   <span>{priceLabel(product)}</span>
                 </li>
                 <li>
                   <span>Minimum order</span>
-                  <span>{product.moq || 'On request'}</span>
+                  <span>{product.moq} per style; mix sizes and colours</span>
                 </li>
                 {product.sizes && (
                   <li>
@@ -101,6 +102,8 @@ export default function ProductDetail() {
           </div>
         </div>
       </section>
+
+      <section className="section section--tight"><div className="shell"><TradeTerms /></div></section>
 
       {related.length > 0 && (
         <section className="section section--raised">

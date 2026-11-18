@@ -31,6 +31,10 @@ const STATIC = {
     description:
       'OEM and ODM cosplay supply: your artwork, your size chart and your label. How sampling works, what we tool, and the trade terms we work to.',
   },
+  '/ecommerce-sourcing': {
+    title: 'Ecommerce sourcing & labelling',
+    description: 'MOQ 2 per style with mixed sizes and colours. Stock samples, EXW prices, custom packaging and labelling support for Amazon and other ecommerce buyers.',
+  },
   '/about': {
     title: 'About us',
     description:
@@ -39,7 +43,7 @@ const STATIC = {
   '/factory': {
     title: 'The factory',
     description:
-      'Wuhan Hongbo Mingchuang: a costume workshop running since 2014, 18 people, 10-piece minimums and 3-day custom runs. What we make, where it ships, and what we will show you.',
+      'Wuhan Ouwanni Clothing Co., Ltd. — MOQ 2 per style, EXW pricing and mixed sizes and colours. Stock dispatch within 3 days; custom lead times depend on the service.',
   },
   '/blog': {
     title: 'Programme notes',

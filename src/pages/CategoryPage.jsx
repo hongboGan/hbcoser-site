@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import { CHARACTER_SUBCATEGORIES, getCategory, byCategory } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
+import TradeTerms from '../components/TradeTerms.jsx';
 import NotFound from './NotFound.jsx';
 
 export default function CategoryPage() {
@@ -25,6 +26,7 @@ export default function CategoryPage() {
         </p>
         <h1 style={{ fontSize: 'clamp(2rem, 4.4vw, 3.2rem)' }}>{cat.name}</h1>
         <p className="lede mt-1">{cat.blurb}</p>
+        <TradeTerms compact />
 
         {subcategories.length > 0 && (
           <div className="chips category-subcategories" role="group" aria-label="Character subcategories">

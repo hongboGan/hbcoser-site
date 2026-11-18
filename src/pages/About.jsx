@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { CATEGORIES, CONTACT, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
+import { COMPANY_NAME } from '../data/trade-terms.js';
 
 export default function About() {
   usePageMeta();
@@ -17,6 +18,7 @@ export default function About() {
             pet-product sellers, event producers and theme venues. The catalogue is the front door;
             most of the business is made-to-order.
           </p>
+          <p className="mt-2">Website operator: {COMPANY_NAME}.</p>
           <p className="mt-2">
             <Link to="/factory" style={{ color: 'var(--cyan)' }}>
               How the factory got here, and what it can actually do &rarr;
@@ -56,7 +58,7 @@ export default function About() {
           </ul>
           <p className="lede mt-2">
             The lines are kept apart on purpose. A children&apos;s buyer, a pet-products distributor
-            and an event producer need different MOQs, different cartons and different compliance
+            and an event producer need different size mixes, cartons and compliance
             paperwork — bundling them into one catalogue would serve none of them well.
           </p>
         </div>

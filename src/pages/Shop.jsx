@@ -3,6 +3,7 @@ import { CATEGORIES, byCategory, getCategory, products } from '../data/products.
 import { matchesProductSearch } from '../lib/product-search.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
+import TradeTerms from '../components/TradeTerms.jsx';
 
 export default function Shop() {
   const [params, setParams] = useSearchParams();
@@ -38,10 +39,11 @@ export default function Shop() {
           {query ? `Search results for “${query}”` : 'All products'}
         </h1>
         <p className="lede mt-1">
-          {products.length} references in production. Prices are indicative wholesale ranges in USD; final pricing
-          depends on quantity, material and finishing.
+          {products.length} product references. Prices are indicative EXW ranges in USD; final pricing
+          depends on quantity and specification. Freight is paid by the buyer.
         </p>
 
+        <TradeTerms compact />
         <div className="catalogue-search-summary">
           <span role="status" aria-live="polite" aria-atomic="true">
             {shown.length} {shown.length === 1 ? 'product' : 'products'}{query ? ` matching “${query}”` : ''}

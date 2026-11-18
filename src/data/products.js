@@ -80,9 +80,9 @@ export const CHARACTER_SUBCATEGORIES = [
 export const countIn = (slug) => byCategory(slug).length;
 
 export function priceLabel(p) {
-  if (p.priceUsdMin == null) return 'Price on request';
-  if (p.priceUsdMax == null || p.priceUsdMax === p.priceUsdMin) return `US$${p.priceUsdMin.toFixed(2)}`;
-  return `US$${p.priceUsdMin.toFixed(2)} – ${p.priceUsdMax.toFixed(2)}`;
+  if (p.priceUsdMin == null) return 'EXW price on request';
+  if (p.priceUsdMax == null || p.priceUsdMax === p.priceUsdMin) return `US$${p.priceUsdMin.toFixed(2)} EXW`;
+  return `US$${p.priceUsdMin.toFixed(2)} – ${p.priceUsdMax.toFixed(2)} EXW`;
 }
 
 export function moqLabel(p) {

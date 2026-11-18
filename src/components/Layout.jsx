@@ -150,6 +150,9 @@ export default function Layout() {
               <Link to="/custom">Custom / OEM</Link>
             </li>
             <li>
+              <Link to="/ecommerce-sourcing">Ecommerce sourcing</Link>
+            </li>
+            <li>
               <Link to="/about">About</Link>
             </li>
             <li>
@@ -211,6 +214,9 @@ export default function Layout() {
               </li>
               <li>
                 <Link to="/blog">Programme notes</Link>
+              </li>
+              <li>
+                <Link to="/ecommerce-sourcing">Ecommerce sourcing</Link>
               </li>
               <li>
                 <Link to="/inquiry">Request a quote</Link>

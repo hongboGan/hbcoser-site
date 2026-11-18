@@ -13,6 +13,7 @@ export const ROUTES = [
   '/',
   '/shop',
   '/custom',
+  '/ecommerce-sourcing',
   '/about',
   '/factory',
   '/blog',

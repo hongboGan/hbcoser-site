@@ -1,0 +1,45 @@
+.inquiry-form__optional {
+  margin: 0 0 1rem;
+  color: var(--ink-muted);
+  font-size: 0.88rem;
+}
+
+.inquiry-form__details {
+  margin: 1.25rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line);
+  background: rgba(0, 0, 0, 0.018);
+}
+
+.inquiry-form__details summary {
+  cursor: pointer;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.inquiry-form__details .form__row,
+.inquiry-form__details .field {
+  margin-top: 1rem;
+}
+
+.inquiry-form__materials {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+}
+
+.inquiry-form__materials a { color: var(--cyan); }
+
+.field__error[role="alert"] { display: block; }
+
+.inquiry-reference,
+.inquiry-form .notice__detail,
+.inquiry-form .notice--err strong,
+.inquiry-form__materials,
+.inquiry-form__materials a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .inquiry-form__details { padding: 0.75rem; }
+}

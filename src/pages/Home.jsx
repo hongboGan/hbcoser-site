@@ -172,11 +172,12 @@ export default function Home() {
           <div>
             <p className="eyebrow">Wholesale &amp; OEM</p>
             <h1>Costumes for your next programme.</h1>
-            <p className="hero-intro__text">Explore costumes, mascots, pet outfits and party supplies. Tell us your product, quantity and customisation needs.</p>
+            <p className="hero-intro__text">MOQ 2 per style, with mixed sizes and colours. Explore costumes, mascots, pet outfits and party supplies. All listed prices are EXW; the buyer pays freight.</p>
           </div>
           <div className="hero-intro__actions">
             <Link className="btn hero-quote" to="/inquiry">Request a quote</Link>
             <Link className="btn hero-catalogue" to="/shop">Shop all products</Link>
+            <Link to="/ecommerce-sourcing" style={{ textDecoration: 'underline', textAlign: 'center' }}>Ecommerce sourcing &amp; labelling</Link>
           </div>
         </div>
       </section>
