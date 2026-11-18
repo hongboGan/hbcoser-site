@@ -1443,7 +1443,13 @@ body { background: var(--paper); }
   color: var(--ink);
 }
 .header-search input { min-width: 0; flex: 1; height: 100%; border: 0; outline: 0; padding: 0 14px; background: transparent; color: var(--ink); font-size: 0.88rem; }
-.header-search svg { margin-right: 12px; }
+.header-search:focus-within { border-color: var(--cyan-strong); box-shadow: 0 0 0 2px var(--cyan-wash); }
+.header-search__submit { flex: 0 0 44px; align-self: stretch; display: grid; place-items: center; padding: 0; border: 0; border-radius: 0 4px 4px 0; background: transparent; color: var(--ink); cursor: pointer; }
+.header-search__submit:hover { background: var(--cyan-tint); }
+.header-search__submit svg { margin: 0; }
+.catalogue-search-summary { margin-top: 24px; overflow-wrap: anywhere; }
+.catalogue-search-summary .chip { margin-left: 12px; }
+.catalogue-title { overflow-wrap: anywhere; }
 .header-utility { display: flex; align-items: center; gap: 14px; color: var(--ink-muted); font-size: 0.72rem; white-space: nowrap; }
 .header-utility > a, .header-tool { display: inline-flex; align-items: center; gap: 6px; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
 .header-utility > a:hover, .header-tool:hover { color: var(--cyan-strong); }

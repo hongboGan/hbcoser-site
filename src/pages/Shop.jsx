@@ -1,24 +1,54 @@
-import { useState } from 'react';
-import { CATEGORIES, byCategory, products, countIn } from '../data/products.js';
+import { useSearchParams } from 'react-router-dom';
+import { CATEGORIES, byCategory, getCategory, products } from '../data/products.js';
+import { matchesProductSearch } from '../lib/product-search.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 
 export default function Shop() {
-  const [filter, setFilter] = useState('all');
+  const [params, setParams] = useSearchParams();
+  const query = (params.get('search') || '').trim().replace(/\s+/g, ' ');
+  const requestedCategory = params.get('category');
+  const filter = CATEGORIES.some((category) => category.slug === requestedCategory) ? requestedCategory : 'all';
 
   usePageMeta();
 
-  const shown = filter === 'all' ? products : byCategory(filter);
+  const matches = (product) => matchesProductSearch(product, query, getCategory(product.category)?.name);
+  const searchResults = products.filter(matches);
+  const shown = filter === 'all' ? searchResults : byCategory(filter).filter(matches);
+  const categoryCount = (slug) => byCategory(slug).filter(matches).length;
+
+  function setFilter(category) {
+    const next = new URLSearchParams(params);
+    if (category === 'all') next.delete('category');
+    else next.set('category', category);
+    setParams(next);
+  }
+
+  function clearSearch() {
+    const next = new URLSearchParams(params);
+    next.delete('search');
+    setParams(next);
+  }
 
   return (
     <section className="section">
       <div className="shell">
         <p className="eyebrow">Catalogue</p>
-        <h1 style={{ fontSize: 'clamp(2rem, 4.4vw, 3.2rem)' }}>All products</h1>
+        <h1 className="catalogue-title" style={{ fontSize: 'clamp(2rem, 4.4vw, 3.2rem)' }}>
+          {query ? `Search results for “${query}”` : 'All products'}
+        </h1>
         <p className="lede mt-1">
           {products.length} references in production. Prices are indicative wholesale ranges in USD; final pricing
           depends on quantity, material and finishing.
         </p>
+
+        <div className="catalogue-search-summary">
+          <span role="status" aria-live="polite" aria-atomic="true">
+            {shown.length} {shown.length === 1 ? 'product' : 'products'}{query ? ` matching “${query}”` : ''}
+            {filter !== 'all' ? ` in ${getCategory(filter).name}` : ''}.
+          </span>
+          {query && <button className="chip" type="button" onClick={clearSearch}>Clear search</button>}
+        </div>
 
         <div className="chips" role="group" aria-label="Filter by category">
           <button
@@ -27,7 +57,7 @@ export default function Shop() {
             aria-pressed={filter === 'all'}
             onClick={() => setFilter('all')}
           >
-            All ({products.length})
+            All ({searchResults.length})
           </button>
           {CATEGORIES.map((c) => (
             <button
@@ -37,13 +67,19 @@ export default function Shop() {
               aria-pressed={filter === c.slug}
               onClick={() => setFilter(c.slug)}
             >
-              {c.name} ({countIn(c.slug)})
+              {c.name} ({categoryCount(c.slug)})
             </button>
           ))}
         </div>
 
         {shown.length === 0 ? (
-          <p className="empty">No products in this category yet.</p>
+          <div className="empty">
+            <p>{query ? 'No products match this search in the selected category. Try another product name or reference code.' : 'No products in this category yet.'}</p>
+            {filter !== 'all' && (
+              <button className="chip" type="button" onClick={() => setFilter('all')}>Search all categories</button>
+            )}
+            {query && <button className="chip" type="button" onClick={clearSearch}>Clear search</button>}
+          </div>
         ) : (
           <div className="grid">
             {shown.map((p) => (

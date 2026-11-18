@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES, CONTACT, waLink } from '../data/products.js';
 import { FacebookIcon, MailIcon, MenuIcon, SearchIcon, WhatsAppIcon } from './icons.jsx';
 
@@ -29,11 +29,23 @@ function Wordmark() {
 export default function Layout() {
   const [drawer, setDrawer] = useState(false);
   const fabRef = useRef(null);
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState(() => new URLSearchParams(search).get('search') || '');
 
   useEffect(() => {
     setDrawer(false);
-  }, [pathname]);
+    setSearchInput(new URLSearchParams(search).get('search') || '');
+  }, [pathname, search]);
+
+  function submitSearch(event) {
+    event.preventDefault();
+    const query = searchInput.trim().replace(/\s+/g, ' ');
+    setSearchInput(query);
+    const params = new URLSearchParams();
+    if (query) params.set('search', query);
+    navigate(`/shop${query ? `?${params}` : ''}`);
+  }
 
   // The contact bar is fixed to the bottom corner. On a narrow screen the product title sits
   // low, because the hero image comes first, so the bar can land on top of it and the page
@@ -106,11 +118,20 @@ export default function Layout() {
             <MenuIcon />
           </button>
           <Wordmark />
-          <div className="header-search">
+          <form className="header-search" role="search" action="/shop" method="get" onSubmit={submitSearch}>
             <label htmlFor="site-search" className="sr-only">Search products</label>
-            <input id="site-search" type="search" placeholder="Search costumes, props and OEM styles" />
-            <SearchIcon />
-          </div>
+            <input
+              id="site-search"
+              name="search"
+              type="search"
+              placeholder="Search costumes, props and OEM styles"
+              value={searchInput}
+              onChange={(event) => setSearchInput(event.target.value)}
+            />
+            <button className="header-search__submit" type="submit" aria-label="Search products">
+              <SearchIcon />
+            </button>
+          </form>
 
         </div>
         <div className="shell header__inner">
