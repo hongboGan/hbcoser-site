@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import { CONTACT } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
+import GalleryImage from '../components/GalleryImage.jsx';
+import { ADDED_FACTORY_IMAGES } from '../data/added-gallery-images.js';
 
 const FACTORY_IMAGES = [
+  ...ADDED_FACTORY_IMAGES.map((item) => item.image),
   '/factory/factory-01.webp',
   '/factory/factory-02.webp',
   '/factory/factory-03.webp',
@@ -143,14 +146,11 @@ export default function Factory() {
               <p>Production, finishing and the costume reference wall from the same floor that supports custom runs.</p>
             </div>
           </div>
-          <div className="factory-gallery__rail" aria-label="Scrolling factory image display">
+          <div id="production-photos" className="factory-gallery__rail" aria-label="Scrolling factory image display">
             <div className="factory-gallery__track">
               {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                 <figure key={`${image}-${index}`} className="factory-gallery__item">
-                  <picture>
-                    <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
-                    <img src={image} alt={`Factory showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} loading="lazy" decoding="async" />
-                  </picture>
+                    <GalleryImage image={image} alt={`Factory showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} />
                 </figure>
               ))}
             </div>

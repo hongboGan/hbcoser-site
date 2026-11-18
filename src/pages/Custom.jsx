@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { CONTACT, waLink } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
+import GalleryImage from '../components/GalleryImage.jsx';
+import { ADDED_CUSTOM_IMAGES } from '../data/added-gallery-images.js';
 
 const CHANGES = [
   {
@@ -39,6 +41,7 @@ const STEPS = [
 ];
 
 const CASE_STUDIES = [
+  ...ADDED_CUSTOM_IMAGES,
   { image: '/custom/custom-case-01.webp', title: 'Retail packaging and garment presentation' },
   { image: '/custom/custom-case-02.webp', title: 'Licensed-style costume sample development' },
   { image: '/custom/custom-case-03.webp', title: 'Custom hangtag and brand identity details' },
@@ -87,21 +90,19 @@ export default function Custom() {
           <div className="sec-head">
             <span className="sec-head__n">02</span>
             <div className="sec-head__body">
-              <p className="eyebrow">Real case references</p>
+              <p className="eyebrow">Custom references</p>
               <h2>From sample detail to retail-ready finish.</h2>
               <p>Selected examples of packaging, labelling and costume development for custom programmes.</p>
             </div>
           </div>
-          <div className="custom-cases__grid">
-            {CASE_STUDIES.map((item) => (
-              <figure key={item.image} className="custom-case">
-                <picture>
-                  <source media="(max-width: 640px)" srcSet={item.image.replace(/\.webp$/, '-mobile.webp')} />
-                  <img src={item.image} alt={`${item.title} custom costume case study`} loading="lazy" decoding="async" />
-                </picture>
-                <figcaption>{item.title}</figcaption>
-              </figure>
-            ))}
+          <div id="custom-references" className="custom-roll custom-roll--page" aria-label="Scrolling custom references">
+            <div className="custom-roll__track">
+              {[...CASE_STUDIES, ...CASE_STUDIES].map((item, index) => (
+                <figure key={`${item.image}-${index}`} className="custom-roll__item">
+                  <GalleryImage image={item.image} alt={`${item.title} custom costume reference`} />
+                </figure>
+              ))}
+            </div>
           </div>
         </div>
       </section>

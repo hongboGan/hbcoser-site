@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
+import GalleryImage from '../components/GalleryImage.jsx';
+import { ADDED_FACTORY_IMAGES, ADDED_CUSTOM_IMAGES } from '../data/added-gallery-images.js';
 
 // Section 02 always leads with the four newest records in products.json. The catalogue
 // append order is the source of truth for “latest”; the remaining six slots use the
@@ -59,6 +61,7 @@ const OEM = [
 ];
 
 const FACTORY_IMAGES = [
+  ...ADDED_FACTORY_IMAGES.map((item) => item.image),
   '/factory/factory-01.webp',
   '/factory/factory-02.webp',
   '/factory/factory-03.webp',
@@ -95,6 +98,7 @@ const REVIEWS = [
 ];
 
 const CUSTOM_CASE_IMAGES = [
+  ...ADDED_CUSTOM_IMAGES.map((item) => item.image),
   '/custom/custom-case-01.webp',
   '/custom/custom-case-02.webp',
   '/custom/custom-case-03.webp',
@@ -242,7 +246,7 @@ export default function Home() {
             <Link className="btn btn--primary" to="/inquiry">Request a wholesale quote</Link>
           </div>
 
-          <div className="factory-showcase" aria-label="Factory showcase">
+          <div id="production-photos" className="factory-showcase" aria-label="Factory showcase">
             <div className="factory-showcase__copy">
               <p className="eyebrow">Factory floor</p>
               <h3>See how the range comes together.</h3>
@@ -256,10 +260,7 @@ export default function Home() {
               <div className="factory-showcase__track">
                 {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                   <figure className="factory-showcase__frame" key={`${image}-${index}`}>
-                    <picture>
-                      <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
-                      <img src={image} alt={`Factory production showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} loading="lazy" decoding="async" />
-                    </picture>
+                    <GalleryImage image={image} alt={`Factory production showcase ${(index % FACTORY_IMAGES.length) + 1}: costume manufacturing floor`} />
                   </figure>
                 ))}
               </div>
@@ -287,15 +288,12 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <p className="custom-roll__label">Custom case references · artwork, sampling and finished applications</p>
-          <div className="custom-roll" aria-label="Scrolling custom case references">
+          <p className="custom-roll__label">Custom references · artwork, sampling and finished applications</p>
+          <div id="custom-references" className="custom-roll" aria-label="Scrolling custom references">
             <div className="custom-roll__track">
               {[...CUSTOM_CASE_IMAGES, ...CUSTOM_CASE_IMAGES].map((image, index) => (
                 <figure className="custom-roll__item" key={`${image}-${index}`}>
-                  <picture>
-                    <source media="(max-width: 640px)" srcSet={image.replace(/\.webp$/, '-mobile.webp')} />
-                    <img src={image} alt={`Custom OEM case reference ${(index % CUSTOM_CASE_IMAGES.length) + 1}: costume artwork and finished application`} loading="lazy" decoding="async" />
-                  </picture>
+                    <GalleryImage image={image} alt={`Custom OEM reference ${(index % CUSTOM_CASE_IMAGES.length) + 1}: costume artwork and finished application`} />
                 </figure>
               ))}
             </div>
