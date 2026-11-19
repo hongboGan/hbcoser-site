@@ -1,0 +1,68 @@
+{
+  "/factory/added-20261118/cutting.webp": [
+    {
+      "src": "/gallery-responsive/cutting-320-c0ccd9e05382.webp",
+      "width": 320
+    },
+    {
+      "src": "/gallery-responsive/cutting-640-36acb5c16321.webp",
+      "width": 640
+    },
+    {
+      "src": "/factory/added-20261118/cutting.webp",
+      "width": 1280
+    }
+  ],
+  "/factory/added-20261118/ironing.webp": [
+    {
+      "src": "/gallery-responsive/ironing-320-23e5e7c0d874.webp",
+      "width": 320
+    },
+    {
+      "src": "/gallery-responsive/ironing-640-6ef587a84eb3.webp",
+      "width": 640
+    },
+    {
+      "src": "/factory/added-20261118/ironing.webp",
+      "width": 1280
+    }
+  ],
+  "/factory/added-20261118/packing.webp": [
+    {
+      "src": "/gallery-responsive/packing-320-a90466b13aec.webp",
+      "width": 320
+    },
+    {
+      "src": "/gallery-responsive/packing-640-17c5dd93c94f.webp",
+      "width": 640
+    },
+    {
+      "src": "/factory/added-20261118/packing.webp",
+      "width": 1280
+    }
+  ],
+  "/custom/added-20261118/packaging-reference.webp": [
+    {
+      "src": "/gallery-responsive/packaging-reference-320-fa0c5aec8fb2.webp",
+      "width": 320
+    },
+    {
+      "src": "/custom/added-20261118/packaging-reference.webp",
+      "width": 588
+    }
+  ],
+  "/custom/added-20261118/acrylic-badge-concept.webp": [
+    {
+      "src": "/gallery-responsive/acrylic-badge-concept-320-0b624b600d12.webp",
+      "width": 320
+    },
+    {
+      "src": "/gallery-responsive/acrylic-badge-concept-640-247240e04218.webp",
+      "width": 640
+    },
+    {
+      "src": "/custom/added-20261118/acrylic-badge-concept.webp",
+      "width": 883
+    }
+  ]
+}

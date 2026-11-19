@@ -11,7 +11,7 @@
       ]
     },
     {
-      "source": "/(banners|categories|custom|factory|products|reviews|fonts)/(.*)",
+      "source": "/(banners|categories|custom|factory|products|reviews|fonts|gallery-responsive)/(.*)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]

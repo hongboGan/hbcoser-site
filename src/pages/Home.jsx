@@ -4,6 +4,7 @@ import { CATEGORIES, byCategory, countIn, products } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import ProductCard from '../components/ProductCard.jsx';
 import GalleryImage from '../components/GalleryImage.jsx';
+import DeferredGallery from '../components/DeferredGallery.jsx';
 import { ADDED_FACTORY_IMAGES, ADDED_CUSTOM_IMAGES } from '../data/added-gallery-images.js';
 
 // Section 02 always leads with the four newest records in products.json. The catalogue
@@ -257,7 +258,7 @@ export default function Home() {
                 <Link className="btn btn--primary" to="/inquiry">Plan a production run</Link>
               </div>
             </div>
-            <div className="factory-showcase__rail" aria-label="Scrolling factory image display">
+            <DeferredGallery className="factory-showcase__rail" aria-label="Scrolling factory image display">
               <div className="factory-showcase__track">
                 {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                   <figure className="factory-showcase__frame" key={`${image}-${index}`}>
@@ -265,7 +266,7 @@ export default function Home() {
                   </figure>
                 ))}
               </div>
-            </div>
+            </DeferredGallery>
           </div>
         </div>
       </section>
@@ -290,7 +291,7 @@ export default function Home() {
             ))}
           </div>
           <p className="custom-roll__label">Custom references · artwork, sampling and finished applications</p>
-          <div id="custom-references" className="custom-roll" aria-label="Scrolling custom references">
+          <DeferredGallery id="custom-references" layout="custom-home" className="custom-roll" aria-label="Scrolling custom references">
             <div className="custom-roll__track">
               {[...CUSTOM_CASE_IMAGES, ...CUSTOM_CASE_IMAGES].map((image, index) => (
                 <figure className="custom-roll__item" key={`${image}-${index}`}>
@@ -298,7 +299,7 @@ export default function Home() {
                 </figure>
               ))}
             </div>
-          </div>
+          </DeferredGallery>
           <div className="mt-3">
             <div className="home-cta-row">
               <Link className="btn btn--light" to="/custom">How custom orders work</Link>

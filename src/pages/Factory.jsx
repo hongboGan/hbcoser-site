@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CONTACT } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import GalleryImage from '../components/GalleryImage.jsx';
+import DeferredGallery from '../components/DeferredGallery.jsx';
 import { ADDED_FACTORY_IMAGES } from '../data/added-gallery-images.js';
 import TradeTerms from '../components/TradeTerms.jsx';
 import { COMPANY_NAME } from '../data/trade-terms.js';
@@ -149,7 +150,7 @@ export default function Factory() {
               <p>Production, finishing and the costume reference wall from the same floor that supports custom runs.</p>
             </div>
           </div>
-          <div id="production-photos" className="factory-gallery__rail" aria-label="Scrolling factory image display">
+          <DeferredGallery id="production-photos" className="factory-gallery__rail" aria-label="Scrolling factory image display">
             <div className="factory-gallery__track">
               {[...FACTORY_IMAGES, ...FACTORY_IMAGES].map((image, index) => (
                 <figure key={`${image}-${index}`} className="factory-gallery__item">
@@ -157,7 +158,7 @@ export default function Factory() {
                 </figure>
               ))}
             </div>
-          </div>
+          </DeferredGallery>
         </div>
       </section>
 

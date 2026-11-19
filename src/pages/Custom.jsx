@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CONTACT, waLink } from '../data/products.js';
 import { usePageMeta } from '../lib/seo.js';
 import GalleryImage from '../components/GalleryImage.jsx';
+import DeferredGallery from '../components/DeferredGallery.jsx';
 import { ADDED_CUSTOM_IMAGES } from '../data/added-gallery-images.js';
 import TradeTerms from '../components/TradeTerms.jsx';
 
@@ -96,7 +97,7 @@ export default function Custom() {
               <p>Selected examples of packaging, labelling and costume development for custom programmes.</p>
             </div>
           </div>
-          <div id="custom-references" className="custom-roll custom-roll--page" aria-label="Scrolling custom references">
+          <DeferredGallery id="custom-references" layout="custom-page" className="custom-roll custom-roll--page" aria-label="Scrolling custom references">
             <div className="custom-roll__track">
               {[...CASE_STUDIES, ...CASE_STUDIES].map((item, index) => (
                 <figure key={`${item.image}-${index}`} className="custom-roll__item">
@@ -104,7 +105,7 @@ export default function Custom() {
                 </figure>
               ))}
             </div>
-          </div>
+          </DeferredGallery>
         </div>
       </section>
 
