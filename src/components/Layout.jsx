@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { CATEGORIES, CONTACT, waLink } from '../data/products.js';
 import { FacebookIcon, MailIcon, MenuIcon, SearchIcon, WhatsAppIcon } from './icons.jsx';
+import { handleContactClick } from '../lib/analytics.js';
 
 // Shared chrome is on every page, so the tag has to follow the route rather than be fixed.
 function refForPath(pathname) {
@@ -36,6 +37,16 @@ export default function Layout() {
     setDrawer(false);
     setSearchInput(new URLSearchParams(search).get('search') || '');
   }, [pathname, search]);
+
+  useEffect(() => {
+    const onContact = (event) => handleContactClick(event);
+    document.addEventListener('click', onContact, true);
+    document.addEventListener('auxclick', onContact, true);
+    return () => {
+      document.removeEventListener('click', onContact, true);
+      document.removeEventListener('auxclick', onContact, true);
+    };
+  }, []);
 
   function submitSearch(event) {
     event.preventDefault();

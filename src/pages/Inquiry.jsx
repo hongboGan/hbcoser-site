@@ -11,6 +11,8 @@ import {
 } from '../lib/inquiry-form.js';
 import { MailIcon, WhatsAppIcon } from '../components/icons.jsx';
 import '../components/inquiry-form.css';
+import { trackAcceptedInquiry } from '../lib/analytics.js';
+import { submitInquiryToService } from '../lib/inquiry-delivery.js';
 
 function fieldId(key) {
   return `f-${key.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
@@ -90,25 +92,6 @@ export default function Inquiry() {
     return `mailto:${CONTACT.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   }
 
-  async function sendPrimary(payload) {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 15000);
-    try {
-      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT.formEmail || CONTACT.email}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify(payload),
-        signal: controller.signal,
-      });
-      const data = await response.json().catch(() => null);
-      if (!response.ok || !data || String(data.success) !== 'true') {
-        throw new Error('FormSubmit delivery failed');
-      }
-    } finally {
-      clearTimeout(timer);
-    }
-  }
-
   async function onSubmit(event) {
     event.preventDefault();
     if (submitLock.current) return;
@@ -140,7 +123,11 @@ export default function Inquiry() {
     };
 
     try {
-      await sendPrimary(payload);
+      await submitInquiryToService(
+        `https://formsubmit.co/ajax/${CONTACT.formEmail || CONTACT.email}`,
+        payload,
+        () => trackAcceptedInquiry(inquiryReference),
+      );
       setStatus('done');
     } catch {
       setStatus('error');

@@ -1,4 +1,4 @@
-import raw from './products.json';
+import raw from './products.json' with { type: 'json' };
 
 export const CONTACT = {
   email: 'sales01@hoburn.group',
